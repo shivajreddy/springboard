@@ -1,0 +1,86 @@
+/* http://curric.rithmschool.com/springboard/assessments/meme-gen-8d96/ */
+
+* {
+  /* outline: solid 1px red; */
+}
+
+/* Form Properties ══════╗ */
+form {
+    padding-left: 50px;
+    display: inline-block;
+    flex-direction: column;
+    justify-content: center;
+}
+/* ══════════════════════╝ */
+
+
+/* Body Properties ══════╗ */
+
+body {
+    /* outline: solid 20px red; */
+    /* height: 200vh; */
+    background-color: var(--bodybg) !important;
+    /* background-color: var(--mainBag); */
+}
+
+/* ══════════════════════╝ */
+
+
+/* Light Color Scheme ══════╗ */
+:root,
+.lightMode {
+    --color1: #e5383b;
+    --color2: #b1a7a6;
+    --color3: #d3d3d3;
+    --color4: #f5f3f4;
+    --color5: #ffffff;
+    --font1: #0b090a;
+    --mainBag: #ffa5a6;
+    --bodybg: #eaeaea;
+
+  }
+
+/* ═════════════════════════╝ */
+
+
+/* Dark Color Scheme ══════╗ */
+.darkMode {
+    --color1: #0b090a;
+    --color2: #161a1d;
+    --color3: #660708;
+    --color4: #a4161a;
+    --color5: #ba181b;
+    --font1: #d3d3d3;
+    --mainBag: #0b090a;
+    --bodybg: #0b090a;
+  }
+
+/* ════════════════════════╝ */
+
+
+/* Navigation ══════╗ */
+
+nav {
+  background-color: var(--mainBag);
+}
+
+a {
+  font-size: 42px;
+}
+
+.nav-link {
+  color: var(--color1);
+}
+
+#navbrand {
+  font-size: 2rem;
+  color: var(--font1);
+}
+
+/* ═════════════════╝ */
+
+
+h1, p {
+    color: var(--font1);
+    /* background-color: var(--mainBag); */
+}
