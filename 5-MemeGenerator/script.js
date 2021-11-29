@@ -28,11 +28,13 @@ function ToggleDarkMode() {
 };
 
 
+// Test work
 
+let queryCol = document.querySelector('#id2');
 
+console.log(queryCol)
 
-
-
+let queryCol2 = document.querySelector('h3');
 
 
 
