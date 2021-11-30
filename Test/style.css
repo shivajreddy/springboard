@@ -1,0 +1,28 @@
+.class1 {
+    color: red;
+    background-color: yellow;
+}
+
+.class2 {
+    color: pink;
+    background-color: turquoise;
+}
+
+
+h2 {
+    text-align: center;
+    transition: all 1000ms;
+}
+
+.big {
+    /* font-size: 5rem; */
+    /* scale: 2; */
+    transform: scale(2);
+    color: tomato;
+}
+
+.small {
+    /* font-size: 1rem; */
+    transform: scale(0.5);
+    color: turquoise;
+}
