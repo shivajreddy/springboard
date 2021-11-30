@@ -1,7 +1,7 @@
 /* http://curric.rithmschool.com/springboard/assessments/meme-gen-8d96/ */
 
 * {
-  /* outline: solid 1px red; */
+    /* outline: solid 1px red; */
 }
 
 /* Form Properties ══════╗ */
@@ -11,6 +11,7 @@ form {
     flex-direction: column;
     justify-content: center;
 }
+
 /* ══════════════════════╝ */
 
 
@@ -38,7 +39,7 @@ body {
     --mainBag: #ffa5a6;
     --bodybg: #eaeaea;
 
-  }
+}
 
 /* ═════════════════════════╝ */
 
@@ -53,7 +54,7 @@ body {
     --font1: #d3d3d3;
     --mainBag: #0b090a;
     --bodybg: #0b090a;
-  }
+}
 
 /* ════════════════════════╝ */
 
@@ -61,26 +62,41 @@ body {
 /* Navigation ══════╗ */
 
 nav {
-  background-color: var(--mainBag);
+    background-color: var(--mainBag);
 }
 
 a {
-  font-size: 42px;
+    font-size: 42px;
 }
 
 .nav-link {
-  color: var(--color1);
+    color: var(--color1);
 }
 
 #navbrand {
-  font-size: 2rem;
-  color: var(--font1);
+    font-size: 2rem;
+    color: var(--font1);
 }
 
 /* ═════════════════╝ */
 
 
-h1, p {
+h1,
+p {
     color: var(--font1);
     /* background-color: var(--mainBag); */
 }
+
+#colors {
+    display: flex;
+    justify-content: center;
+}
+
+.letter {
+    /* background-color: black; */
+    font-size: 10rem;
+    transition: color 1200ms;
+    text-align: center;
+}
+
+
