@@ -1,0 +1,16 @@
+const ol = document.querySelectorAll('ol')
+undefined
+ol
+NodeList [ol]
+ol.children
+undefined
+let mylist = document.querySelectorAll('ol li')
+undefined
+for (let i of mylist) {
+i.style.backgroundColor = 'green'
+}
+'green'
+(document.querySelector('.footer')).remove()
+undefined
+(document.querySelector('.footer'))
+null
