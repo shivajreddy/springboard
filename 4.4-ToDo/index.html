@@ -15,23 +15,35 @@
 </head>
 <body>
 
-    <h1 id="logo">
-       To Do
-    </h1>
+    <div class="header">
+        <img height="38" src="https://img.icons8.com/fluency/48/000000/todo-list.png" alt="">
+        <h1 id="logo">
+            To Do
+        </h1>
+    </div>
 
     <!-- Form -->
     <form action="">
 
         <input type="text" name="task" id="taskinput" placeholder="Add a Task">
-        <button type="submit">ADD</button>
+        <button type="submit" id="addnewtask">ADD</button>
 
 
     </form>
 
-    <label for="order">Add new Task on top</label>
-    <input type="checkbox" name="" id="order">
-    
-    <button type="button" id="removeall">Remove All</button>
+    <div>
+        <br>
+        <label for="order">Add new Task on top</label>
+        <input type="checkbox" name="" id="order" checked='true'>
+    </div>
+
+    <div>
+        <button>Check All</button>
+        <button>UnCheck All</button>
+        <button>Toggle All</button>
+        <button type="button" id="removeall">Remove All</button>
+        <br>
+    </div>
 
     <div class="todotasks">
 
@@ -39,10 +51,11 @@
 
 
     <!-- Delete This -->
-    <div id="test">
+    <!-- <div id="test">
         <input type="checkbox" name="" id="testbox">
         <p id="testp">test p</p>
-    </div>
+        <button id="testdelete"> X </button>
+    </div> -->
     <!-- Delete This -->
 
     <!-- JS Link -->

@@ -1,9 +1,10 @@
 const form = document.querySelector('form');
 const task = document.querySelector('#taskinput')
-
-const submit = document.querySelector('button');
-
+const submit = document.querySelector('#addnewtask');
 const todotasks = document.querySelector('.todotasks')
+var totalTasks = 0;
+const order = document.querySelector('#order')
+
 
 function removeAllButton(){
     const removeButton = document.createElement('button');
@@ -12,19 +13,33 @@ function removeAllButton(){
 
 
 function addTask(taskText) {
+
     const newTask = document.createElement('div');
-    newTask.setAttribute('class', 'notdone')
+    newTask.setAttribute('class','task')
+
     const newTaskCheckbox = document.createElement('input')
     newTaskCheckbox.setAttribute('type', 'checkbox')
-    const newTaskText = document.createElement('p')
 
+    const newTaskText = document.createElement('p')
+    newTaskText.setAttribute('class', 'notdone')
     newTaskText.innerText = taskText;
+
+    const newTaskRemove = document.createElement('button')
+    newTaskRemove.setAttribute('class', 'removetask')
+    newTaskRemove.innerHTML = "&#10005;"
 
     newTask.appendChild(newTaskCheckbox)
     newTask.appendChild(newTaskText)
+    newTask.appendChild(newTaskRemove)
 
-    todotasks.appendChild(newTask)
-    return newTaskText
+    if (order.checked == false){
+        todotasks.appendChild(newTask)
+    }
+    else {
+        todotasks.prepend(newTask)
+    }
+
+    // return newTaskText
 }
 
 
@@ -43,17 +58,23 @@ submit.addEventListener('click', function(event){
 })
 
 
+// Toggle Finish/Unfinished Task
 todotasks.addEventListener('click', function(event){
     if (event.target.tagName == 'INPUT') {
         if (event.target.checked == true){
             ((event.target).nextElementSibling).setAttribute('class', 'done')
-            // console.log("Yes Done")
         }
         else {
             ((event.target).nextElementSibling).setAttribute('class', 'notdone');
-            // console.log('nope not done')
         }
     }
+    else if (event.target.tagName =='BUTTON') {
+        (event.target.parentElement).remove()
+        // console.log(event.target.parentElement)
+        console.log('delete the event')
+    }
+
+
 
 })
 
