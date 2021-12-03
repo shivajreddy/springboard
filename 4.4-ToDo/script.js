@@ -1,3 +1,4 @@
+
 const form = document.querySelector('form');
 const task = document.querySelector('#taskinput')
 const submit = document.querySelector('#addnewtask');
@@ -5,11 +6,11 @@ const todotasks = document.querySelector('.todotasks')
 var totalTasks = 0;
 const order = document.querySelector('#order')
 
+const localTodoTasks = []
 
-function removeAllButton(){
-    const removeButton = document.createElement('button');
-    removeAllButton
-}
+localTodoTasks.push(1)
+// localStorage.setItem('todoTasks', localTodoTasks)
+
 
 
 function addTask(taskText) {
@@ -39,7 +40,6 @@ function addTask(taskText) {
         todotasks.prepend(newTask)
     }
 
-    // return newTaskText
 }
 
 
@@ -57,8 +57,23 @@ submit.addEventListener('click', function(event){
 
 })
 
+const localStorageToDo = [];
+
+
+function jsobject(actual_object){
+    const jsobject = JSON.stringify(actual_object);
+    return jsobject;
+};
+
+function actualObject (js_object){
+    const actual = JSON.parse(js_object);
+    return actual;
+};
+
+localStorage.setItem('localToDoTasks', jsobject() )
 
 // Toggle Finish/Unfinished Task
+// function addNewTodoTasks(){
 todotasks.addEventListener('click', function(event){
     if (event.target.tagName == 'INPUT') {
         if (event.target.checked == true){
@@ -73,8 +88,35 @@ todotasks.addEventListener('click', function(event){
         // console.log(event.target.parentElement)
         console.log('delete the event')
     }
+})
+// }
+
+
+// Saving To-Do into Local Storage
 
 
 
+// Extra Functionality
+// Check All todo's
+
+
+// Uncheck All todo's
+
+
+// Toggle All todo's
+
+
+// Remove all todo's
+function removeAllButton(){
+    const removeButton = document.createElement('button');
+    removeAllButton
+}
+
+
+const removelocalstorage = document.querySelector('#removelocalstorage')
+
+removelocalstorage.addEventListener('click', function(){
+    window.localStorage.clear();
+    // console.log('delete this asdpofjaslk')
 })
 
