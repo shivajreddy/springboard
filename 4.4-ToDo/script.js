@@ -43,6 +43,9 @@ function addTask(taskText) {
 }
 
 
+
+
+
 submit.addEventListener('click', function(event){
     event.preventDefault();
 
@@ -73,8 +76,16 @@ todotasks.addEventListener('click', function(event){
         // console.log(event.target.parentElement)
         console.log('delete the event')
     }
-
-
-
 })
+
+const localToDoTasks = [];
+var count = 0;
+
+localStorage.setItem('localTasks', localToDoTasks);
+console.log(localStorage.length)
+
+
+
+
+
 
