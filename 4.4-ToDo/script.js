@@ -1,15 +1,28 @@
-// Making Sure there is a localStorage TodoTasks
-const localTodoTasks = []
-if ((localStorage.getItem('localTasks')) == null) {
-    localStorage.setItem('localTasks', JSON.stringify(localTodoTasks));
-}
-else {
-    for (let i = 0; i < (JSON.parse((localStorage.getItem('localTasks')))).length ; i ++) {
-        localTodoTasks.push ((JSON.parse((localStorage.getItem('localTasks'))))[i])
+
+// Task Object
+function createTask(index, todoText, strike) {
+
+    const todoItem = {
+        index : index,
+        todoText : todoText,
+        strike : strike
     }
+
+    return todoItem
 }
 
+//////////////////////////////
+// const testbutton = document.querySelector('#testdelete');
+// testbutton.addEventListener('click', function(){
+//     // Creating a NEW Task object
+//     item = (createTask(taskNumber, "something", true))
+//     taskNumber = taskNumber + 1
 
+//     localTodoTasks.push(item)
+//     localStorage.setItem('localTasks', JSON.stringify(localTodoTasks))
+//     console.log(localStorage.getItem('localTasks'));
+// })
+//////////////////////////////
 
 const form = document.querySelector('form');
 const task = document.querySelector('#taskinput')
@@ -18,20 +31,21 @@ const todotasks = document.querySelector('.todotasks')
 var totalTasks = 0;
 const order = document.querySelector('#order')
 
-
 // Create a DIV item that has input.value as innerText
-function addTask(taskText) {
-
+function addTask(taskText, strike) {
     const newTask = document.createElement('div');
     newTask.setAttribute('class','task')
-
     const newTaskCheckbox = document.createElement('input')
     newTaskCheckbox.setAttribute('type', 'checkbox')
-
     const newTaskText = document.createElement('p')
-    newTaskText.setAttribute('class', 'notdone')
-    newTaskText.innerText = taskText;
 
+    if (strike == false) {
+        newTaskText.setAttribute('class', 'notdone')
+    }
+    else if (strike == true) {
+        newTaskText.setAttribute('class', 'done')
+    }
+    newTaskText.innerText = taskText;
     const newTaskRemove = document.createElement('button')
     newTaskRemove.setAttribute('class', 'removetask')
     newTaskRemove.innerHTML = "&#10005;"
@@ -40,13 +54,43 @@ function addTask(taskText) {
     newTask.appendChild(newTaskText)
     newTask.appendChild(newTaskRemove)
 
-    if (order.checked == false){
-        todotasks.appendChild(newTask)
-    }
-    else {
-        todotasks.prepend(newTask)
+    todotasks.appendChild(newTask)
+
+}
+
+// Making sure there is a 'localTasks' Key in localStorage
+const localTodoTasks = []
+
+if ((localStorage.getItem('localTasks')) == null) {
+    localStorage.setItem('localTasks', JSON.stringify(localTodoTasks));
+
+    var taskNumber = 0;
+}
+else {
+    // Add the existing localTasks into the localTodoTasks array
+    const localstorageTodoTasks = localStorage.getItem('localTasks');
+
+    // This is a array of stricngs, each string is a json object
+    const existingLocalTasks = JSON.parse(localstorageTodoTasks);
+
+    // Getting the Length of existing tasks, and creating count
+    var taskNumber = existingLocalTasks.length
+
+    // Adding the localStorage tasks to the array in JS
+    for (let task of existingLocalTasks){
+        localTodoTasks.push(task)
     }
 
+    for (let task of localTodoTasks){
+        addTask(task.todoText, task.strike)
+    }
+
+}
+
+const removeChildren = (parent) => {
+    while (parent.lastChild) {
+        parent.removeChild(parent.lastChild)
+    }
 }
 
 // Creates the DIV, and Append into Results DIV
@@ -58,21 +102,38 @@ submit.addEventListener('click', function(event){
         task.value = ''
     }
     else {
-        addTask(current_value)
+        // Create a task in LocalStorage
+        item = (createTask(taskNumber, task.value, false))
+        taskNumber = taskNumber + 1
+
+        if (order.checked == false){
+            localTodoTasks.push(item)
+        }
+        else {
+            localTodoTasks.unshift(item)
+        }
+        localStorage.setItem('localTasks', JSON.stringify(localTodoTasks));
+
+        removeChildren(todotasks)
+
+        for (let task of localTodoTasks){
+            addTask(task.todoText, false)
+        }
         task.value = ''
     }
-
 })
 
 // Toggle Finish/Unfinished Task
-// function addNewTodoTasks(){
 todotasks.addEventListener('click', function(event){
     if (event.target.tagName == 'INPUT') {
         if (event.target.checked == true){
             ((event.target).nextElementSibling).setAttribute('class', 'done')
+
+
         }
         else {
             ((event.target).nextElementSibling).setAttribute('class', 'notdone');
+
         }
     }
     else if (event.target.tagName =='BUTTON') {
@@ -81,7 +142,6 @@ todotasks.addEventListener('click', function(event){
         console.log('delete the event')
     }
 })
-// }
 
 
 // Saving To-Do into Local Storage
@@ -120,19 +180,3 @@ function removeAllButton(){
 // const actuallocalTodoTasks = JSON.parse(jslocalTodoTasks)
 
 // localStorage.setItem('localTasks', jslocalTodoTasks)
-
-const testbutton = document.querySelector('#testdelete');
-
-var count = 0;
-
-testbutton.addEventListener('click', function(){
-    console.log(localStorage.getItem('localTasks'));
-    // console.log("yes clicked")
-    count = count + 1;
-    localTodoTasks.push(count)
-    localStorage.setItem('localTasks', JSON.stringify(localTodoTasks))
-})
-
-
-
-
