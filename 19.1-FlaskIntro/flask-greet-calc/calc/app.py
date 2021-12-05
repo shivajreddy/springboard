@@ -73,3 +73,7 @@ def mega_operation(operation):
         result = div_operation(a,b)
         return f'{result}'
 
+# As an extra-bonus, see if you can find a way to do this in the route
+#  without a whole series of if/elif statements. 
+# One good way is to use a dictionary to map operation names to
+#  the functions that do the underlying math.

@@ -1,102 +1,182 @@
 /* http://curric.rithmschool.com/springboard/assessments/meme-gen-8d96/ */
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
+/* Root Properties ══════╗ */
 * {
-    /* outline: solid 1px red; */
+  /* outline: solid 1px red; */
+  margin: 0;
+  padding: 0;
+}
+/* Body Properties ══════╗ */
+body {
+  background-color: var(--bodybg) !important;
+  margin: 20px;
 }
 
 /* Form Properties ══════╗ */
 form {
-    padding-left: 50px;
-    display: inline-block;
-    flex-direction: column;
-    justify-content: center;
+  /* padding-left: 50px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/* ══════════════════════╝ */
-
-
-/* Body Properties ══════╗ */
-
-body {
-    /* outline: solid 20px red; */
-    /* height: 200vh; */
-    background-color: var(--bodybg) !important;
-    /* background-color: var(--mainBag); */
+/* Navigation ══════╗ */
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--mainBag);
 }
 
-/* ══════════════════════╝ */
+nav a {
+  font-size: 32px;
+  text-decoration: none;
+  color: var(--font1);
+}
 
+nav button {
+  margin-left: 10px;
+  width: 100px;
+}
+
+h1,
+p,
+label {
+  color: var(--font1);
+}
+
+input {
+  background-color: var(--bodybg);
+  color: var(--font1);
+  border-radius: 5px;
+  border-color: var(--font1);
+  border-width: 3px;
+  width: 600px;
+  margin-left: 30px;
+}
+#textbot {
+  margin-left: 5px;
+}
+
+button {
+  border-radius: 10px;
+}
+
+.creatememe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.creatememe button {
+  width: 100px;
+}
+
+.option label {
+  width: 10%;
+}
+
+.option input {
+  width: 90%;
+}
 
 /* Light Color Scheme ══════╗ */
 :root,
 .lightMode {
-    --color1: #e5383b;
-    --color2: #b1a7a6;
-    --color3: #d3d3d3;
-    --color4: #f5f3f4;
-    --color5: #ffffff;
-    --font1: #0b090a;
-    --mainBag: #ffa5a6;
-    --bodybg: #eaeaea;
-
+  --color1: #e5383b;
+  --color2: #b1a7a6;
+  --color3: #d3d3d3;
+  --color4: #f5f3f4;
+  --color5: #ffffff;
+  --font1: #0b090a;
+  --mainBag: #818edd;
+  --bodybg: #eaeaea;
 }
-
-/* ═════════════════════════╝ */
-
 
 /* Dark Color Scheme ══════╗ */
 .darkMode {
-    --color1: #0b090a;
-    --color2: #161a1d;
-    --color3: #660708;
-    --color4: #a4161a;
-    --color5: #ba181b;
-    --font1: #d3d3d3;
-    --mainBag: #0b090a;
-    --bodybg: #0b090a;
+  --color1: #0b090a;
+  --color2: #161a1d;
+  --color3: #660708;
+  --color4: #a4161a;
+  --color5: #ba181b;
+  --font1: #d3d3d3;
+  --mainBag: #070845;
+  --bodybg: #0b090a;
 }
 
-/* ════════════════════════╝ */
-
-
-/* Navigation ══════╗ */
-
-nav {
-    background-color: var(--mainBag);
+/* Results Section ══════╗ */
+section {
+  background-color: var(--bodybg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-a {
-    font-size: 42px;
+.meme {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  /* height: 0.8vh; */
+  /* position: relative; */
+}
+.meme img {
+  outline: gray solid 2px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  position: absolute;
 }
 
-.nav-link {
-    color: var(--color1);
+/* Meme Div ══════╗ */
+section {
+  /* outline: solid red 2px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
-#navbrand {
-    font-size: 2rem;
-    color: var(--font1);
+.imageContainer {
+  /* outline: solid yellow 2px; */
+  display: inline-block;
+  position: relative;
+  /* color: rgb(200, 200, 30); */
+  color: white;
 }
+.topcenter {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-/* ═════════════════╝ */
+  font-family: 'Anton', sans-serif;
+  font-size: 30px;
 
-
-h1,
-p {
-    color: var(--font1);
-    /* background-color: var(--mainBag); */
+  text-shadow: -1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000, 1px 0 0 #000,
+    1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000;
+  /* font-weight: bold; */
 }
+.botcenter {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-#colors {
-    display: flex;
-    justify-content: center;
+  font-family: 'Anton', sans-serif;
+  font-size: 30px;
+
+  text-shadow: -1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000, 1px 0 0 #000,
+    1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000;
+  /* font-weight: bold; */
 }
+.deletememe {
+  font-size: 12px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 
-.letter {
-    /* background-color: black; */
-    font-size: 10rem;
-    transition: color 1200ms;
-    text-align: center;
+  position: absolute;
+  /* transform: translate(0 0% 50% 0); */
+  margin-top: 40%;
+  margin-left: 10px;
 }
-
-
