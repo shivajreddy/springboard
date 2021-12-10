@@ -1,0 +1,28 @@
+/* Pokecard styles */
+.pokecard {
+    margin: 10px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 120px;
+    height: 170px;
+    background-color: rgb(236, 236, 236);
+    border: 0.5px solid rgb(158, 158, 158);
+    border-radius: 25px;
+}
+.pokecard-item {
+    margin: 0;
+    padding: 0;
+}
+
+.pokecard h3 {
+
+
+    color: rgb(66, 94, 252);
+
+
+};
+
