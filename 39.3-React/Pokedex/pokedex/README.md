@@ -14,8 +14,8 @@ React onClick events
 
 ### LinkedIn
 
-[LinkedIn] (https://www.linkedin.com/in/kshivareddy/)
+[LinkedIn](https://www.linkedin.com/in/kshivareddy/)
 
 ### Twitter
 
-[Twitter] (https://twitter.com/shivajreddy)
+[Twitter](https://twitter.com/shivajreddy)
