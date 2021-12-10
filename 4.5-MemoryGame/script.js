@@ -15,10 +15,3 @@ function addText() {
     result.innerText = `${count}`
     // return count
 }
-
-
-
-
-
-
-
