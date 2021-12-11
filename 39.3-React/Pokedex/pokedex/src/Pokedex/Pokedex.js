@@ -1,4 +1,5 @@
 import Pokecard from "../Pokecard/Pokecard"
+import Pokegame from "../Pokegame/Pokegame";
 import '../Pokedex/Pokedex.css'
 
 const pokes = [
@@ -12,15 +13,24 @@ const pokes = [
     {id: 133, name: 'Eevee', type: 'normal', base_experience: 65}
   ]
 
+const pokemonList = ["poke1", "poke2", "poke3", "poke4", "poke5", "poke6", "poke7", "poke8"]
+
 
 const Pokedex = () => {
     return(
+        <>
         <div className="pokedex" >
             {pokes.map(pokemon => (
-                    <Pokecard name={pokemon.name} type={pokemon.type} img={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`} be={pokemon.base_experience}/>
+                    <Pokecard name={pokemon.name} type={pokemon.type} img={pokemon.id} be={pokemon.base_experience}/>
+
                 ))}
         </div>
+
+        {/* This is the actual game component */}
+        <Pokegame />
+        </>
     );
 };
 
+// export {pokes}
 export default Pokedex;

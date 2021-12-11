@@ -1,6 +1,27 @@
 .pokegame {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
+.pokegame h2 {
+  text-align: center;
+  /* margin-left: 50%; */
+}
 
+.deck {
+  background-color: rgb(241, 223, 175);
+  border: 0.5px solid rgb(158, 158, 158);
+  border-radius: 25px;
+}
 
+.hand1 {
+  display: flex;
+  flex-wrap: wrap;
+}
 
+.hand2 {
+  display: flex;
+  flex-wrap: wrap;
 }
