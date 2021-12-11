@@ -17,10 +17,10 @@ const Choice = () => {
 function removeItem(items, item) {
 
     ///// Why is this not working???/////
-    // const temp_items = Foods
-    // let i = temp_items.indexOf(item)
-    // temp_items.splice(i, 1)
-    // return temp_items
+    const temp_items = Foods
+    let i = temp_items.indexOf(item)
+    temp_items.splice(i, 1)
+    return temp_items
 
     for (let i=0;i<items.length; ++i){
         if(items[i] == item){
