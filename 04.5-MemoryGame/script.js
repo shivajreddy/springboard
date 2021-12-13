@@ -30,32 +30,34 @@ let count = 1;
   for (let color of colorArray) {
     // create a new div
     const newDiv = document.createElement("div");
-
-    // give it a class attribute for the value we are looping over
+    // Class attribute for the div
     newDiv.classList.add(color);
-    // Not sure if you need another data-color attribute, started for using with local storage
-    newDiv.setAttribute('data-color', color);
+    // Id addtribute for the div
     newDiv.setAttribute('id', count);
     count = count +1 
-
     // call a function handleCardClick when a div is clicked on
     newDiv.addEventListener("click", handleCardClick);
-    // newDiv.addEventListener('click',check);
-    // newDiv.addEventListener('click', simpleArray);
 
-    // append the div to the element with an id of game
     gameContainer.append(newDiv);
   }
 }
 
+let noClicking = false;
 // TODO: Implement this function!
 function handleCardClick(event) {
-    const colorClass = event.target.classList[0];
+    if(noClicking)
+    console.log(event.target)
+    console.log(event.target.getAttribute('class'))
 
-    // console.log(event.target.getAttribute('data-color'))
+    // Saving the id and class of selected div to LocalStorage
+    localStorage.setItem(event.target.id, event.target.classList[0])
 
-    localStorage.setItem(event.target.id, colorClass)
+    // Set a Timer to show the color
+    event.target.style.backgroundColor = event.target.getAttribute('data-color')
+    // const temp_box = (event.target).style.backgroundColor = 
+    // temp_box.style.backgroundColor = localStorage.getItem(localStorage.key(0))
 
+    
     // Making sure only two boxes are clicked at any time. (Not sure if it should be top or botton, based on setInterval)
     if (localStorage.length>2)
     {
@@ -69,8 +71,7 @@ function handleCardClick(event) {
     const v2 = localStorage.getItem(k2);
     console.log(`these are k1 v1=(${k1},${v1}), and k2v2=(${k2},${v2})`);
 
-    // Set a Timer to show the color
-    
+
 
     // Runcs check only after two boxes are selected.
     if (v1 !== null && v2 !== null)
