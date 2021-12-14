@@ -1,0 +1,29 @@
+h4 {
+    color: orchid;
+}
+
+.game {
+    background-color: #eaeaea;
+    width: 250px;
+    height: 250px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ball {
+    /* background-color: #dfdfdf; */
+    width: 200px;
+    height: 200px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 1000px;
+    /* outline: red solid 2px; */
+}
+.ball h4 {
+    text-align: center;
+}
