@@ -6,11 +6,13 @@
 
 body {
   background-color: rgb(245, 245, 247);
+  height: 300px;
 }
 
 h1 {
   text-align: center;
   font-weight: 700;
+  margin-top: 30px;
 
   background: -webkit-linear-gradient(rgb(210, 215, 52), rgb(37, 181, 238));
   -webkit-background-clip: text;
@@ -20,7 +22,10 @@ h1 {
 #game {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+
+  /* height: 300px; */
 }
 
 #game div {
