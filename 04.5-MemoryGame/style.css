@@ -1,7 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400;500;700&display=swap');
+
+:root {
+  font-family: 'Karla', sans-serif;
+}
+
+body {
+  background-color: rgb(245, 245, 247);
+}
+
+h1 {
+  text-align: center;
+  font-weight: 700;
+
+  background: -webkit-linear-gradient(rgb(210, 215, 52), rgb(37, 181, 238));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#game {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 #game div {
-  border: 1px solid black;
+  border: 2px solid rgb(110, 110, 115);
   width: 15%;
   height: 200px;
   margin: 10px;
   display: inline-block;
+
+  border-radius: 10px;
+}
+
+[data-type='cardbox'] {
 }

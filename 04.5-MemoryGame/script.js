@@ -1,5 +1,8 @@
 localStorage.clear()
 const gameContainer = document.getElementById("game");
+let clicking = true;
+let card1 = null;
+let card2 = null;
 
 const COLORS = ["red","blue","green","orange","purple","red","blue","green","orange","purple"];
 
@@ -32,6 +35,7 @@ let count = 1;
     const newDiv = document.createElement("div");
     // Class attribute for the div
     newDiv.classList.add(color);
+    newDiv.setAttribute('data-type','cardbox')
     // Id addtribute for the div
     newDiv.setAttribute('id', count);
     count = count +1 
@@ -45,126 +49,56 @@ let count = 1;
 let noClicking = false;
 // TODO: Implement this function!
 function handleCardClick(event) {
-    if(noClicking)
-    console.log(event.target)
-    console.log(event.target.getAttribute('class'))
 
-    // Saving the id and class of selected div to LocalStorage
+    //* Saving the id and class of selected div to LocalStorage
     localStorage.setItem(event.target.id, event.target.classList[0])
 
-    // Set a Timer to show the color
-    event.target.style.backgroundColor = event.target.getAttribute('data-color')
-    // const temp_box = (event.target).style.backgroundColor = 
-    // temp_box.style.backgroundColor = localStorage.getItem(localStorage.key(0))
-
-    
-    // Making sure only two boxes are clicked at any time. (Not sure if it should be top or botton, based on setInterval)
-    if (localStorage.length>2)
+    //* Set a Timer to show the color
+    if (clicking == true)
     {
-        localStorage.clear();
-    }
+        event.target.style.backgroundColor = event.target.getAttribute('class')
+        event.target.classList.add('flipped');
+    };
 
-    // Check if the box colors are same
+
+    //* Creating Key,Value for each localStorage item 
     const k1 = localStorage.key(0);
     const v1 = localStorage.getItem(k1);
     const k2 = localStorage.key(1);
     const v2 = localStorage.getItem(k2);
-    console.log(`these are k1 v1=(${k1},${v1}), and k2v2=(${k2},${v2})`);
 
 
+    // * Both Cards are selected
+    if (k1 && k2){
 
-    // Runcs check only after two boxes are selected.
-    if (v1 !== null && v2 !== null)
-    {
-        const box1 = (document.getElementById(k1));
-        const box2 = (document.getElementById(k2));
-        if (v1 === v2)
+        //* Both cards are same color, remove click listener
+        if (v1 == v2)
         {
-            console.log("these match");
-            box1.style.backgroundColor = v1
-            box2.style.backgroundColor = v2
+            document.getElementById(k1).removeEventListener('click', handleCardClick);
+            document.getElementById(k2).removeEventListener('click', handleCardClick);
         }
-        if (v1 !== v2)
+
+        //* Not Same, execute after 500milliseconds, remove flipped, remove background
+        else
         {
-            console.log("these don't match");
-            box1.removeAttribute('style');
+            setTimeout(function(){
+
+                document.getElementById(k1).style.backgroundColor = ''
+                document.getElementById(k2).style.backgroundColor = ''
+                document.getElementById(k1).classList.remove('flipped');
+                document.getElementById(k2).classList.remove('flipped');
+
+            },350);
         }
     }
+
+    //* Final Check, if there are two items in storage, clear both
+    if (localStorage.length == 2)
+    {
+        localStorage.clear();
+    }
+
 }
 
 // when the DOM loads
 createDivsForColors(shuffledColors);
-
-
-// >>>> OLD CODE <<<<< //
-// const pair = []
-// const correctPairs = []
-
-// function addColor(e){
-//     let object = {}
-//     color = (e.target).getAttribute('class')
-//     pair.push(color);
-//     (e.target).style.background = color;
-// }
-
-// function check(event){
-//     if (pair.length >= 2){
-//         pair.splice(0,2)
-//         // console.log(pair)
-//     }
-//     else{
-//         pair.push((event.target).getAttribute('class'))
-//         color = (event.target).getAttribute('class');
-//         (event.target).style.background = color;
-//         console.log(pair)
-//         // newDiv.addEventListener('click', addColor);
-
-//     }
-// }
-
-// function Box(input_box){
-//     this.class = (input_box.target).getAttribute('class');
-//     this.id = (input_box.target).getAttribute('id');
-// }
-
-
-// function simpleArray (event) {
-//     currentBox = new Box(event)
-//     boxdetail = (`${(currentBox.class)}, ${currentBox.id}`);
-
-//     if (pair.length === 0) {
-//         pair.push(currentBox);
-//     }
-
-//     if ((pair.length === 1) && (currentBox.id != pair[0].id)){
-
-//         if (pair.length >= 2){
-//             if (pair[0].class === pair[1].class){
-//                 correctPairs.push(pair[0]);
-//                 correctPairs.push(pair[1]);
-//                 console.log(`Correct Pairs ${correctPairs}`);
-//             }
-//             else{
-//                 pair.shift()
-//                 pair.shift()
-//             }
-//         }
-//         else if(pair.length == 0 || pair.length < 2){
-//             pair.push(currentBox)
-//             // pair.push(boxdetail)
-//         }
-
-//         else if (pair[0] === pair[1]){
-//             console.log("pass")
-//         }
-//         else if(true){
-//             console.log("fail so removed both")
-//             pair.shift()
-//             pair.shift()
-//         }
-
-//     }
-    
-//     console.log(pair)
-
-// }
