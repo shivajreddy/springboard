@@ -62,38 +62,39 @@ Examples:
     vowelCount('hmmm') // {};
     vowelCount('I Am awesome and so are you') // {i: 1, a: 4, e: 3, o: 3, u: 1};
 */
-
-
 function vowelCount(str){
-    const str_words = [];
-    const str_small = str.toLowerCase();
-    for(char of str_small){
-        str_words.push(char);
-    }
-    const vowels = 'aeiou';
-    let num = 0;
-    let a,e,i,o,u = 0;
-    const letters = [];
-    const aa = str_words.filter(item=> item =='a' ? a+=1 : a+=0)
-    const ee = str_words.filter(item=> item =='e' ? e+=1 : e+=0)
-    const ii = str_words.filter(item=> item =='i' ? i+=1 : i+=0)
-    const oo = str_words.filter(item=> item =='o' ? o+=1 : o+=0)
-    const uu = str_words.filter(item=> item =='u' ? u+=1 : u+=0)
-    // str_words.map(item=> {
-    //     item == 'a' ? a+=1 : a+=0;
-    //     item == 'e' ? e+=1 : e+=0;
-    //     item == 'i' ? i+=1 : i+=0;
-    //     item == 'o' ? o+=1 : o+=0;
-    //     item == 'u' ? u+=1 : u+=0;
-    // })
-        // vowels.indexOf(item) == -1 ? num+=0: num+=1)
+    let result = {};
+    let a = 0;
+    let e = 0;
+    let i = 0;
+    let o = 0;
+    let u = 0;
 
-    return [a,e,i,o,u]
-    // return str_words
+    [...str].map(item=>{
+        if(item == 'a'){
+            a += 1;
+            result.a = a;
+        }
+        if(item == 'e'){
+            e+=1;
+            result.e = e;
+        }
+        if(item == 'i'){
+            i+=1;
+            result.i = i;
+        }
+        if(item == 'o'){
+            o+=1;
+            result.o = o;
+        }
+        if(item == 'u'){
+            u+=1;
+            result.u = u;
+        }
+    })
+    return result;
 };
 
-console.log(vowelCount('eElie')) // {e:2,i:1};
-console.log(vowelCount('I Am awesome and so are you')) // {i: 1, a: 4, e: 3, o: 3, u: 1};
 
 // vowelCount('abcdefghijklmnopqrstuvwxy');
 // console.log(vowelCount('abcdefghijklmnopqrstuvwxyz'));
@@ -188,7 +189,12 @@ function findInObj(arr, key, searchValue) {
     return arr.filter(item=> item.isCatOwner == true)[0]
     }
 }
-console.log(findInObj([{first: 'Elie', last:"Schoppik"}, {first: 'Tim', last:"Garcia", isCatOwner: true}, {first: 'Matt', last:"Lane"}, {first: 'Colt', last:"Steele", isCatOwner: true}], 'isCatOwner',true)) // {first: 'Tim', last:"Garcia", isCatOwner: true}
+
+console.log(findInObj([{first: 'Elie', last:"Schoppik"}, {first: 'Tim', last:"Garcia", isCatOwner: true}, {first: 'Matt', last:"Lane"}, {first: 'Colt', last:"Steele", isCatOwner: true}], 'isCatOwner',true));
+// {first: 'Tim', last:"Garcia", isCatOwner: true}
+
+console.log(findInObj([{first: 'Elie', last:"Schoppik"}, {first: 'Tim', last:"Garcia", isCatOwner: true}, {first: 'Matt', last:"Lane"}, {first: 'Colt', last:"Steele", isCatOwner: true}], 'isCatOwner',true));
+// {first: 'Tim', last:"Garcia", isCatOwner: true}
 
 
 /*
