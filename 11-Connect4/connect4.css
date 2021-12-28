@@ -1,4 +1,39 @@
 /* game board table */
+@import url('https://fonts.googleapis.com/css2?family=Moo+Lah+Lah&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+body {
+    /* background-color: #E5E5E5; */
+    background-color: #e9ecef;
+    margin: 0;
+}
+
+#game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+#title {
+    margin-top: 20px;
+    /* padding-top: 10px; */
+    font-family: 'Moo Lah Lah', cursive;
+    font-family: 'Orbitron', sans-serif;
+    color: white;
+    /* font-size: 900; */
+    font-size: 5rem;
+    text-align: center;
+}
+#title1 {
+    color: #F72585;
+    text-shadow: 0 0 3px #F72585, 0 0 10px #12b2e2;
+}
+#title2 {
+    color: #4CC9F0;
+    text-shadow: 0 0 3px #4CC9F0, 0 0 10px #f962a6;
+}
+
 
 #board td {
   width: 50px;
