@@ -14,14 +14,15 @@ body {
     align-items: center;
     flex-direction: column;
     height: 100vh;
+    /* width: 90%; */
+    padding:0px 30px;
+    outline: red solid 2px;
 }
 #title {
-    margin-top: 20px;
-    /* padding-top: 10px; */
+    margin: 0px 0px 50px 0px;
     font-family: 'Moo Lah Lah', cursive;
     font-family: 'Orbitron', sans-serif;
     color: white;
-    /* font-size: 900; */
     font-size: 5rem;
     text-align: center;
 }
@@ -34,11 +35,36 @@ body {
     text-shadow: 0 0 3px #4CC9F0, 0 0 10px #f962a6;
 }
 
+@media only screen and (min-width: 600px) {
+    #game {
+        background-color: rgb(0, 179, 249);
+        /* height: 200px; */
+    }
+    #board td{
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    #game {
+        background-color: rgb(166, 57, 239);
+    }
+    #board td {
+        width: 50px;
+        height: 50px;
+    }
+    #title {
+        font-size: 3rem;
+    }
+}
 
 #board td {
-  width: 50px;
-  height: 50px;
+  /* width: 50px; */
+  /* height: 50px; */
+  /* margin: 20px; */
   border: solid 1px #666;
+  border-radius: 50%;
 }
 
 /* pieces are div within game table cells: draw as colored circles */
