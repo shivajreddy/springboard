@@ -40,4 +40,5 @@ const randomGame = () => {
         }
     }, 1000);
 }
-randomGame()
+
+// randomGame()
