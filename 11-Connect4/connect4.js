@@ -56,7 +56,6 @@ function makeHtmlBoard() {
     }
 }
 
-makeBoard();
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
 function findSpotForCol(x) {
@@ -65,6 +64,7 @@ function findSpotForCol(x) {
     for (let i=0; i<HEIGHT;i++){
         col.push(board[i][x])
     }
+    col = col.reverse()
     const idx = col.findIndex((item)=>item===null);
     return idx;
 
@@ -78,16 +78,40 @@ function findSpotForCol(x) {
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-    // TODO: make a div and insert into correct table cell
 
+    // Game Piece DIV element, with classes
+    const piece = document.createElement('div')
+    piece.classList.add('game-piece')
+    piece.classList.add(`p${currPlayer}`)
+    // Find which player and add that
+    // piece.classList.add(`${player}`)
 
+    // console.log(`x=${x}, y=${y}`)
+    // The td that is empty in the selected column
+    const empty_td = document.querySelector(`#\\3${HEIGHT-1 - y}-${x}`)
+    board[HEIGHT-1 - y][x] = 1;
 
+    // Add the game piece of that player into this td
+    empty_td.append(piece)
+    // console.log(empty_td)
 }
 
 /** endGame: announce game end */
 
 function endGame(msg) {
-  // TODO: pop up alert message
+    //Time out for animation of winning piece to finish.
+    setTimeout(()=>{
+        alert(msg);
+    },220);
+
+    // Add reset only if there is no reset button, after Game over.
+    const reset = document.createElement('button');
+    reset.classList.add('reset');
+    reset.innerText = 'Reset Game';
+    if (document.querySelector('.reset') == null)
+    {
+        document.querySelector('#game').append(reset)
+    }
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -95,7 +119,7 @@ function endGame(msg) {
 function handleClick(evt) {
     // get x from ID of clicked cell
     var x = +evt.target.id;
-    console.log(x)
+    // console.log(x)
 
     // get next spot in column (if none, ignore click)
     var y = findSpotForCol(x);
@@ -103,7 +127,7 @@ function handleClick(evt) {
         return;
     }
 
-    // place piece in board and add to HTML table
+    //* place piece in board and add to HTML table
     // TODO: add line to update in-memory board
     placeInTable(y, x);
 
@@ -112,11 +136,23 @@ function handleClick(evt) {
         return endGame(`Player ${currPlayer} won!`);
     }
 
-    // check for tie
-    // TODO: check if all cells in board are filled; if so call, call endGame
+    //* check for tie
+    const empty_idx = []
+    for(let column=board.length - 1; column>0;column--){
+        const idx = (board[column]).findIndex((i)=>i != null)
+        empty_idx.push(idx)
+    }
+    if (empty_idx.findIndex((i)=>i== -1) == -1){
+        return setTimeout(() => {
+            alert(`It's a tie`)
+        }, 220);
+    }
+    // console.log(empty_idx)
 
-    // switch players
-    // TODO: switch currPlayer 1 <-> 2
+    //* switch players
+    if (currPlayer == 1){currPlayer = 2}
+    else {currPlayer = 1}
+
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
@@ -126,6 +162,7 @@ function checkForWin() {
     // Check four cells to see if they're all color of current player
     //  - cells: list of four (y, x) cells
     //  - returns true if all are legal coordinates & all match currPlayer
+    // console.log(cells)
 
     return cells.every(
       ([y, x]) =>
@@ -146,6 +183,8 @@ function checkForWin() {
       var diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
       var diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
 
+        console.log([horiz, vert, diagDR, diagDL])
+
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
         return true;
       }
@@ -153,5 +192,5 @@ function checkForWin() {
   }
 }
 
-// makeBoard();
+makeBoard();
 makeHtmlBoard();

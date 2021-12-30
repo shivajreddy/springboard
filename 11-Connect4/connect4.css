@@ -16,10 +16,11 @@ body {
     height: 100vh;
     /* width: 90%; */
     padding:0px 30px;
-    outline: red solid 2px;
+    /* outline: solid red 5px; */
+    /* border: solid red 2px; */
 }
 #title {
-    margin: 0px 0px 50px 0px;
+    margin: 0px 0px 60px 0px;
     font-family: 'Moo Lah Lah', cursive;
     font-family: 'Orbitron', sans-serif;
     color: white;
@@ -35,7 +36,7 @@ body {
     text-shadow: 0 0 3px #4CC9F0, 0 0 10px #f962a6;
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 400px) {
     #game {
         background-color: rgb(0, 179, 249);
         /* height: 200px; */
@@ -59,11 +60,32 @@ body {
     }
 }
 
+#board{
+
+    outline: 3px solid rgb(150, 150, 150);
+    outline-offset: 10px;
+
+}
+.p1{
+    background-color: #F72585;
+}
+.p2{
+    background-color: #4CC9F0;
+}
+.game-piece {
+    margin: 5px;
+    width: 80%;
+    height: 80%;
+    /* width: 50px;
+    height: 50px; */
+    border-radius: 50%;
+}
+
 #board td {
   /* width: 50px; */
   /* height: 50px; */
   /* margin: 20px; */
-  border: solid 1px #666;
+  border: solid 2px rgb(50, 50, 50);
   border-radius: 50%;
 }
 
@@ -86,4 +108,8 @@ body {
 
 #column-top td:hover {
   background-color: gold;
+}
+
+.reset {
+    margin-top: 20px;
 }
