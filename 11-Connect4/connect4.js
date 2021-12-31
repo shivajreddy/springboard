@@ -11,6 +11,16 @@ var HEIGHT = 6;
 var currPlayer = 1; // active player: 1 or 2
 var board = []; // array of rows, each row is array of cells  (board[y][x])
 
+if (localStorage.getItem('1') === null){
+    localStorage.setItem('1',0)}
+if (localStorage.getItem('1')!== null){
+    (document.getElementById('p1-score')).innerText = `Player1: ${localStorage.getItem(1)}`
+}
+if (localStorage.getItem('2') === null){localStorage.setItem('2',0)}
+if (localStorage.getItem('2')!== null){
+    (document.getElementById('p2-score')).innerText = `Player2: ${localStorage.getItem(2)}`
+}
+
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
@@ -60,19 +70,11 @@ function makeHtmlBoard() {
 
 function findSpotForCol(x) {
     //* return the index of cell, that is empty when counted from top, for a given column:x
-    let col = []
-    for (let i=0; i<HEIGHT;i++){
-        col.push(board[i][x])
+    for (let y=HEIGHT-1; y>=0; y--){
+        if(!board[y][x]){
+            return y}
     }
-    col = col.reverse()
-    const idx = col.findIndex((item)=>item===null);
-    return idx;
 
-    // Use this if -1 is not an option
-    if (idx != -1){
-        return idx
-    }
-    else {return undefined}
 };
 
 /** placeInTable: update DOM to place piece into HTML table of board */
@@ -81,19 +83,14 @@ function placeInTable(y, x) {
 
     // Game Piece DIV element, with classes
     const piece = document.createElement('div')
-    piece.classList.add('game-piece')
+    piece.classList.add('piece')
     piece.classList.add(`p${currPlayer}`)
-    // Find which player and add that
-    // piece.classList.add(`${player}`)
 
-    // console.log(`x=${x}, y=${y}`)
     // The td that is empty in the selected column
-    const empty_td = document.querySelector(`#\\3${HEIGHT-1 - y}-${x}`)
-    board[HEIGHT-1 - y][x] = 1;
+    const empty_td = document.querySelector(`#\\3${y}-${x}`)
 
     // Add the game piece of that player into this td
     empty_td.append(piece)
-    // console.log(empty_td)
 }
 
 /** endGame: announce game end */
@@ -108,10 +105,26 @@ function endGame(msg) {
     const reset = document.createElement('button');
     reset.classList.add('reset');
     reset.innerText = 'Reset Game';
+    reset.onclick = () =>window.location.reload(true)
     if (document.querySelector('.reset') == null)
     {
         document.querySelector('#game').append(reset)
     }
+
+    // Clear scores button to clear local storage
+    const clearScores = document.createElement('button');
+    clearScores.classList.add('clearScores');
+    clearScores.innerText = 'Clear Scores';
+    const resetScores = () => {
+        (document.getElementById('p1-score')).innerText = `Player1: 0`;
+        (document.getElementById('p2-score')).innerText = `Player2: 0`;
+        localStorage.clear()};
+    clearScores.addEventListener('click', resetScores)
+    if (document.querySelector('.clearScores') == null)
+    {
+        document.querySelector('#game').append(clearScores)
+    }
+
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -119,7 +132,6 @@ function endGame(msg) {
 function handleClick(evt) {
     // get x from ID of clicked cell
     var x = +evt.target.id;
-    // console.log(x)
 
     // get next spot in column (if none, ignore click)
     var y = findSpotForCol(x);
@@ -129,29 +141,43 @@ function handleClick(evt) {
 
     //* place piece in board and add to HTML table
     // TODO: add line to update in-memory board
+    board[y][x] = currPlayer;
     placeInTable(y, x);
 
     // check for win
     if (checkForWin()) {
-        return endGame(`Player ${currPlayer} won!`);
+        // Update Local storage with the score
+        localStorage.setItem(`${currPlayer}`, parseInt(localStorage.getItem(`${currPlayer}`))+1 )
+
+        if(currPlayer == 1){
+            (document.getElementById('p1-score')).innerText = `Player1: ${localStorage.getItem(1)}`
+        }
+        if(currPlayer == 2){
+            (document.getElementById('p2-score')).innerText = `Player2: ${localStorage.getItem(2)}`
+        }
+
+        return endGame(`Player ${currPlayer} won 🎉!`);
     }
 
     //* check for tie
-    const empty_idx = []
-    for(let column=board.length - 1; column>0;column--){
-        const idx = (board[column]).findIndex((i)=>i != null)
-        empty_idx.push(idx)
-    }
-    if (empty_idx.findIndex((i)=>i== -1) == -1){
-        return setTimeout(() => {
-            alert(`It's a tie`)
-        }, 220);
-    }
+    // const empty_idx = []
+    // for(let column=board.length - 1; column>0;column--){
+    //     const idx = (board[column]).findIndex((i)=>i != null)
+    //     empty_idx.push(idx)
+    // }
+    // if (empty_idx.findIndex((i)=>i== -1) == -1){
+    //     return setTimeout(() => {
+    //         alert(`It's a tie`)
+    //     }, 220);
+    // }
     // console.log(empty_idx)
 
     //* switch players
     if (currPlayer == 1){currPlayer = 2}
     else {currPlayer = 1}
+
+    //* Updating Score board
+    document.querySelector('#status').innerText = `Player ${currPlayer} make your move`
 
 }
 
@@ -183,7 +209,7 @@ function checkForWin() {
       var diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
       var diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
 
-        console.log([horiz, vert, diagDR, diagDL])
+        // console.log([horiz, vert, diagDR, diagDL])
 
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
         return true;

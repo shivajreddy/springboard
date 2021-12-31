@@ -38,7 +38,7 @@ body {
 
 @media only screen and (min-width: 400px) {
     #game {
-        background-color: rgb(0, 179, 249);
+        /* background-color: rgb(0, 179, 249); */
         /* height: 200px; */
     }
     #board td{
@@ -49,7 +49,7 @@ body {
 
 @media only screen and (min-width: 1200px) {
     #game {
-        background-color: rgb(166, 57, 239);
+        /* background-color: rgb(166, 57, 239); */
     }
     #board td {
         width: 50px;
@@ -96,6 +96,8 @@ body {
   margin: 5px;
   width: 80%;
   height: 80%;
+  border-radius: 50%;
+
 }
 
 /* TODO: make pieces red/blue,  depending on player 1/2 piece */
@@ -112,4 +114,18 @@ body {
 
 .reset {
     margin-top: 20px;
+}
+
+/* Game Status Styles */
+.game-status{
+    margin-top: 20px;
+}
+h2{
+    margin: 0;
+}
+.scores {
+    display: flex;
+}
+#p2-score{
+    padding-left: 30px;
 }
