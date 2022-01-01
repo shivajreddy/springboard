@@ -1,77 +1,32 @@
-// Write an ES2015 Version.
+new Set([1,1,2,2,3,4])  // {1,2,3,4}
+let res = new Set("referee")
 
-//* 1 Same keys and values
-/*
-function createInstructor(firstName, lastName){
-    return {
-      firstName: firstName,
-      lastName: lastName
-    }
-  }
-*/
+// [...new Set("referee")].join("") // set-> {r,e,f}, join-> 'ref'
 
-const createInstructor = (fname, lname) => {return {fname, lname}};
-// instructor1 = createInstructor('Colt','Steele') //{fname: 'Colt', lname: 'Steele'}
+let m = new Map();
+m.set([1,2,3], true);
+m.set([1,2,3], false);
+// map will keep adding the arr[0] as key, and arr[1] as value, so m will have  {[1,2,3]:true,[1,2,3]:false}
 
 
-//* 2 Compute Property Names
-var favoriteNumber = 41;
-/*
-var instructor = {
-  firstName: "Colt"
-}
-
-instructor[favoriteNumber] = "That is my favorite!"
-*/
-
-const instructor = {
-        fname:'Colt',
-        [favoriteNumber] : 'This is my favorite!'}
-
-// instructor  //{41: 'This is my favorite!', fname: 'Colt'}
-
-
-//*3 Object Methods
-/*
-var instructor = {
-  firstName: "Colt",
-  sayHi: function(){
-    return "Hi!";
-  },
-  sayBye: function(){
-    return this.firstName + " says bye!";
-  }
-}
-*/
-
-const instructor2 = {
-    fname:'coltz',
-    sayHi : ()=>'Hi, I am Colt, I love 🐈',
-    sayBye : ()=>`${instructor2.fname} says bye!`
-}
-
-
-//*4 Create Animal Function
-/* 
-const d = createAnimal("dog", "bark", "Woooof!")
--> {species: "dog", bark: ƒ}
-d.bark()  //"Woooof!"
-
-const s = createAnimal("sheep", "bleet", "BAAAAaaaa")
--> {species: "sheep", bleet: ƒ}
-s.bleet() //"BAAAAaaaa"
- */
-
-const animal = (species, verb, noise) => {
-    return {
-        species,
-        [verb] : ()=> noise
-    }
+const hasDuplicate = (arr) => {
+    if (new Set(arr).size == arr.length){return false}
+    else{return true}
 };
-// const boo = animal('cat','says','meow')
-// boo.says() -> 'meow'
+// hasDuplicate([1,3,2,1])     //true
+// hasDuplicate([1,5,-1,4])    //false
 
-// const sunny = animal('dog','barks','woof')
+const name = 'shiva';
 
-// sunny.barks() -> 'woof'
+const vowelCount = (word) => {
+    let a=0, e=0, i=0, o=0, u=0;
+    for(let char of [...word]){
+        if(char === 'a'){a+=1}
+        if(char === 'e'){e+=1}
+        if(char === 'i'){i+=1}
+        if(char === 'o'){o+=1}
+        if(char === 'u'){u+=1}
+    }
+    return {a,e,i,o,u}
+};
 
