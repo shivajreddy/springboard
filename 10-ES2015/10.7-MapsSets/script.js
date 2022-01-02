@@ -16,17 +16,17 @@ const hasDuplicate = (arr) => {
 // hasDuplicate([1,3,2,1])     //true
 // hasDuplicate([1,5,-1,4])    //false
 
-const name = 'shiva';
-
 const vowelCount = (word) => {
-    let a=0, e=0, i=0, o=0, u=0;
-    for(let char of [...word]){
-        if(char === 'a'){a+=1}
-        if(char === 'e'){e+=1}
-        if(char === 'i'){i+=1}
-        if(char === 'o'){o+=1}
-        if(char === 'u'){u+=1}
-    }
-    return {a,e,i,o,u}
+    function isVowel(char){
+        const vowels = 'aeiou';
+        return vowels.includes(char);
+    };
+    const result = new Map();
+    for (let char of word){
+        if(isVowel(char)){
+            if(result.has(char)){result.set(char, result.get(char)+1)}
+            else{result.set(char,1)}
+        };
+    };
+    return result;
 };
-
