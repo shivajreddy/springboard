@@ -1,25 +1,33 @@
-/* 
-function double(arr) {
-    return arr.map(function(val) {
-        return val * 2;
-    });
-}
-*/
 
-const double = (arr) => arr.map((i)=>i*2);
-// double([2,21,12])   //[4, 42, 24]
+var PI = 3.14;
+PI = 42; // stop me from doing this!
+
+
+
 
 /* 
-function squareAndFindEvens(numbers){
-    var squares = numbers.map(function(num){
-        return num ** 2;
-    });
-    var evens = squares.filter(function(square){
-        return square % 2 === 0;
-    });
-    return evens;
-}
-*/
+What is the difference between var and let?
+var creates a global variable, that can be modified and accessed from any where in the code.
+let variable can also be modified after assignment. But, its scope is with in a loop or function.
 
-const squareAndFindEvents = (numbers) => (numbers.map((i)=>i**2)).filter((i)=>i%2==0);
-// squareAndFindEvents([1,2,3,4,2,4,6,13,12,3,5,8])    //[4, 16, 4, 16, 36, 144, 64]
+
+What is the difference between var and const?
+const has same scope as let, but const cant be modified after assigned.
+
+
+const a = () => {
+    const pi = 3.14;
+    return pi
+}
+const b = () => {
+    const pi = 3.14;
+    return pi
+}
+pi is a constant but it lies inside separate scopes, so it is allowed.
+
+
+What is the difference between let and const?
+let can be changed, const can't be changed
+
+What is hoisting?
+*/
