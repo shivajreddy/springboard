@@ -130,14 +130,15 @@ class Game {
     }
 
     testThis(e){
-        this.board[0][0] = 1;
         console.log(e, this, this.board);
+        this.board[0][0] = 1;
     }
 
     /**handleClick: handle click of column top to play piece */
     handleClick(evt) {
         // get x from ID of clicked cell
         const x = +evt.target.id;
+        console.log(this);
         // console.log(x, this, this.board);
         // get next spot in column (if none, ignore click)
         //! this refers to table(since its the parent of the event), but line 43 solves it.
@@ -206,7 +207,7 @@ class Game {
     // makeHtmlBoard();
 }
 
-// const game1 = new Game(6,7)
-// game1.makeBoard()
-// game1.makeHtmlBoard()
+const game1 = new Game(6,7)
+game1.makeBoard()
+game1.makeHtmlBoard()
 
