@@ -1,5 +1,4 @@
 /** BinaryTreeNode: node for a general tree. */
-
 class BinaryTreeNode {
   constructor(val, left = null, right = null) {
     this.val = val;
@@ -17,13 +16,55 @@ class BinaryTree {
    * the length of the shortest path from the root to a leaf. */
 
   minDepth() {
+    if(this.root ===null)return 0;
 
+    const stack = [this.root];
+    const visited = [];
+    let depth = 0;
+    while(stack.length>0){
+        const currentNode = stack.pop();
+        visited.push(currentNode);
+        if (currentNode.right!==null){
+            depth ++;
+            stack.push(currentNode.right)}
+        if (currentNode.left!==null){
+            depth ++;
+            stack.push(currentNode.left)}
+        else if(currentNode.left === null || currentNode.right === null){
+            return depth
+        }
+    }
+    // return depth;
   }
 
   /** maxDepth(): return the maximum depth of the tree -- that is,
    * the length of the longest path from the root to a leaf. */
-
+  // TODO fix this
   maxDepth() {
+      
+      const stack = [this.root]
+      const visited = [];
+      const depthArray = [];
+      let depth = 0;
+
+      while(stack.length>0){
+          const currentNode = stack.pop();
+          if(currentNode.left!==null){
+              stack.push(currentNode.left)
+          }
+          if (currentNode.right!==null){
+              stack.push(currentNode.right);
+          }
+          if(currentNode.left!==null || currentNode.right!==null){
+              depth++
+          }
+          if (currentNode.left===null && currentNode.right===null){
+            depthArray.push(depth);
+            depth = 0;
+          }
+
+      }
+      return Math.max(...depthArray)
 
   }
 
@@ -31,7 +72,30 @@ class BinaryTree {
    * The path doesn't need to start at the root, but you can't visit a node more than once. */
 
   maxSum() {
+    function Recursion(root){
 
+      // null check, if submitted empty node
+      if (root !== null && root.left === undefined && root.right === undefined) return 0;
+      
+      // base condition
+      if (root === null) return -Infinity
+  
+      if(root.left===null && root.right===null){
+          return root.val
+      }
+  
+      const left = Recursion(root.left);
+      const right = Recursion(root.right);
+  
+      return root.val + Math.max(left, right);
+    };
+
+    const root = this.root;
+    if (root === null && this.left === undefined && this.right === undefined) return 0;
+    
+    else {
+        return Recursion(root);
+    }
   }
 
   /** nextLarger(lowerBound): return the smallest value in the tree
@@ -71,5 +135,29 @@ class BinaryTree {
     
   }
 }
+
+
+
+// emptyTree = new BinaryTree();
+
+// // build small tree;
+// let smallLeft = new BinaryTreeNode(5);
+// let smallRight = new BinaryTreeNode(5);
+// let smallRoot = new BinaryTreeNode(6, smallLeft, smallRight);
+// smallTree = new BinaryTree(smallRoot);
+
+// // build large tree
+// let node6 = new BinaryTreeNode(1);
+// let node5 = new BinaryTreeNode(1);
+// let node4 = new BinaryTreeNode(2);
+// let node3 = new BinaryTreeNode(3, node4, node6);
+// let node2 = new BinaryTreeNode(5, node3, node5);
+// let node1 = new BinaryTreeNode(5);
+// let root = new BinaryTreeNode(6, node1, node2);
+// largeTree = new BinaryTree(root);
+
+// console.log(emptyTree.maxSum());
+// console.log(smallTree.maxSum());
+// console.log(largeTree.maxSum());
 
 module.exports = { BinaryTree, BinaryTreeNode };
