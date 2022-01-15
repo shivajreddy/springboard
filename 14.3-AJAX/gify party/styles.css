@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+#header {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+#header button {
+    margin-left: 20px;
+}
+
+
+#title {
+    font-family: 'Fredoka One', cursive;
+    text-align: center;
+    /* font-size: ; */
+}
+
+#form {
+    font-family: 'Fredoka One', cursive;
+    font-size: large;
+    /* font-size: sm; */
+}
+
+#gif-box {
+    width: 100vw;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gif {
+    padding: 10px;
+}
+
+img{
+    border-radius: 40px;
+}
+/* npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch */

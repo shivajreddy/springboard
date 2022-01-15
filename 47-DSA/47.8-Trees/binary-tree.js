@@ -62,7 +62,6 @@ class BinaryTree {
             depthArray.push(depth);
             depth = 0;
           }
-
       }
       return Math.max(...depthArray)
 

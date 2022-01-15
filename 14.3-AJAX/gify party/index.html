@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./output.css">
+    <link rel="shortcut icon" href="https://img.icons8.com/color/48/000000/trash-dove.png" type="image/x-icon">
+    <title>Giphy Party!</title>
+</head>
+
+<body class="m-0 p-0 bg-slate-100">
+
+    <div id="header" class="m-0">
+        <h1 class="text-3xl text-indigo-800 decoration-indigo-600 hover:decoration-blue-400" id="title">Giphy Party</h1>
+        <!-- <button class="border-solid p-2 rounded-lg bg-indigo-300 text-slate-800">Dark Mode</button> -->
+    </div>
+
+    <!-- <div id="form" class="items-center mx-20 flex flex-row"> -->
+        <form action="#" id="form" class="items-center mx-20 flex flex-row" onsubmit="return false">
+            <input class="ring-2 ring-indigo-500 basis-3/4 mx-5 focus:outline-none focus:ring-2 focus:ring-indigo-800 rounded-full p-2 text-indigo-800 text-center" type="text" name="gifinput" id="search" placeholder="Enter your search">
+            <button id="search" class="basis-1/4 mx-2 bg-indigo-800 text-white p-2 rounded-full" type="submit">Search Gify</button>
+            <button id="remove" class="invisible basis-1/4 mx-2 bg-rose-500 text-white p-2 rounded-full" type="submit">Remove All</button>
+        </form>
+    <!-- </div> -->
+
+    <div id="gif-box">
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.js"></script> -->
+    <script src="app.js"></script>
+
+</body>
+
+</html>
