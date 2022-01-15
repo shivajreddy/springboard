@@ -16,14 +16,27 @@
     </div>
 
     <!-- <div id="form" class="items-center mx-20 flex flex-row"> -->
-        <form action="#" id="form" class="items-center mx-20 flex flex-row" onsubmit="return false">
-            <input class="ring-2 ring-indigo-500 basis-3/4 mx-5 focus:outline-none focus:ring-2 focus:ring-indigo-800 rounded-full p-2 text-indigo-800 text-center" type="text" name="gifinput" id="search" placeholder="Enter your search">
-            <button id="search" class="basis-1/4 mx-2 bg-indigo-800 text-white p-2 rounded-full" type="submit">Search Gify</button>
-            <button id="remove" class="invisible basis-1/4 mx-2 bg-rose-500 text-white p-2 rounded-full" type="submit">Remove All</button>
+        <form action="#" id="form" 
+            class="items-center mx-20 flex flex-row" 
+        onsubmit="return false">
+
+            <input id="search" 
+                class="ring-2 ring-indigo-500 basis-3/4 mx-5 focus:outline-none focus:ring-2 focus:ring-indigo-800 rounded-full p-2 text-indigo-800 text-center"
+            type="text" name="gifinput" placeholder="Enter your search">
+            <button id="search-gif"
+                class="basis-1/4 mx-2 bg-indigo-800 text-white p-2 rounded-full" 
+            type="submit">Search Gify</button>
+            <button id="remove" 
+                class="invisible basis-1/4 mx-2 bg-rose-500 text-white p-2 rounded-full" 
+            type="submit">Remove All</button>
+
         </form>
     <!-- </div> -->
 
+    <img id="loadingimg" class="animate-spin invisible" src="https://img.icons8.com/nolan/64/loading-sign.png" width="100"/>
     <div id="gif-box">
+
+        <!-- <img src="./loading.png" alt="" srcset=""> -->
 
     </div>
 

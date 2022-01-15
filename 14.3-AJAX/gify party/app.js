@@ -4,41 +4,44 @@ const $gifbox = $('#gif-box');
 
 let gifsPresent = false;
 
+
+//*async function for 'search end point' giphy api, return <img>
+
 async function giphyAPI(searchTerm) {
+
+    $('#loadingimg').toggleClass('invisible')
+    
     const res = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=6R5uDpWuODZVe4b5OQFoSCVURZ0GzuAW&q=${searchTerm}`)
-    console.log("res =", res);
+
     const randomIdx = Math.floor(Math.random()*(res.data.data.length));
-
-    try{
-        const randomGifUrl = res.data.data[randomIdx].images.original.url;
-    }
-    catch (e) {
-        console.log(e);
-    }
-    // console.log(randomGifUrl);
-
-    // <img class="gif" src="${randomGifUrl}" alt="" width="300" height="300" >
+    
+    const randomGifUrl = res.data.data[randomIdx].images.original.url;
+    
     $gifbox.prepend($(`
     <img class="gif" src="${randomGifUrl}" alt="" >
     `));
+    
+    $('#loadingimg').toggleClass('invisible')
 
 }
 
-// giphyAPI();
 
+//* GET request for the input search term & append the result image
 
-$('#search').on('click',()=>{
+$('#search-gif').on('click',()=>{
+
     const inputVal = $('input').val();
 
     giphyAPI(inputVal);
 
-    //TODO create remove button if no remove button
-    // if (gifsPresent == false) {
-    //     $('#remove').toggleClass('invisible')
-    //     gifsPresent = true;
-    // };
-    
+    if (gifsPresent == false) {
+        $('#remove').toggleClass('invisible')
+        gifsPresent = true;
+    };
 })
+
+
+//* Remove all gifs and toggle button visibility
 
 $('#remove').on('click', ()=>{
     $gifbox.empty();
