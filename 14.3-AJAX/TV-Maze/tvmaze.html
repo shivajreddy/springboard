@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <head>
+    <title>TV Maze</title>
+    <link rel="shortcut icon" href="https://img.icons8.com/external-wanicon-lineal-color-wanicon/64/000000/external-tv-live-and-streaming-wanicon-lineal-color-wanicon.png" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.css"> -->
+    <link rel="stylesheet" href="tvoutput.css">
+
+  </head>
+  <body class="m-5">
+    <div >
+
+        <a class="text-5xl text-[#3A0CA3] flex place-content-center " href="#">📺 TV-Maze</a>
+
+        <form class="form-inline m-2 place-content-center flex mt-10" id="search-form">
+        <input class="border-2 border-[#cebcee] text-[#480CA8] focus:outline-none focus-within:border-[#480CA8] rounded-md p-2" id="search-query" placeholder="Type show name">
+        <button class="text-white bg-[#430EBE] rounded-md p-2 ml-5 w-20 font-bold text-lg" type="submit">Go</button>
+        </form>
+
+        <div class="w-full justify-items-stretch flex flex-initial flex-wrap place-content-center" id="shows-list">
+
+            <!--! Sample Show item -->
+            <!-- <div class="box-content w-80 rounded-lg p-3 m-3 bg-slate-100">
+                <h2 class="text-2xl font-bold p-2 text-[#390A85]">Show Name</h2>
+                <span class="p-2">Id:289</span>
+                <img class="p-2" src="https://static.tvmaze.com/uploads/images/original_untouched/31/78286.jpg" alt="">
+                <p class="p-2 h-10 truncate">Lorem ipsum dolor, sit amet consectetur adipisicing elit. At, inventore voluptas sint dolorem optio esse fugiat sunt natus earum suscipit in! Quod facilis sit laborum, nulla velit aliquid alias neque.
+                </p>
+                <button class="bg-[#3F37C9] text-white p-2 rounded-lg ">Get Episodes</button>
+            </div> -->
+
+        </div>
+
+        <section style="display: none" id="episodes-area">
+        <h2>Episodes</h2> 
+        <ul id="episodes-list">
+        </ul>
+        </section>  
+
+        <script src="http://unpkg.com/jquery"></script>
+        <script src="http://unpkg.com/axios/dist/axios.js"></script>
+        <script src="tvmaze.js"></script>
+
+    </div>
+
+  </body>
+</html>
