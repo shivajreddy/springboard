@@ -107,7 +107,6 @@ async function fillTable(){
             // row.append(`<td class = "item-${c} p-4 w-1/6 bg-cyan-100 text-center">${item.question}</td>`)
         }
     }
-
 }
 fillTable();
 
