@@ -20,13 +20,13 @@ async function login(evt) {
   // User.login retrieves user info from API and returns User instance
   // which we'll make the globally-available, logged-in user.
   currentUser = await User.login(username, password);
+  console.debug("current user =",currentUser);
 
   $loginForm.trigger("reset");
 
   saveUserCredentialsInLocalStorage();
   updateUIOnUserLogin();
 }
-
 $loginForm.on("submit", login);
 
 /** Handle signup form submission. */
@@ -114,3 +114,35 @@ function updateUIOnUserLogin() {
 
   updateNavOnLogin();
 }
+
+
+//? Create Posts Functionality
+
+function createPost() {
+  hidePageComponents();
+  $newPostForm.show();
+}
+
+
+//? Show User created posts
+
+function usersPosts() {
+  hidePageComponents();
+  $myPosts.show();
+}
+
+//? Show User's favorite posts
+
+function usersFavoritePosts () {
+  hidePageComponents();
+  $myFavorites.show();
+}
+
+
+
+// Show/hide on clicking 'favorites' nav link
+$navCreatePost.on('click',createPost);
+
+$navMyPosts.on('click',usersPosts);
+
+$navFavorites.on('click', usersFavoritePosts);

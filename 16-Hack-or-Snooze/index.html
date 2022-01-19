@@ -37,6 +37,14 @@
   <div class="navbar-brand">
     <a class="nav-link" href="#" id="nav-all">Hack or Snooze</a>
   </div>
+
+  <!--? New Post - Nav-Links -->
+  <div class="">
+    <a class="nav-link" href="#" id="nav-create-post">Create Post</a>
+    <a class="nav-link" href="#" id="nav-my-posts">My-Posts</a>
+    <a class="nav-link" href="#" id="nav-favorites">Favorites</a>
+  </div>
+
   <div class="nav-right">
     <a class="nav-link" href="#" id="nav-login">login/signup</a>
     <a class="nav-link" href="#" id="nav-user-profile"></a>
@@ -49,6 +57,36 @@
 
   <!-- loading message (removed by JS after stories loaded) -->
   <div id="stories-loading-msg">Loading&hellip;</div>
+
+  <!--? Create Post Section -->
+  <div class="" id="add-post">
+    <form action="#" id="new-post-form" class="hidden" method="post">
+      <span>
+        <label for="new-post-author">Author</label>
+        <input type="text" name="" id="new-post-author" placeholder="Author name">
+      </span>
+      <span>
+        <label for="new-post-title">Title</label>
+        <input type="text" name="" id="new-post-title" placeholder="Post's title">
+      </span>
+      <span>
+        <label for="new-post-url">URL</label>
+        <input type="url" name="" id="new-post-url" placeholder="Post's URL">
+      </span>
+      <button>Add Story</button>
+    </form>
+  </div>
+
+  <!-- ? My-Posts Section -->
+  <div class="hidden" id="my-posts">
+    <p>My Posts section</p>
+  </div>
+
+  <!-- ? My Favorites Section -->
+  <div class="hidden" id="my-favorites">
+    <p>My Favorites</p>
+  </div>
+
 
   <!-- List of all stories -->
   <ol id="all-stories-list" class="stories-list"></ol>
