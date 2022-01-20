@@ -15,6 +15,9 @@ const $navUserProfile = $("#nav-user-profile");
 const $navLogOut = $("#nav-logout");
 
 //* New Story Form functionality
+const $addPost = $('#add-post');
+
+const $navUser = $('#nav-user');
 const $navCreatePost = $('#nav-create-post');
 const $navMyPosts = $('#nav-my-posts');
 const $navFavorites = $('#nav-favorites');
@@ -23,6 +26,12 @@ const $newPostForm = $('#new-post-form');
 const $myPosts = $('#my-posts');
 const $myFavorites = $('#my-favorites');
 
+const $newPostAuthor = $('#new-post-author');
+const $newPostTitle = $('#new-post-title');
+const $newPostUrl = $('#new-post-url');
+
+const $submitPost = $('#submit-post');
+const $submitPostResult = $('#submit-post-result');
 
 /** To make it easier for individual components to show just themselves, this
  * is a useful function that hides pretty much everything on the page. After
@@ -35,6 +44,7 @@ function hidePageComponents() {
     $loginForm,
     $signupForm,
     $newPostForm,
+    $addPost,
     $myPosts,
     $myFavorites,
   ];
@@ -47,6 +57,7 @@ async function start() {
   console.debug("start");
 
   // "Remember logged-in user" and log in, if credentials in localStorage
+  hidePageComponents();
   await checkForRememberedUser();
   await getAndShowStoriesOnStart();
 

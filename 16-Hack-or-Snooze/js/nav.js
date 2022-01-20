@@ -14,6 +14,7 @@ function navAllStories(evt) {
 
 $body.on("click", "#nav-all", navAllStories);
 
+
 /** Show login/signup on click on "login" */
 
 function navLoginClick(evt) {
@@ -31,8 +32,50 @@ function updateNavOnLogin() {
   console.debug("updateNavOnLogin");
   $(".main-nav-links").show();
   $navLogin.hide();
+
+  //? Show User's nav links
+  $navUser.show();
+
+
   $navLogOut.show();
   $navUserProfile.text(`${currentUser.username}`).show();
 }
 
+
+//? Create Posts Functionality
+
+$navCreatePost.on('click',()=>{
+  hidePageComponents();
+  $addPost.show();
+  $newPostForm.show();
+  $submitPostResult.text('');
+  $newPostForm.trigger('reset')
+});
+
+
+//? Show User created posts
+
+$navMyPosts.on('click',async ()=>{
+  hidePageComponents();
+  $myPosts.show();
+  $myPosts.empty();
+
+  //? get the stories from the api, and create dom elements of each story
+  const userStoryList = await getUsersStories();
+  putUserStoriesOnPage(userStoryList);
+});
+
+
+//? Show User's favorite posts
+
+$navFavorites.on('click', async ()=>{
+  hidePageComponents();
+  $myFavorites.empty();
+  $myFavorites.show();
+
+  const favStoryList = await getFavorites();
+  console.log("this is 77", favStoryList);
+  putFavortiePostsOnPage(favStoryList);
+  // console.log(getFavorites());
+});
 
