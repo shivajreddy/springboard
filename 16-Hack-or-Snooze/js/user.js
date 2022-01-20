@@ -81,7 +81,7 @@ $navLogOut.on("click", logout);
  */
 
 async function checkForRememberedUser() {
-  console.debug("checkForRememberedUser");
+  // console.debug("checkForRememberedUser");
   const token = localStorage.getItem("token");
   const username = localStorage.getItem("username");
   if (!token || !username) return false;

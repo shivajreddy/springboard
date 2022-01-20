@@ -7,7 +7,7 @@ let storyList;
 
 async function getAndShowStoriesOnStart() {
   storyList = await StoryList.getStories();
-  console.log("first got stories here", storyList);
+  // console.log("first got stories here", storyList);
   $storiesLoadingMsg.remove();
 
   putStoriesOnPage();
@@ -33,6 +33,7 @@ function generateStoryMarkup(story) {
         <small class="story-hostname">(${hostName})</small>
         <small class="story-author">by ${story.author}</small>
         <small class="story-user">posted by ${story.username}</small>
+        <button class='delete-post'>X</button>
       </li>
     `);
 }
@@ -40,16 +41,16 @@ function generateStoryMarkup(story) {
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 
 function putStoriesOnPage() {
-  console.debug("putStoriesOnPage");
+  // console.debug("putStoriesOnPage");
 
   $allStoriesList.empty();
 
   // loop through all of our stories and generate HTML for them
-  console.log("this is storyList at 47=", storyList);
+  // console.log("this is storyList at 47=", storyList);
   for (let story of storyList.stories) {
     
     const $story = generateStoryMarkup(story);
-    console.log("this is tory.userFavorite=", story.userFavorite);
+    // console.log("this is tory.userFavorite=", story.userFavorite);
 
     //! set the checkbox to true
     if(story.userFavorite){
@@ -179,3 +180,22 @@ function putFavortiePostsOnPage(favStories) {
     }
   }
 }
+
+
+//? Delete posts on delete push
+$('ol').on('click', 'button',async (e)=>{
+  const storyId = e.target.parentElement.id;
+
+  for ( let i=0; i<storyList.stories.length; i++) {
+    const s = storyList.stories[i];
+    if (s.username !== localStorage.getItem('username')) {
+      console.log("s.username=", s.username, "and ls.username =", localStorage.getItem('username'));
+      return alert('you did not create this story')
+    }
+    if (s.storyId === storyId) {
+      await axios.delete(`https://hack-or-snooze-v3.herokuapp.com/stories/${storyId}`, {params:{token:localStorage.getItem('token')}})
+      alert('Successfully deleted')
+      return window.location.reload(true)
+    }
+  }
+});
