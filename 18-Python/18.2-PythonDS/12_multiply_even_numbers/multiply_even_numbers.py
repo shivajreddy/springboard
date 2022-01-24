@@ -12,3 +12,11 @@ def multiply_even_numbers(nums):
         >>> multiply_even_numbers([1, 3, 5])
         1
     """
+
+    result = 1
+
+    for num in nums:
+      if num % 2 == 0:
+        result *= num
+    
+    return result

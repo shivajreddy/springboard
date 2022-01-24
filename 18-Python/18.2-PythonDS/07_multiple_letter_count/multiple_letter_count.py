@@ -1,6 +1,3 @@
-from calendar import c
-
-
 def multiple_letter_count(phrase):
     """Return dict of {ltr: frequency} from phrase.
 
