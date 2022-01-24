@@ -8,7 +8,7 @@ Preview - [Live Demo](https://filedn.com/lSGOhc5nX6kY0i4Hy6mdAq4/Springboard%20P
 
 ## Connect -4 
 Scope - 2 Player Connect-4 game, first one to make 4 connecting dots wins!  
-Code - [Github-Link](https://github.com/shivajreddy/springboard/tree/main/11-Connect4). 
+Code - [Github-Link](https://github.com/shivajreddy/springboard/tree/main/11-Connect4)  
 Preview - [Live Demo](https://filedn.com/lSGOhc5nX6kY0i4Hy6mdAq4/Springboard%20Projects/11-Connect4/)
 
 
