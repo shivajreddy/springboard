@@ -107,8 +107,14 @@ async function fillTable(){
             // row.append(`<td class = "item-${c} p-4 w-1/6 bg-cyan-100 text-center">${item.question}</td>`)
         }
     }
+
+    // add the reset button
+    const $resetButton = $('#reset');
+    $resetButton.toggleClass('hidden');
+    $resetButton.on('click', ()=>window.location.reload(true))
 }
 fillTable();
+
 
 
 //* on click, on any tr, retrieve the row, column clicked on, and the clue_item
