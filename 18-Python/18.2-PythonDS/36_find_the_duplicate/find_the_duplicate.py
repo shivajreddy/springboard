@@ -13,3 +13,21 @@ def find_the_duplicate(nums):
         >>> find_the_duplicate([2, 1, 3, 4]) is None
         True
     """
+
+    ## Solution1
+    # for num in nums:
+    #   nums.pop(nums.index(num))
+    #   if num in nums:
+    #     return num
+    # return None
+
+
+    s1 = set()
+
+    for num in nums:
+      if num in s1:
+        return num
+      else:
+        s1.add(num)
+        
+    return None

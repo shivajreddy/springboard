@@ -1,3 +1,6 @@
+from turtle import st
+
+
 def includes(collection, sought, start=None):
     """Is sought in collection, starting at index start?
 
@@ -30,3 +33,22 @@ def includes(collection, sought, start=None):
         >>> includes({"apple": "red", "berry": "blue"}, "blue")
         True
     """
+
+    if start == None:
+      start = 0
+    
+    if isinstance(collection, set):
+      for i in collection:
+        if i == sought:
+          return True
+    
+    if isinstance(collection, dict):
+      for (k,v) in collection.items():
+        if sought == k or sought == v:
+          return True
+
+    for i in range(start,len(collection)):
+      if collection[i] == sought:
+        return True
+
+    return False

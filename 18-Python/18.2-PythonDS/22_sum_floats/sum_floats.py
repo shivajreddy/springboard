@@ -13,4 +13,12 @@ def sum_floats(nums):
     # if something is a float!
 
 
+    result = 0
+
+    for num in nums:
+      if isinstance(num,float):
+        result += num
+    
+    return result
+
       
