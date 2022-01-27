@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MadLibs</title>
+  </head>
+  <body>
+    <h1>MadLibs Game</h1>
+
+    <form action="/story">
+      {% for i in content %}
+      <label for="{{i}}">{{i}}</label>
+      <input type="text" id="{{i}}" name="{{i}}" />
+      {% endfor %}
+      <button type="submit">PUSH</button>
+    </form>
+  </body>
+</html>

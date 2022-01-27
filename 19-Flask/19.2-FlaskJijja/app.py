@@ -1,45 +1,22 @@
-from flask import Flask
-from flask import render_template
-from flask import request
-import stories
+from flask import Flask, render_template, request
+from flask_debugtoolbar import DebugToolbarExtension
+from stories import story
 
 app = Flask(__name__)
 
+# debug toolbar
+app.config["SECRET_KEY"] = "WTF"
+app.debug = True
+toolbar = DebugToolbarExtension(app)
+
+# URL routing
+# Home Page
 @app.route('/')
 def home():
-    return render_template('index.html')
+    p = story.prompts
+    return render_template('home.html', content=p)
 
-
-inputs = ["place", "noun", "verb", "adjective", "plural_noun"]
-
-
-@app.route('/hello')
-def hello():
-    return render_template('hello.html',len=len(inputs), inputs=inputs)
-
-
-# @app.route('/story')
-# def story():
-#     return render_template('story.html')
-
-@app.route('/story', methods=["GET", "POST"])
-def story2():
-    results = []
-    for i in inputs:
-        item = request.args[i]
-        results.append(item)
-    # item1 = request.args['place']
-    
-    return render_template('story.html', results=results)
-
-
-@app.route('/test')
-def test():
-    return render_template('test.html')
-
-@app.route('/results')
-def results():
-    results = request.args['out_name']
-    return render_template('results.html', myresults=results)
-    # return render_template('results.html')
-
+@app.route('/story')
+def storyResult():
+    res = story.generate(request.args)
+    return render_template('story.html',res=res)
