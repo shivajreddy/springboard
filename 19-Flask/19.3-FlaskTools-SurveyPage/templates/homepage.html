@@ -1,0 +1,6 @@
+{% extends "base.html" %} {% block content %}
+<h1>SURVEY TITLE : {{title}}</h1>
+<form action="/survey-home" method="post">
+  <button type="submit">Start Survey</button>
+</form>
+{% endblock %}
