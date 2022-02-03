@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% block content %}
+<h1>Forex Convertor</h1>
+<form action="/inputs" method="POST">
+  <fieldset>
+    <label for="from-curr">Converting From:</label>
+    <input
+      name="input-from"
+      type="text"
+      value=""
+      placeholder="From Currency"
+      id="from-curr"
+    />
+    <label for="to-curr">Converting To:</label>
+    <input
+      name="input-to"
+      type="text"
+      value=""
+      placeholder="To Currency"
+      id="to-curr"
+    />
+    <label for="amount">Amount</label>
+    <input
+      name="input-amount"
+      type="text"
+      value=""
+      placeholder="Amount"
+      id="amount"
+    />
+    <button>Convert</button>
+  </fieldset>
+</form>
+
+{% endblock %}
