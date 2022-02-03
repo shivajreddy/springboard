@@ -32,6 +32,7 @@ satisfaction_survey = Survey(
         Question("On average, how much do you spend a month on frisbees?",
                  ["Less than $10,000", "$10,000 or more"]),
         Question("Are you likely to shop here again?"),
+        Question("Will you refer you friend",["Definetely", "Maybe","Nope"],True)
     ])
 
 personality_quiz = Survey(
@@ -52,3 +53,10 @@ surveys = {
     "satisfaction": satisfaction_survey,
     "personality": personality_quiz,
 }
+
+
+# one = surveys["satisfaction"]
+# print({**surveys})
+
+# for q in one.questions:
+#     print (q.question, q.choices, q.allow_text)
