@@ -7,9 +7,8 @@
     <title>19.3-SURVEY</title>
   </head>
   <body>
-    {% with messages = get_flashed_messages() %} {% if messages %} {% for msg in
-    messages %}
+    {% with messages = get_flashed_messages() %} {% for msg in messages %}
     <p>{{msg}}</p>
-    {% endfor %} {% endif %} {% endwith %} {% block content %}{% endblock %}
+    {% endfor %} {% endwith %} {% block content %}{% endblock %}
   </body>
 </html>

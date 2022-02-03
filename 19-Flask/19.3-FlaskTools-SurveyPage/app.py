@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, flash, redirect, request
+from flask import Flask, jsonify, render_template, flash, redirect, request, session
 from flask_debugtoolbar import DebugToolbarExtension
 from surveys import surveys
 
@@ -28,45 +28,52 @@ def homePage():
 
 @app.route('/survey-home', methods=["POST"])
 def surveyHome():
+    session['responses'] = []
+    session_responses = session['responses']
     return render_template('surveyHomepage.html',content=survey)
 
 
 @app.route('/answer', methods=["POST"])
 def answer():
     # get the response and append to DS 
-    # Pull back to the question, if unanswered    
-    try:
+    # Pull back to the question, if unanswered
+    session_responses = session['responses']
+    
+    if 'radio-group' in request.form.keys():
         response = request.form['radio-group']
-        RESPONSES.append(response)
-    except:
-        return redirect(f'questions/{len(RESPONSES)}')
+        session_responses.append(response)
+        session['responses'] = session_responses
+    else:
+        response = None
 
     # if no question filled
     if response == None:
-        return redirect(f'/qeustions/{len(RESPONSES)}')
+        print("it is supposed to flash ")
+        flash(f'You need to respond to this question before going to next')
+        return redirect(f'/questions/{len(session_responses)}')
 
     # check if all questions filled
-    if len(RESPONSES) == len(QUESTIONS):
+    if len(session_responses) == len(QUESTIONS):
         return redirect('/thank-you')
 
     # Redirect to the next question
-    return redirect(f'/questions/{len(RESPONSES)}')
+    return redirect(f'/questions/{len(session_responses)}')
 
 
 
 @app.route('/questions/<int:number>')
 def surveyQuestion(number):
-
+    session_responses = session.get('responses',[])
     print(f"number={number} DS length = {len(RESPONSES)}, DS items={RESPONSES}")
 
     # Redirect to thankyou page if all questions are answered
-    if len(RESPONSES) == len(QUESTIONS):
+    if len(session_responses) == len(QUESTIONS):
         return redirect('/thank-you')
 
     # Bring the user back to the right question, based on len(responses)
-    if number != len(RESPONSES):
-        flash(f'You went to the wrong question {number}, instead answer {len(RESPONSES)}')
-        return redirect(f'/questions/{len(RESPONSES)}')
+    if number != len(session_responses):
+        flash(f'You went to the wrong question {number}, instead answer {len(session_responses)}')
+        return redirect(f'/questions/{len(session_responses)}')
 
     # check if query number same as as length of responses
     nextPage = number + 1
