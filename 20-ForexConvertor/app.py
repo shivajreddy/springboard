@@ -1,7 +1,12 @@
+from decimal import Decimal
+import imp
 from flask import Flask, jsonify, render_template, flash, redirect, request, session
 from flask_debugtoolbar import DebugToolbarExtension
+from forex_python.converter import CurrencyRates, CurrencyCodes
+cr = CurrencyRates()
+cc = CurrencyCodes()
 
-# from forex_python import CurrencyRates
+
 
 # app configureation
 app = Flask(__name__)
@@ -43,8 +48,6 @@ def get_inputs():
 
     return redirect('/results')
 
-    result = convert_currency(input_from,input_to,input_amount)
-    return render_template('results.html', result=result)
 
 
 
@@ -55,10 +58,24 @@ def results():
     input_amount = session['input_amount']
     data = [input_from, input_to, input_amount]
     # session.clear()
-    return render_template('results.html', data=data)
+
+    result = convert_currency(input_from,input_to,input_amount)
+
+    if result:
+        return render_template('results.html', data=result)
+    else:
+        flash('Please make sure your currency names are correct')
+        return redirect('/')
+
+
 
 
 
 # Function to convert the currencies
 def convert_currency(from_curr,to_curr,amount_curr):
-    return f"This is {from_curr} converted to {to_curr} for total amout of {amount_curr}"
+
+    if cc.get_currency_name(from_curr) and cc.get_currency_name(to_curr):
+        res = cr.convert(from_curr, to_curr, Decimal(amount_curr))
+        return f"This is {from_curr} converted to {to_curr} for total amout of {res}"
+    else:
+        return None
