@@ -1,24 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="shortcut icon"
-      href="https://img.icons8.com/external-flatart-icons-lineal-color-flatarticons/64/000000/external-game-arcade-flatart-icons-lineal-color-flatarticons.png"
-      type="image/x-icon"
-    />
+{% extends "base.html" %} {% block title %}<title>Boggle</title>{% endblock %}
+{% block body %}
+<h1>THIS IS BOGGLE GAME</h1>
 
-    <!-- Style Sheets  -->
-    <link rel="stylesheet" href="static/styles.css" />
-
-    <title>Boggle</title>
-  </head>
-  <body>
-    <h1>THIS IS BOGGLE GAME</h1>
-
-    <!-- JS Files -->
-    <script src="static/script.js"></script>
-  </body>
-</html>
+{% for row in board %}
+<h2></h2>
+<tr>
+  <section id="game-row">
+    {% for letter in row %}
+    <td>{{letter}}</td>
+    {% endfor %}
+  </section>
+</tr>
+{% endfor %}
+<form action="javascript:void(0)" method="POST">
+  <input type="text" name="guess" id="guess-word" placeholder="Guess Word" />
+  <button type="submit">Guess</button>
+</form>
+{% endblock %}

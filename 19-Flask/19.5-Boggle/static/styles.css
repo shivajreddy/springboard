@@ -7,3 +7,8 @@
 h1 {
     color: blueviolet;
 }
+
+#game-row {
+    font-size: 52px;
+    color: red;
+}
