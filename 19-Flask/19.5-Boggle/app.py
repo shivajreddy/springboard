@@ -13,15 +13,16 @@ toolbar = DebugToolbarExtension(app)
 
 @app.route('/')
 def home_page():
-    if session['boggle-board']:
+    # already in a game
+    if 'boggle-board' in session.keys():
         boggle_board = session['boggle-board']
-        # user_guess = session['user-guess']
+        return render_template('index.html', board=boggle_board)
+    # opening the app for first time
     else:
         session.clear()
         session['boggle-board'] = boggle_game.make_board()
-    
-    return render_template('index.html', board=boggle_board)
-
+        boggle_board = session['boggle-board']
+        return render_template('index.html', board=boggle_board)
 
 @app.route('/get-word', methods=["POST"])
 def get_word():
@@ -29,3 +30,15 @@ def get_word():
     session['user-guess'] = user_word
     flash(user_word)
     return redirect('/')
+
+# respond to ajax request with a result
+@app.route('/req/<string:userWord>')
+def front_req(userWord):
+    boggle_board = session['boggle-board']
+    r = boggle_game.check_valid_word(boggle_board,userWord)
+
+    # wrapping the result into an object and sending it using jsonify
+    result = {"result":r}
+
+    return jsonify(result)
+    

@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block title %}<title>Boggle</title>{% endblock %}
 {% block body %}
-<h1>THIS IS BOGGLE GAME</h1>
+<h1>BOGGLE GAME</h1>
 
 {% for row in board %}
 <h2></h2>
@@ -14,6 +14,7 @@
 {% endfor %}
 <form action="javascript:void(0)" method="POST">
   <input type="text" name="guess" id="guess-word" placeholder="Guess Word" />
-  <button type="submit">Guess</button>
+  <button id="submit-word" type="submit">Guess</button>
 </form>
+
 {% endblock %}
