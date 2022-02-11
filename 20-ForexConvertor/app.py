@@ -7,7 +7,7 @@ cr = CurrencyRates()
 cc = CurrencyCodes()
 
 
-
+tofu = 21
 # app configureation
 app = Flask(__name__)
 app.debug = True
@@ -60,6 +60,9 @@ def results():
     # session.clear()
 
     result = convert_currency(input_from,input_to,input_amount)
+    import pdb
+    pdb.set_trace()
+
 
     if result:
         return render_template('results.html', data=result)
