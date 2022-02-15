@@ -60,8 +60,8 @@ def results():
     # session.clear()
 
     result = convert_currency(input_from,input_to,input_amount)
-    import pdb
-    pdb.set_trace()
+    # import pdb
+    # pdb.set_trace()
 
 
     if result:

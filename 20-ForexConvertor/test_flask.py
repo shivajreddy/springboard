@@ -28,5 +28,3 @@ class FlaskTest1(TestCase):
     def test_convert_currencty(self):
         self.assertEqual(convert_currency('USD','USD',1),f"This is USD converted to USD for total amout of 1")
         self.assertEqual(convert_currency('USD','USD',2),f"This is USD converted to USD for total amout of 2")
-
-        
