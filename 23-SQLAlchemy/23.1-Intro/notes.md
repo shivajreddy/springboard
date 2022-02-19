@@ -3,13 +3,13 @@
 
 ## Adding tables
 - The Model(class) has __tablename__ set to the name of the table that is going to be created. 
-- Schema is designed in the very beginning and not altered. So this command **db.create_all()** is used in the very beginning, to create all the tables.
+- Schema is designed in the very beginning and not altered. So this command ```db.create_all()``` is used in the very beginning, to create all the tables.
   
 ## Adding row's to the tables
-- Once the an instance is created for the Model, it means a row(instance) is created for the table(Class). And when **db.session.add(instance)** is called, this instance(row) is added to the staging area, and finally when **db.session.commit()** is called, it will be pushed into the table, if there are no errors. Make sure to use ECHO in app.configuration to see the full details in the terminal.
+- Once the an instance is created for the Model, it means a row(instance) is created for the table(Class). And when ```db.session.add(instance)``` is called, this instance(row) is added to the staging area, and finally when ```db.session.commit()``` is called, it will be pushed into the table, if there are no errors. Make sure to use ECHO in app.configuration to see the full details in the terminal.
 
 ## Erros and Rollback
-- If a table is not properly added, the **db.session** should be rolled back using **db.session.rollback()** only then the staging area is cleared, and can be added again with fixed quiries and commited.
+- If a table is not properly added, the ```db.session``` should be rolled back using ```db.session.rollback()``` only then the staging area is cleared, and can be added again with fixed quiries and commited.
 
 ## Importing Models:
 
@@ -27,17 +27,29 @@ db.session is not same as flask's session, totally different things.
 
 ## Multiple Inserts
 
-- Using **db.session.add_all(list_of_instances)** all the instances in the list, that is passed as the arg, will be executed, when **db.session.commit()** is called.
+- Using ```db.session.add_all(list_of_instances)``` all the instances in the list, that is passed as the arg, will be executed, when ```db.session.commit()``` is called.
 
 ## Modifying an Instance
 
-- In your python file, when you change the value of a property of the instance(row), it doesn't automatically update the row in the database. First you should add the instance you want to modify into **db.session.add(instance_21)** and the **db.session.commit()**, SQLAlchemy will automatically modify the instance_21 row with updated properties (values in the columns) because the row already exists in the table.
+- In your python file, when you change the value of a property of the instance(row), it doesn't automatically update the row in the database. First you should add the instance you want to modify into ```db.session.add(instance_21)``` and the ```db.session.commit()```, SQLAlchemy will automatically modify the instance_21 row with updated properties (values in the columns) because the row already exists in the table.
   
 ### Better Representatin
 
-- The dunder method in the Model class **__repr__** will result in returning more appropriate responses in the terminal, when a new instance is created. Default is going to show the class name and the memory id of the instance.
-- **__repr__** should be a dunder method i.e., **def __repr__(self):** , but **__tablename__** is used as the variable name for the name of the table you want to create.
+- The dunder method in the Model class ```__repr__``` will result in returning more appropriate responses in the terminal, when a new instance is created. Default is going to show the class name and the memory id of the instance.
+- Also, when ever this instance method is called, the representation you define will be show, so it will be easy when querying.
+- ```__repr__``` should be a dunder method i.e., ```def __repr__(self):``` , but ```__tablename__``` is used as the variable name for the name of the table you want to create.
 
 ## Querying Basics
 
-- 
+Example: table21 is the name of the table in Model21 class. (Class Model21: __tablename__='table21')
+- ```Model21.query``` is a method for method that can be called on all the Models class'es 
+- ```Model21.query.all()``` is = to ```SELECT * FROM Model21```, but query.all() will return a list of all the rows.
+- ```Model21.query.get(arg)``` is query syntax for SQLAlchemy. arg is the id of the row in Model21 table. so Model21.query.get(2) will return the instance(row) in Model21 Class(table),which  has id=2
+- ```Model21.query.filter_by(col3='dog')``` returns a base query SQLAlchemy object, which is pretty useless, we need the list of the results.
+- ```Model21.query.filter_by(col3="dog").all()``` returns a list of all the rows in table21 table, where value in ```col3 = 'dog'```
+- ```Model21.query.filter_by().first()``` will return the first item in the above list
+- ```Model21.query.filter_by(col3="dog", col4=True).all()``` returns a list of all the rows in table21 table, where value in ```col3 = 'dog'``` and ```col4 = True```
+
+## filter vs. filter_by
+
+-  
