@@ -8,10 +8,11 @@
   </head>
   <body>
     <h3>User's Details</h3>
+    <img src="{{user.image_url}}" alt="" width="100" />
     <li>{{user.first_name}}</li>
     <li>{{user.last_name}}</li>
-    <li>{{user.image_url}}</li>
 
+    <a href="/{{user.first_name}}/edit">Edit Details</a>
     <a href="/users">All Users</a>
   </body>
 </html>

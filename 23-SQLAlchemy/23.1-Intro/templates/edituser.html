@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit {{user.first_name}}</title>
+  </head>
+  <body>
+    <h3>This is the edit page for {{user.first_name}}</h3>
+    <form action="/edit-user/{{user.id}}" method="POST">
+      <input name="first-name" type="text" value="{{user.first_name}}" />
+      <input name="last-name" type="text" value="{{user.last_name}}" />
+      <input name="image-url" type="url" value="{{user.image_url}}" />
+      <button type="submit">Confirm Changes</button>
+    </form>
+  </body>
+</html>

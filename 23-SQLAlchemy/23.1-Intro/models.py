@@ -2,17 +2,12 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String
 
-
 db = SQLAlchemy()
-
 def connect_db(app):
     db.app = app
     db.init_app(app)
 
-
-#* My Models
-
-# User Model
+#* User Model
 class User(db.Model):
 
     __tablename__ = "users"
@@ -42,3 +37,7 @@ class User(db.Model):
     image_url = Column(
         db.String(),
     )
+
+    # methods
+    def get_full_name(self):
+        return f'{self.first_name}{self.last_name}'

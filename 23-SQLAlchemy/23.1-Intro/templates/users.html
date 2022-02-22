@@ -13,10 +13,29 @@
       <a href="/userpage/{{user.id}}">{{user.first_name}}</a>
       {% endfor %}
     </h3>
+    <h2>Create a New User</h2>
     <form action="/create-user" method="POST">
-      <input name="first-name" type="text" placeholder="First Name:" />
-      <input name="last-name" type="text" placeholder="Last Name:" />
-      <input name="image-url" type="url" placeholder="Image Url:" />
+      <label for="first-name">First Name</label>
+      <input
+        name="first-name"
+        id="first-name"
+        type="text"
+        placeholder="Eneter a first name"
+      />
+      <label for="last-name">Last name</label>
+      <input
+        name="last-name"
+        id="last-name"
+        type="text"
+        placeholder="Enter a last name"
+      />
+      <label for="image-url">Image URL</label>
+      <input
+        name="image-url"
+        id="image-url"
+        type="url"
+        placeholder="Provide an Image of this user"
+      />
       <button type="submit">Add User</button>
     </form>
   </body>
