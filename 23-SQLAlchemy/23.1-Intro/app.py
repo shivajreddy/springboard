@@ -32,8 +32,8 @@ def users_page():
 def user(id):
     user = User.query.get(id)
 
-    import pdb
-    pdb.set_trace()
+    # import pdb
+    # pdb.set_trace()
     return render_template('userpage.html', user =user)
 
 @app.route('/create-user', methods=["POST"])
