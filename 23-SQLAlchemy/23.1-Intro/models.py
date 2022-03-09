@@ -13,10 +13,12 @@ class User(db.Model):
     __tablename__ = "users"
 
     def __repr__(self):
+        """represent the model using id+first_name"""
         return f"{self.id}{self.first_name}"
     
     @property
     def full_name(self):
+        """return first_name + last_name"""
         return f'{self.first_name}{self.last_name}'
 
     # Schema design
