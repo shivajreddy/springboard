@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from database import db
+from config import db, connect_db
 
 
 class Pet(db.Model):
@@ -17,8 +17,13 @@ class Pet(db.Model):
   photo_url = db.Column(db.String())
   age = db.Column(db.Integer)
   notes = db.Column(db.String())
-  available = db.Column(db.String(db.Boolean), default=True)
+  available = db.Column(db.Boolean, default=True)
 
+class TestModel(db.Model):
+  """Test Model"""
+  __tablename__ = "test_model"
+  id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+  name = db.Column(db.String(50))
 
   
 
