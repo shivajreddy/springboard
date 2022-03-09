@@ -1,0 +1,20 @@
+
+<div class="card m-3" style="width: 18rem">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h3 class="card-title text-center">{{pet.name}}</h3>
+    <p>Species: {{pet.species}}</p>
+    <p>Age: {{pet.age}}</p>
+    <p> Notes: {{pet.notes}}</p>
+
+    {% if pet.available %}
+      <p >{{pet.name}} is
+      <span class="text-success">available</span>
+      </p>
+    {% else %}
+      <p>{{pet.name}} is
+      <span class="text-danger">unavailable</span>
+      </p>
+    {% endif %}
+  </div>
+</div>

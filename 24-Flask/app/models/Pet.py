@@ -1,6 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from config import db, connect_db
-
+from config import db
 
 class Pet(db.Model):
 
