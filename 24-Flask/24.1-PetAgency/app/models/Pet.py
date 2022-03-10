@@ -1,6 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from config import db
 
+generic_image = "/../static/placeholder.jpeg"
+
 class Pet(db.Model):
 
   """Pet table"""
@@ -17,6 +19,9 @@ class Pet(db.Model):
   age = db.Column(db.Integer)
   notes = db.Column(db.String())
   available = db.Column(db.Boolean, default=True)
+
+  def image_url(self):
+    return self.photo_url or generic_image
 
 class TestModel(db.Model):
   """Test Model"""
