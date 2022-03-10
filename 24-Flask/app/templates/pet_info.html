@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block pet_info %}
+
+
+<div class="card m-3 pet-info-card" style="width: 24rem">
+  <img src="/../static/placeholder.jpeg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h3 class="card-title text-center">{{pet.name}}</h3>
+    <p>Species: {{pet.species}}</p>
+    <p>Age: {{pet.age}}</p>
+    <p> Notes: {{pet.notes}}</p>
+
+    {% if pet.available %}
+      <h5 >{{pet.name}} is
+      <span class="text-success"><b>available</b></span>
+      </h5>
+    {% else %}
+      <h5>{{pet.name}} is
+      <span class="text-danger">unavailable</span>
+      </h5>
+    {% endif %}
+    <a href="/pet-edit/{{pet.id}}/" class="btn btn-primary" >
+      <i class="bi bi-pencil-square"></i>
+      Edit</a>
+  </div>
+</div>
+
+{% endblock pet_info %}

@@ -5,16 +5,16 @@
 <div class="container text-center p-4" >
 
   <form action="/add-pet/" method="POST">
-    {{ form.hidden_tag() }} 
-    {% for field in form if field.widget.input_type != 'hidden'%}
+    {{ pet.hidden_tag() }} 
+    {% for field in pet if field.widget.input_type != 'hidden'%}
     <div class="m-2">
       {{field.label}}
       {{field}}
     </div>
     
     {% endfor %}
-    <button class="btn btn-success">
-      <i class="bi bi-check-circle-fill"></i> Add
+    <button class="btn btn-primary">
+      <i class="bi bi-ui-checks"></i> Confirm Changes
     </button>
   </form>
   

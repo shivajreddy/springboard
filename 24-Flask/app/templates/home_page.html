@@ -4,15 +4,15 @@
 
 <h2 class="text-center mt-5">All Pets 🐈</h2>
 
-  <div class="container d-flex">
+  <div class="d-flex">
   {% for pet in pets %}
     {% include "pet_box.html" %}
   {% endfor %}
   </div>
 
-<form action="/new-pet">
+<form action="/add-pet">
   <div class="col-md-12 text-center">
-    <button class="btn btn-success">
+    <button class="btn btn-primary">
       <i class="bi bi-plus-circle"></i> New Pet
     </button>
   </div>

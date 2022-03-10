@@ -1,0 +1,42 @@
+.pet-card {
+  background-color: #90e0ef;
+  min-width: 220px;
+}
+
+.pet-info-card {
+  background-color: #90e0ef;
+  min-width: 220px;
+}
+
+body {
+  background-color: #caf0f8;
+}
+
+.header {
+  background-color: #3a0ca3;
+
+}
+
+h3 {
+  color: #480ca8;
+}
+
+h2 {
+  color: #560bad;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #3f37c9;
+  border-color: #3f37c9;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open>.dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #3a0ca3;
+  border-color: #3a0ca3;
+}
