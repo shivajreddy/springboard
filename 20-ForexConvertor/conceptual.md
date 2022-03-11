@@ -43,7 +43,8 @@ if "c" in dict.keys():
 
 
 ### How do you collect data from a URL placeholder parameter using Flask?
-- request.args.get("argument_name")
+- request.params["argument_name"]
+- request.args.get("argument_name") 
 
 
 ### How do you collect data from the query string using Flask?

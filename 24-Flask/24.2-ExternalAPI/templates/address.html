@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>API form</h1>
+
+  <form action="/code" >
+
+    {% for field in data %}
+    {{field.name}}
+    {{field}}
+    {% endfor %}
+    <button>Push</button>
+  </form>
+  <!-- <a href="/code">go</a> -->
+
+{% endblock content %}
