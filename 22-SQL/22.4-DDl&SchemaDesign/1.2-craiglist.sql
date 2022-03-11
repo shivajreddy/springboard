@@ -25,7 +25,7 @@ CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
     cat_id INTEGER REFERENCES categories(id) ON DELETE SET NULL,
     title TEXT,
-    description TEXT,
+    descrption TEXT,
     creator INTEGER REFERENCES users(id) ON DELETE SET NULL,
     location INTEGER REFERENCES locations(id) ON DELETE SET NULL,
     region INTEGER REFERENCES regions(id) ON DELETE SET NULL

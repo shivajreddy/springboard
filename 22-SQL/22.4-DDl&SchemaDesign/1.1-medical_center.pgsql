@@ -13,6 +13,14 @@ CREATE TABLE diseases(
     name TEXT
 );
 
+CREATE TABLE visits(
+  id SERIAL PRIMARY KEY,
+  doctor_id INTEGER REFERENCES doctors(id),
+  patient_id INTEGER REFERENCES patients(id),
+  date DATE
+
+)
+
 CREATE TABLE doctors_for_patients (
     id SERIAL PRIMARY KEY,
     patient_id INTEGER REFERENCES patients(id),
@@ -24,6 +32,12 @@ CREATE TABLE patient_diseases(
     patient_id INTEGER REFERENCES patients(id),
     disease_id INTEGER REFERENCES diseases(id)
 );
+
+CREATE TABLE diagnoses(
+  id SERIAL PRIMARY KEY,
+  visit_id INTEGER REFERENCES visits(id)
+
+)
 
 -- Testing 
 INSERT INTO doctors
