@@ -30,17 +30,20 @@ def page_not_found(error):
 
 
 #! API routes
+#* GET all cookies
 @app.route('/api/cupcakes/', methods=["GET"])
 def get_cupcakes():
   all_cupcakes = [cake.srlz() for cake in Cupcake.query.all()]
   return (jsonify(result=all_cupcakes), 200)
 
+#* GET cookie of id
 @app.route('/api/cupcakes/<int:id>/', methods=["GET"])
 def get_cupcake(id):
   cupcake = Cupcake.query.get_or_404(id)
   result = cupcake.srlz()
   return (jsonify(result=result), 200)
 
+#* POST a new cookie
 @app.route('/api/cupcakes/', methods=["POST"])
 def new_cookie():
   new_cupcake = Cupcake()
@@ -59,6 +62,7 @@ def new_cookie():
 
   return (jsonify(result=new_cupcake.srlz()), 200)
 
+#* PATCH update a cookie of id
 @app.route('/api/cupcakes/<int:id>/', methods=["PATCH"])
 def update_cookie(id):
   cupcake = Cupcake.query.get_or_404(id)
@@ -76,6 +80,7 @@ def update_cookie(id):
 
   return (jsonify(result= cupcake.srlz()), 200)
 
+#* DELETE a cookie of id
 @app.route('/api/cupcakes/<int:id>/', methods=["DELETE"])
 def delete_cookie(id):
   cupcake = Cupcake.query.get_or_404(id)
