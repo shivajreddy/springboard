@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% block content %}
+
+<h1 class="text-center m-4">Cup Cakes 🧁</h1>
+
+<div class="all-cakes">
+  <!-- <ul>
+    <li>hi</li>
+  </ul> -->
+</div>
+
+<div class="container d-flex p-2">
+
+    <form action="" method="POST">
+      <div class="m-2">
+        <label for="cake-flavor">cake-flavor</label>
+        <input type="text" name="cake-flavor" id="cake-flavor">
+      </div>
+      
+      <div class="m-2">
+        <label for="cake-size">cake-size</label>
+        <input type="text" name="cake-size" id="cake-size">
+      </div>
+      
+      <div class="m-2">
+        <label for="cake-rating">cake-rating</label>
+        <input type="text" name="cake-rating" id="cake-rating">
+      </div>
+      
+      <div class="m-2">
+        <label for="cake-image">cake-image</label>
+        <input type="url" name="cake-image" id="cake-image">
+      </div>
+
+      <button id="addbtn" class="btn btn-primary">Add</button>
+    </form>
+
+</div>
+
+{% endblock content %}
