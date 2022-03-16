@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block content %}
+
+{% with messages=get_flashed_messages() %}
+  {% if messages %}
+    {% for msg in messages %}
+      <p> {{msg}} </p>
+    {% endfor %}
+  {% endif %}
+
+{% endwith %}
+
+<h3 class="text-center">Authentication Demo</h3>
+<br>
+
+<div class="container">
+  <form action="/check-user" method="POST" >
+    
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username">
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+    
+    
+    <button>Submit</button>
+  </form>
+</div>
+
+
+{% endblock content %}
