@@ -24,7 +24,7 @@ connect_db(app)
 #! Routes
 @app.route('/')
 def route_homePage():
-  # db.create_all()
+  db.create_all()
   if 'user_name' not in session:
     return redirect('/login')
     # return render_template('home_page.html')
