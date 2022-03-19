@@ -32,6 +32,11 @@ def route_homePage():
   return render_template('home_page.html', data=session['user_name'])
 
 
+@app.route('/tweets')
+def tweets():
+  
+
+
 @app.route('/signup', methods=["GET", "POST"])
 def route_singup():
   form = SignUpForm()
