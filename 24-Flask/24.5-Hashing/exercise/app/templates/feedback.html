@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="text-center p-4"> FEEDBACKS </h1>
+<div class="container">
+
+  <form action="/feedback" method="post">
+
+    {{ form_data.hidden_tag() }}
+    {% for field in form_data if field.widget.input_type != 'hidden' %}
+    <div class="p-2">
+      {{field.label}}
+    </div>
+    <div class="">
+      {{field}}
+    </div>
+    {% endfor %}
+    <button class="btn btn-primary m-2">Add </button>
+
+  </form>
+
+</div>
+
+
+{% endblock content %}

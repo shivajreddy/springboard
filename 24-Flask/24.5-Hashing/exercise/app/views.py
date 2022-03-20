@@ -1,24 +1,10 @@
+from app import app, db
 from crypt import methods
-import os
-from re import L
-from flask import Flask, flash, redirect, render_template, session
-from forms import SignUpForm, LoginForm 
-from User import db, connect_db, User
+from flask import flash, redirect, render_template, session
+from .forms.forms import SignUpForm, LoginForm, FeedbackForm
+from .models.User import db, User
+from .models.Feedback import Feedback
 
-
-#! App Conifguration
-project_root = os.path.dirname(os.path.realpath('__file__'))
-template_path = os.path.join(project_root, 'templates')
-static_path = os.path.join(project_root, 'static')
-app  = Flask(__name__, template_folder=template_path, static_folder=static_path)
-# generate secret in python using: secrets.token_hex(24)
-app.config["SECRET_KEY"] = "609b6a63b901ef5b79b85b398b524157385baddf61b7e4a4"
-
-#! DB config
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///stupid_twitter'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = True
-connect_db(app)
 
 
 #! Routes
@@ -29,7 +15,15 @@ def route_homePage():
     return redirect('/login')
     # return render_template('home_page.html')
 
-  return render_template('home_page.html', data=session['user_name'])
+  # import pdb
+  # pdb.set_trace()
+
+  all_data = {
+    0 : Feedback.query.all(),
+    1 : session['user_name'],
+  }
+
+  return render_template('home_page.html', data=all_data)
 
 
 @app.route('/signup', methods=["GET", "POST"])
@@ -56,6 +50,9 @@ def route_singup():
 
 @app.route('/login', methods=["GET", "POST"])
 def route_login():
+  if 'user_name' in session:
+    return redirect('/')
+
   form = LoginForm()
 
   # validate form
@@ -83,4 +80,20 @@ def logout():
   session.pop('user_name')
   return redirect('/')
 
+
+@app.route('/feedback', methods=["GET", "POST"])
+def feedback():
+  if 'user_name' not in session:
+    return redirect('/login')
+
+  form = FeedbackForm()
+  if form.validate_on_submit():
+    title = form.title.data
+    content = form.content.data
+    new_feedback = Feedback(title=title, content=content, username=session['user_name'])
+    db.session.add(new_feedback)
+    db.session.commit()
+    return redirect('/')
+  
+  return render_template('feedback.html', form_data=form)
 

@@ -1,12 +1,9 @@
+from app import db
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt()
 
 
-db = SQLAlchemy()
-def connect_db(app):
-  db.app = app
-  db.init_app(app)
 
 
 class User(db.Model):
@@ -39,18 +36,15 @@ class User(db.Model):
     return False
 
 
-class Tweet(db.Model):
-  """tweet table"""
+# class Feedback(db.Model):
+#   """feedbacks table"""
 
-  __tablename__ = 'tweets'
+#   __tablename__ = 'feedbacks'
 
-  id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+#   id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
-  text = db.Column(db.Text, nullable=False)
-  user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+#   text = db.Column(db.Text, nullable=False)
+#   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-  user = db.relationship('User', backref="tweets")
-
-
-
+#   user = db.relationship('User', backref="tweets")
 
