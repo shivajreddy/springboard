@@ -1,7 +1,5 @@
 from flask import Flask, flash, redirect, render_template, session
-from .forms.forms import SignUpForm, LoginForm 
-# from .models.User import User
-from crypt import methods
+
 
 #* Define the WSGI applicatin object
 app = Flask(__name__)
@@ -17,4 +15,5 @@ def connect_db(app):
   db.init_app(app)
 connect_db(app)
 
-from . import views
+
+from .views import views, auth_views, user_views

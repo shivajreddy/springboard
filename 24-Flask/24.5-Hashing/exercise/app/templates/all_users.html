@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-center p-4"> All Users </h2>
+
+<div class="container">
+  {% for usr in users %}
+
+    <div class="container">
+      <h3>{{usr.username}}<a href="" class="btn btn-danger dlt-user"><i class="bi bi-x-circle-fill"></i> Delete User and their feedbacks</a></h3>
+      <ul>
+        {% for fb in all_feedbacks[usr.username] %}
+          <li>
+            {{fb.title}}
+            {{fb.content}}
+          </li>
+      {% endfor %}
+      </ul>
+    </div>
+
+  {% endfor %}
+</div>
+
+{% endblock content %}

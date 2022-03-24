@@ -34,17 +34,3 @@ class User(db.Model):
     if usr and bcrypt.check_password_hash(usr.password, form_password):
       return usr
     return False
-
-
-# class Feedback(db.Model):
-#   """feedbacks table"""
-
-#   __tablename__ = 'feedbacks'
-
-#   id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-
-#   text = db.Column(db.Text, nullable=False)
-#   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-
-#   user = db.relationship('User', backref="tweets")
-

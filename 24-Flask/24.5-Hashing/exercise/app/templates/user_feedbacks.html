@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3 class="text-center p-3">List of {{usr.username}}'s feedback </h3>
+
+<ul>
+  {% for f in feedbacks %}
+    <div class="container p-4">
+      <h4>Feedback</h4>
+      <ul>
+        <h5><li>id:{{f.id}}</li></h5>
+        <h5><li>Title:{{f.title}}</li></h5>
+        <h5><li>Content:{{f.content}}</li></h5>
+        <a class="btn btn-danger dlt-feedback" href=""><i class="bi bi-x-circle-fill"></i> Delete FB</a>
+      </ul>
+    </div>
+  {% endfor %}
+</ul>
+  
+
+{% endblock content %}

@@ -1,21 +1,21 @@
 {% extends "base.html" %} {% block content %}
 
-<h1 class="text-center">Feedback App 📝</h1>
+<h1 class="text-center p-4">Feedback App 📝</h1>
 <h5 class="text-center"> Current user: {{data[1]}} </h5>
 
 <!-- <h2>Current user <span><h2 class="text-success">{{data[1]}}</h2></span> </h2> -->
 
 {% for feedback in data[0] %}
-<div class="container">
+<div class="container ">
   <ul>
     <li>
-      {{feedback.title}}
+      Title: {{feedback.title}}
     </li>
     <li>
-      {{feedback.content}}
+      Content: {{feedback.content}}
     </li>
     <li>
-      {{feedback.username}}
+      user: {{feedback.username}}
     </li>
   </ul>
 </div>
