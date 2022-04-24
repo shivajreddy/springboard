@@ -1,0 +1,29 @@
+
+1. HTTP is a protocol. Hyper Text Transfer protocol
+
+2. URL -> Uniform Resource Locator. A location (unique) for a resource.
+
+3. DNS -> Domain Name System. Like a phonebook, which ip address for the human readable domain or URL
+
+4. Queury String -> dynamic content at a given resource. queries are in key-value pair.
+They start at the end of the url with '?' and multiple quries are separated by '&'
+
+5. HTTP verbs -> GET request: this is a request from client side to the server through a HTTP protocol
+POST request: this is a request to post something from client side on to the server through a HTTP protocol
+
+6. HTTP request is a request done by client to the server, that follows the HTTP protocol
+
+7. HTTP response is HTTP protocol response, responded by the server for a request to the client.
+
+8. HTTP Header: this has the information related to the request/response.
+For request headers: Cache, cookies
+For Response headers: content-type: if it's html or json, cache, set-cookies, session
+
+9. The browser looks at the DNS and identifies('resolves') the IP address to make a request to.
+Browser then makes the request to that IP address along with the request headers.
+The server receives the request, processes it, and responds back with a response resource along with response header.
+The browser then makes the Document Object Model from the response resource (using html,css,js files), ex. v12 is the engine that chrome uses,
+this engine is responsible for creating the DOM on google chrome browser.
+In the response received if there are other requests (almost always yes) like link:styles, src:img, all these resources are
+again requested asynchronously.
+
