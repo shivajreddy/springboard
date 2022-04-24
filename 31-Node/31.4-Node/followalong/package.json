@@ -1,15 +1,17 @@
 {
   "name": "followalong",
   "version": "1.0.0",
-  "description": "this is a test npm repo",
+  "description": "",
   "main": "followalong.js",
+  "dependencies": {
+    "faker": "^5.5.3",
+    "axios": "^0.26.1",
+    "follow-redirects": "^1.14.9"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.26.1",
-    "faker": "^5.5.3"
-  }
+  "license": "ISC"
 }

@@ -1,4 +1,6 @@
 .vscode
 .DS_Store
 venv/
+node_modules
+**node_modules
 __pycache__/
