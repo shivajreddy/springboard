@@ -1,0 +1,31 @@
+PART I
+mkdir first
+cd first
+touch person.txt
+mv person.txt another.txt
+cp another.txt copy.txt
+rm copy.txt
+cp -r first second
+rmdir second, or, rm -rf second
+
+
+
+PART II
+man is manuel, use vim navigatation to navigate.
+-l => List files in the long format, as described in the The Long Format subsection below.
+-a => Include directory entries whose names begin with a dot (‘.’).
+jump words -> option + leftarrow or option + right arrow
+end of the line -> ctrl+e
+start of line -> ctrl+a
+delete -> option + delete
+
+terminal vs shell -> 
+terminal is the software that ineracts with the shell. Shell is the software that handles the commands.
+
+absolute path -> it is the path relative to the root folder
+
+relative path -> it's the path relative to the current location not the root route.
+
+flags -> (rm -rf) this force deletes all the files and sub dir's in the given directory
+-r means recursive, it recursively goes into the folders and the files in every folder
+-f means force delete
