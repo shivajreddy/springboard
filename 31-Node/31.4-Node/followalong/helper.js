@@ -10,3 +10,13 @@ module.exports = {
   sub: sub,
   mult: mult
 };
+
+// console.log(`from helper file-> ${add(51,52)}`);
+
+
+const cl_args = process.argv;
+
+for (let arg of cl_args){
+  // console.log(arg);
+}
+
