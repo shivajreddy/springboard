@@ -1,28 +1,40 @@
-const baseURL = 'http://numbersapi.com'
-const favNum = 2
-const $numberFactsDiv = $('.number-facts')
-const generateButton = $('button')
+const baseURL = 'https://pokeapi.co/api/v2'
+const $pokeDeck= $('.poke-deck')
+const $generateButton = $('button')
 
-// by making promise object
-function makeRequest(){
-  return new Promise((resolve, reject) => {
-    const response = axios.get(`${baseURL}/${favNum}`)
-    resolve(response)
-  })
-}
+$generateButton.on('click', () => {
+  console.log('make new poke card')
+})
+
+let all_pokemons;
+
+// part 1
+$.get(`${baseURL}/pokemon?limit=2000`).then((response)=>{
+  // console.log(response.results)
+  all_pokemons = response.results;
+})
 
 
-generateButton.on('click', (e)=>{
+// part 2 -> pick 3 pokemon at random
+.then(()=>{
+  for (let i=0; i<3; i++){
+    const pokemon = all_pokemons[Math.floor( Math.random()*all_pokemons.length )]
 
-  makeRequest().then((response)=>{$numberFactsDiv.append(`<p>${response.data}</p>`)})
-    .then(()=>{
-      makeRequest().then((response)=>{$numberFactsDiv.append(`<p>${response.data}</p>`)})
+    $.get(`${baseURL}/pokemon-species/${pokemon.name}/`).then((response)=>{
+      console.log(pokemon)
+      console.log(response)
+
+      // fun fact about species
+      for (let flvr_txt of response.flavor_text_entries){
+        if (flvr_txt.language.name === 'en'){
+          console.log(flvr_txt.flavor_text)
+          break
+        }
+      }
+
     })
-    .then(()=>{
-      makeRequest().then((response)=>{$numberFactsDiv.append(`<p>${response.data}</p>`)})
+    .catch(()=>{
+      console.log(`couldn't find species for ${pokemon.name}`)
     })
-    .then(()=>{
-      makeRequest().then((response)=>{$numberFactsDiv.append(`<p>${response.data}</p>`)})
-    })
-
+  }
 })
