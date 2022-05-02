@@ -4,10 +4,18 @@ const middleware = require('./middleware');
 
 
 const app = express();
+app.use(express.json());
+
+app.use((req,res,next)=>{
+  console.clear();
+  next();
+})
 
 // import routes 
 const myroutes = require('./myroutes');
-app.use("", myroutes);
+app.use("/users", myroutes);
+const catroutes = require('./cats');
+app.use('/cats', catroutes);
 
 // middleware
 app.use(middleware.logger);
@@ -29,6 +37,9 @@ app.get('/private/:password', middleware.checkPassword, (req,res,next)=>{
 })
 
 
+app.use((req,res,next)=>{
+  return next(new ExpressError('page not found :(', 404))
+})
 
 
 // global error handler
@@ -37,8 +48,5 @@ app.use((error,req,res,next)=>{
   return res.status(error.status).send(error.msg);
 })
 
-// port 
-const app_port = 2000;
-app.listen(app_port, ()=>{
-  console.log(`App started & listening at ${app_port}`);
-})
+
+module.exports = app;
