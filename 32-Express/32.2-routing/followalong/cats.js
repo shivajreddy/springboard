@@ -4,7 +4,7 @@ const ExpressError = require("./expresserror")
 const cats = require("./fakeDb")
 
 router.get("/", function (req, res) {
-  res.json({ cats })
+  res.status(201).json({ cats })
 })
 
 router.post("/", function (req, res, next) {
@@ -33,7 +33,7 @@ router.patch("/:name", function (req, res) {
     throw new ExpressError("Cat not found", 404)
   }
   foundCat.name = req.body.name
-  res.json({ cat: foundCat })
+  res.status(200).json({ cat: foundCat })
 })
 
 router.delete("/:name", function (req, res) {

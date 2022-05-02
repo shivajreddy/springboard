@@ -44,7 +44,7 @@ app.use((req,res,next)=>{
 
 // global error handler
 app.use((error,req,res,next)=>{
-  console.log('global error object', error)
+  console.error('global error object', error)
   return res.status(error.status).send(error.msg);
 })
 
