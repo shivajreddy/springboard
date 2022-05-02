@@ -3,11 +3,17 @@ const ExpressError = require('./expresserror');
 const db = require('./fakeDB');
 
 const app = express();
+app.use(express.json());    //respond using json
 
 app.use((req,res,next)=>{
   console.clear();
   next();
 })
+
+// import routes
+const items_router = require('./items')
+app.use('/items', items_router)
+
 
 app.get('/',(req,res,next)=>{
   return res.send('Shopping List home page');
