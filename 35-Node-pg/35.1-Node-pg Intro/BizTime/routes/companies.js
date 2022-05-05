@@ -13,7 +13,7 @@ companies.get('/all', async(req, res, next)=>{
   const result = await db.query(
     `SELECT * FROM companies`
   )
-  return res.status(200).send({ companies: result.rows});
+  return res.status(200).json({ companies: result.rows});
 })
 
 
@@ -25,7 +25,7 @@ companies.get('/:code', async(req, res, next)=>{
     const result = await db.query(
       `SELECT * FROM companies WHERE code=$1`, [code]
     );
-    return res.status(200).send({company:result.rows});
+    return res.status(200).json({company:result.rows});
   } catch (error) {
     next(error);
   }
@@ -56,7 +56,7 @@ companies.post('/', async(req, res, next)=>{
       RETURNING code, name, description`,
       [company.code, company.name, company.description]
     )
-    return res.status(201).send({company : query_result.rows[0]});
+    return res.status(201).json({company : query_result.rows[0]});
   
   } catch (e) {
     next(e)
@@ -88,7 +88,7 @@ companies.put('/:code', async(req, res, next)=>{
       [name, description, code]
     );
     if (result.rows.length === 0){throw new ExpressError(`Company code of ${code} not found in DB`, 404)}
-    return res.status(200).send(result.rows[0]);
+    return res.status(200).json(result.rows[0]);
     
   } catch (error) {
     next(error);
@@ -107,7 +107,7 @@ companies.delete('/:code', async(req, res, next)=>{
       [code]
     )
     if (result.rows.length === 0){throw new ExpressError(`No company with code ${code} exists`, 404)}
-    res.status(200).send({status:"delete"});
+    res.status(200).json({status:"delete"});
 
   } catch (error) {
     next(error);
