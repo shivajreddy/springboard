@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1> Best Customers page </h1>
+
+<hr>
+<i> 💡 can show the cutomer details using the customer_id</i>
+<hr>
+
+<ol>
+  {% for customer in best_customers %}
+  <li>
+    <span>
+      <b> Total Reservations: {{ customer.count }}</b>
+      <p> Customer_id: {{ customer.customer_id }}</p>
+    </span>
+  </li>
+  {% endfor %}
+</ol>
+
+{% endblock %}

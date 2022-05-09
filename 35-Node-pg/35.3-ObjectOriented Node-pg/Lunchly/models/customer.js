@@ -2,14 +2,19 @@
 
 const db = require("../db");
 const Reservation = require("./reservation");
+const ExpressError = require('../expresserror');
 
 /** Customer of the restaurant. */
 
 class Customer {
-  constructor({ id, firstName, lastName, phone, notes }) {
+  constructor({ id, firstName, lastName, phone, notes, prefix }) {
     this.id = id;
+    // this.prefix = this.prefix || "pfx.";
     this.firstName = firstName;
     this.lastName = lastName;
+    // this.fullName = this.firstName + " " + this.lastName;
+    // for prefix
+    // this.fullName = this.prefix + this.firstName + " " + this.lastName;
     this.phone = phone;
     this.notes = notes;
   }
@@ -78,6 +83,41 @@ class Customer {
       );
     }
   }
+
+  get fullName(){
+    return `${this.firstName} ${this.lastName}`;
+  }
+
+  /** search for customers using first or last name or part of the name */
+
+  static async searchCustomer(searchTerm) {
+    const result = await db.query(
+      `SELECT * FROM customers
+      WHERE first_name LIKE $1
+      OR last_name LIKE $1`
+      , ['%'+searchTerm+'%']
+    )
+    // console.log('this is the query result for', searchTerm, result.rows);
+    if(result.rowCount === 0){
+      return false;
+    }
+    return result.rows[0];
+  }
+
+  /** top 10 customers with most reviews */
+
+  static async bestCustomers(){
+    const result = await db.query(
+      `SELECT COUNT(id), customer_id
+      FROM reservations
+      GROUP BY customer_id
+      ORDER BY COUNT(id) DESC
+      LIMIT 10`
+    )
+    return result.rows;
+  }
+
+
 }
 
 module.exports = Customer;

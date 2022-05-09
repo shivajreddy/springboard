@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1> Search form</h1>
+
+<h3> {{ result.notfound }}</h3>
+
+<form action="/search/customer" method="POST">
+  <h2>search for user</h2>
+  <input type="text" name="user_search" id="user_search">
+  <button type="submit">Search</button>
+</form>
+
+{% endblock %}

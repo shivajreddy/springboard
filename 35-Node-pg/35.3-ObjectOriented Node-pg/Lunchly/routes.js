@@ -32,10 +32,11 @@ router.get("/add/", async function(req, res, next) {
 
 router.post("/add/", async function(req, res, next) {
   try {
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
-    const phone = req.body.phone;
-    const notes = req.body.notes;
+    // const firstName = req.body.firstName;
+    // const lastName = req.body.lastName;
+    // const phone = req.body.phone;
+    // const notes = req.body.notes;
+    const { firstName, lastName, phone, notes } = req.body;
 
     const customer = new Customer({ firstName, lastName, phone, notes });
     await customer.save();
@@ -111,5 +112,34 @@ router.post("/:id/add-reservation/", async function(req, res, next) {
     return next(err);
   }
 });
+
+router.get('/search/customer', (req, res, next)=>{
+  try {
+    res.render('search_customer.html');
+  } catch (error) {
+    next(error);
+  }
+})
+
+router.post('/search/customer', async (req, res, next)=>{
+  try {
+    const customer = await Customer.searchCustomer(req.body.user_search);
+    if(!customer){
+      return res.redirect('/search/customer')
+    }
+    return res.redirect(`/${customer.id}`)
+  } catch (error) {
+    next(error);
+  }
+})
+
+router.get('/customers/best', async (req, res, next)=>{
+  try {
+    const best_customers = await Customer.bestCustomers();
+    return res.render('best_customers.html', {best_customers});
+  } catch (error) {
+    next(error);
+  }
+})
 
 module.exports = router;
