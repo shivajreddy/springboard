@@ -1,16 +1,35 @@
 /** User class for message.ly */
-
+const db = require('../db');
+const ExpressError = require('../expressError');
 
 
 /** User of the site. */
 
 class User {
 
+  constructor(username, password, first_name, last_name, phone) {
+    this.username = username;
+    this.password = password;
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.phone = phone;
+  }
+
   /** register new user -- returns
    *    {username, password, first_name, last_name, phone}
    */
 
-  static async register({username, password, first_name, last_name, phone}) { }
+  static async register({ given_username, given_password, given_first_name, given_last_name, given_phone }) {
+    const result = await db.query(
+      `INSERT INTO users (username, password, first_name, last_name, phone)
+      VALUES ($1, $2, $3, $4, $5)`,
+      [given_username, given_password, given_first_name, given_last_name, given_phone]
+    );
+    if (result.rowCount === 0) { throw new ExpressError('Couldnt create user', 404) };
+    const { username, password, first_name, last_name, phone } = result.rows[0]
+    const new_user = User(username, password, first_name, last_name, phone);
+    return new_user;
+  }
 
   /** Authenticate: is this username/password valid? Returns boolean. */
 
@@ -23,7 +42,12 @@ class User {
   /** All: basic info on all users:
    * [{username, first_name, last_name, phone}, ...] */
 
-  static async all() { }
+  static async all() {
+    const result = await db.query(
+      `SELECT * FROM users`
+    )
+    return result.rows;
+  }
 
   /** Get: get user by username
    *

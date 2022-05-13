@@ -3,6 +3,14 @@
  * => {users: [{username, first_name, last_name, phone}, ...]}
  *
  **/
+const express = require('express');
+const userRoutes = express.Router();
+const User = require('../models/user');
+
+userRoutes.get('/', (req, res, next) => {
+  const all_users = User.all();
+  return res.status(200).json(all_users);
+})
 
 
 /** GET /:username - get detail of users.
@@ -32,3 +40,6 @@
  *                 to_user: {username, first_name, last_name, phone}}, ...]}
  *
  **/
+
+
+module.exports = userRoutes;
