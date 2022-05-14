@@ -22,17 +22,14 @@ authRoutes.post('/login', async (req, res, next) => {
     "password" : ""
   }
   */
+  //  TODO send signed token after login
   try {
     const { username, password } = req.body;
 
     if (!username || !password) throw new ExpressError(`no username or pass`, 404);
 
     const usr = await User.get(username);
-    console.log('this is the usr', usr);
-
-    usr.last_login_at = new Date();
-    usr.save();
-    console.log('this is the usr after saving', usr);
+    // console.log('this is the usr', usr);
 
     // compare with bcrypt.compare()
     const correct_password = await bcrypt.compare(password, usr.password);
@@ -43,6 +40,10 @@ authRoutes.post('/login', async (req, res, next) => {
       const token = jwt.sign({ pay_load }, SECRET_KEY);
       req.body._token = token;
       req.user = pay_load;
+      usr.last_login_at = new Date();
+      usr.save();
+      console.log('this is the usr after saving', usr);
+      return res.status(200).json({ msg: `Logged in succesfully ${req.user.username}`, your_token: token })
     } else {
       return res.status(403).json({ result: `password incorrect for ${username}` });
     }
@@ -55,14 +56,13 @@ authRoutes.post('/login', async (req, res, next) => {
 
 })
 
-// call back fn for app
-// TODO
 /** POST /register - register user: registers, logs in, and returns token.
  *
  * {username, password, first_name, last_name, phone} => {token}.
  *
  *  Make sure to update their last-login!
  */
+// TODO make sure to send the signed token after registration
 authRoutes.post('/register', async (req, res, next) => {
   /*  Format of the body to create a new user
   {
@@ -91,7 +91,12 @@ authRoutes.post('/register', async (req, res, next) => {
     // save the user details to db
     const new_user = await User.register(usr);
 
-    return res.status(201).json({ new_user })
+    // sign with jwt
+    // debugger
+    const token = jwt.sign({ ...new_user }, SECRET_KEY);
+    req.body._token = token;
+
+    return res.status(201).json({ "created_user": new_user, "signed token": token })
 
   } catch (error) {
     if (error.code === '23505') {

@@ -7,6 +7,7 @@ const { SECRET_KEY } = require("../config");
 
 function authenticateJWT(req, res, next) {
   try {
+    console.log('authenticateJWT function activated');
     const tokenFromBody = req.body._token;
     const payload = jwt.verify(tokenFromBody, SECRET_KEY);
     req.user = payload; // create a current user
@@ -42,8 +43,9 @@ function ensureCorrectUser(req, res, next) {
 }
 // end
 
+
 module.exports = {
   authenticateJWT,
   ensureLoggedIn,
-  ensureCorrectUser
+  ensureCorrectUser,
 };

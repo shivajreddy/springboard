@@ -65,11 +65,11 @@ class User {
 
   static async get(username) {
     const result = await db.query(
-      `SELECT * FROM users
+      `SELECT username, first_name, last_name, phone, join_at, last_login_at FROM users
       WHERE username=$1`
       , [username]
     )
-    if (result.rowCount === 0) throw new ExpressError(`No user of ${username}`, 403);
+    if (result.rowCount === 0) throw { result: `❗️No user of ${username}`, status: 404 };
     const psql_row = result.rows[0];
     const usr = new User(psql_row.username, psql_row.password, psql_row.first_name, psql_row.last_name, psql_row.phone, psql_row.join_at, psql_row.last_login_at);
     return usr;
