@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const ExpressError = require('./expresserror');
 
+
 // Middle ware
 app.use((req, res, next) => {
   console.clear();
@@ -15,10 +16,21 @@ const router = require('./routes/router');
 app.use('/router', router);
 
 
-// home route
-app.get('/', (req, res, next) => {
-  return res.send('Home page');
+const jsonschema = require('jsonschema');
+const myschema = require('./schemas/myschema.json');
+
+app.get('/test', (req, res, next) => {
+  const result = jsonschema.validate(
+    { name: 'shivareddy', phone: "3528704984" }, myschema
+  );
+  if (!result.valid) {
+    const list_of_errors = result.errors.map(error => error.stack);
+    let error = new ExpressError(list_of_errors, 400);
+    console.error(error)
+  }
+  return res.send(result.valid);
 });
+
 
 
 // 404 Page

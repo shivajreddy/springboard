@@ -1,0 +1,15 @@
+{
+  "title": "myfirstschema",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "name",
+    "phone"
+  ]
+}
