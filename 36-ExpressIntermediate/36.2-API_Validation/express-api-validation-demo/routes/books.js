@@ -4,7 +4,38 @@ const ExpressError = require("../expressError");
 const jsonschema = require("jsonschema");
 const bookSchema = require("../schemas/bookSchema.json");
 
-router.post("/with-validation", function(req, res, next) {
+
+router.get('/:isbn', (req, res, next) => {
+  try {
+    const isbn = req.params.isbn;
+    if (!isbn) throw new ExpressError('isbn aint there', 404);
+    return res.status(200).send('asldkfj');
+  } catch (error) {
+    return next(error);
+  }
+})
+
+router.put('/:isbn', (req, res, next) => {
+  try {
+    const isbn = req.params.isbn;
+    if (!isbn) throw new ExpressError('isbn aint there', 404);
+    return res.status(200).send('asldkfj');
+  } catch (error) {
+    return next(error);
+  }
+})
+
+router.delete('/:isbn', (req, res, next) => {
+  try {
+    const isbn = req.params.isbn;
+    if (!isbn) throw new ExpressError('isbn aint there', 404);
+    return res.status(200).send('asldkfj');
+  } catch (error) {
+    return next(error);
+  }
+})
+
+router.post("/with-validation", function (req, res, next) {
   const result = jsonschema.validate(req.body, bookSchema);
 
   if (!result.valid) {
@@ -21,7 +52,7 @@ router.post("/with-validation", function(req, res, next) {
 });
 // end
 
-router.post("/", function(req, res, next) {
+router.post("/", function (req, res, next) {
   const bookData = req.body.book;
 
   if (!bookData) {
