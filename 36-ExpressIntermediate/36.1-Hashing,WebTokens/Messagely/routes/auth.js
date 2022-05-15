@@ -22,7 +22,6 @@ authRoutes.post('/login', async (req, res, next) => {
     "password" : ""
   }
   */
-  //  TODO send signed token after login
   try {
     const { username, password } = req.body;
 
@@ -62,7 +61,6 @@ authRoutes.post('/login', async (req, res, next) => {
  *
  *  Make sure to update their last-login!
  */
-// TODO make sure to send the signed token after registration
 authRoutes.post('/register', async (req, res, next) => {
   /*  Format of the body to create a new user
   {

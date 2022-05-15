@@ -49,7 +49,7 @@ class User {
 
   static async all() {
     const result = await db.query(
-      `SELECT * FROM users`
+      `SELECT username, first_name, last_name, phone FROM users`
     )
     return result.rows;
   }
@@ -83,7 +83,18 @@ class User {
    *   {username, first_name, last_name, phone}
    */
 
-  static async messagesFrom(username) { }
+  static async messagesFrom(username) {
+    // try {
+    const result = await db.query(
+      `SELECT id, to_username, body, sent_at, read_at from messages
+        WHERE from_username=$1`,
+      [username]);
+    // if (result.rowCount === 0) throw { result: `No messages from ${username}` };
+    return result.rows;
+    // } catch (error) {
+    //   return next(error);
+    // }
+  }
 
   /** Return messages to this user.
    *

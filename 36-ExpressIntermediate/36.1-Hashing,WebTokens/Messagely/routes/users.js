@@ -9,7 +9,7 @@ const User = require('../models/user');
 
 userRoutes.get('/', async (req, res, next) => {
   const all_users = await User.all();
-  return res.status(200).json({ all_users });
+  return res.status(200).json({ users: all_users });
 })
 
 // my tested protected route
@@ -44,24 +44,6 @@ userRoutes.get('/:username', async (req, res, next) => {
   }
 })
 
-/** GET /:username/to - get messages to user
- *
- * => {messages: [{id,
- *                 body,
- *                 sent_at,
- *                 read_at,
- *                 from_user: {username, first_name, last_name, phone}}, ...]}
- *
- **/
-userRoutes.get('/:username/to', async (req, res, next) => {
-  try {
-
-  } catch (error) {
-    return next(error);
-  }
-})
-
-
 /** GET /:username/from - get messages from user
  *
  * => {messages: [{id,
@@ -73,6 +55,25 @@ userRoutes.get('/:username/to', async (req, res, next) => {
  **/
 
 userRoutes.get('/:username/from', async (req, res, next) => {
+  try {
+    const usr_name = req.params.username;
+    if (!usr_name) return next();
+    User.messagesFrom(usr_name)
+  } catch (error) {
+    return next(error);
+  }
+})
+
+/** GET /:username/to - get messages to user
+ *
+ * => {messages: [{id,
+ *                 body,
+ *                 sent_at,
+ *                 read_at,
+ *                 from_user: {username, first_name, last_name, phone}}, ...]}
+ *
+ **/
+userRoutes.get('/:username/to', async (req, res, next) => {
   try {
 
   } catch (error) {

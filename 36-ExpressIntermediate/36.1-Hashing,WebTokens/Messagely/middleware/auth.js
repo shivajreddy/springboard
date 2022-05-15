@@ -13,6 +13,7 @@ function authenticateJWT(req, res, next) {
     req.user = payload; // create a current user
     return next();
   } catch (err) {
+    console.log('some error was found so catching it');
     return next();
   }
 }
