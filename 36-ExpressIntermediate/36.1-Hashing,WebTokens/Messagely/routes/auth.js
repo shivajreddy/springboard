@@ -1,59 +1,17 @@
-// authentication middleware
 const express = require('express');
 const ExpressError = require('../expressError');
-const authRoutes = express.Router();
+const router = express.Router();
 
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-
-const { SECRET_KEY, BCRYPT_WORK_FACTOR } = require('../config');
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
+const { SECRET_KEY, BCRYPT_WORK_FACTOR } = require('../config');
 
+const jsonschema = require('jsonschema');
+const user_registration_schema = require('../schema/user_registration_schema.json');
+const user_login_schema = require('../schema/user_login_schema.json');
 
-/** POST /login - login: {username, password} => {token}
- *
- * Make sure to update their last-login!
- *
- **/
-authRoutes.post('/login', async (req, res, next) => {
-  /*format object to login
-  {
-    "username" : "",
-    "password" : ""
-  }
-  */
-  try {
-    const { username, password } = req.body;
+const jsonwebtoken = require('jsonwebtoken');
 
-    if (!username || !password) throw new ExpressError(`no username or pass`, 404);
-
-    const usr = await User.get(username);
-    // console.log('this is the usr', usr);
-
-    // compare with bcrypt.compare()
-    const correct_password = await bcrypt.compare(password, usr.password);
-
-    // sign with jwt if correct password
-    if (correct_password) {
-      const pay_load = usr;
-      const token = jwt.sign({ pay_load }, SECRET_KEY);
-      req.body._token = token;
-      req.user = pay_load;
-      usr.last_login_at = new Date();
-      usr.save();
-      console.log('this is the usr after saving', usr);
-      return res.status(200).json({ msg: `Logged in succesfully ${req.user.username}`, your_token: token })
-    } else {
-      return res.status(403).json({ result: `password incorrect for ${username}` });
-    }
-    return next();
-
-  } catch (error) {
-    // console.log('error handling for login route')
-    return next(error);
-  }
-
-})
 
 /** POST /register - register user: registers, logs in, and returns token.
  *
@@ -61,48 +19,69 @@ authRoutes.post('/login', async (req, res, next) => {
  *
  *  Make sure to update their last-login!
  */
-authRoutes.post('/register', async (req, res, next) => {
-  /*  Format of the body to create a new user
-  {
-    username: "not existing in db",
-    password: "not null",
-    first_name: "not null",
-    last_name: "not nul",
-    phone: "text not null",
-    -> join_at : auto gen. date,
-    -> last_login : empty
-  }
-  */
+
+router.post('/register', async (req, res, next) => {
   try {
-    // get the user information
+    const input_validation = jsonschema.validate(req.body, user_registration_schema);
+    // validate the input data
+    if (!input_validation.valid) {
+      let list_of_errors = input_validation.errors.map(error => error.stack);
+      return next(new ExpressError(list_of_errors, 403));
+    };
+
+    // input data is validated
     const { username, password, first_name, last_name, phone } = req.body;
+    // hash the password
+    const hashed_password = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
+    const join_at = new Date();
+    const last_login_at = new Date();
+    const new_user = await User.register(username, hashed_password, first_name, last_name, phone, join_at, last_login_at);
 
-    // error checks
-    if (!username || !password || !first_name || !last_name || !phone) throw new ExpressError(`given usr object has formatting errors`, 404);
-
-    // bcrypt.hash()
-    const hashed_pw = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
-
-    // create user object with given details + hashed_pw 
-    const usr = { username, hashed_pw, first_name, last_name, phone };
-
-    // save the user details to db
-    const new_user = await User.register(usr);
-
-    // sign with jwt
-    // debugger
-    const token = jwt.sign({ ...new_user }, SECRET_KEY);
-    req.body._token = token;
-
-    return res.status(201).json({ "created_user": new_user, "signed token": token })
+    const token = jsonwebtoken.sign(new_user, SECRET_KEY);
+    return res.status(201).json({ token: token });
 
   } catch (error) {
-    if (error.code === '23505') {
-      return next(new ExpressError(`username:${req.body.username} already taken`, 404));
-    } else {
-      return next(error);
-    }
+    if (error.code === '23502') return next({ status: 403, msg: `Missing field - ${error.column}` })
+    if (error.code === '23505') return next({ status: 403, msg: `username ${req.body.username} already taken` });
+    return next(error);
   }
 })
 
-module.exports = authRoutes;
+
+
+/** POST /login - login: {username, password} => {token}
+ *
+ * Make sure to update their last-login!
+ *
+ **/
+router.post('/login', async (req, res, next) => {
+  try {
+    const input_validation = jsonschema.validate(req.body, user_login_schema);
+    // validate the input data
+    if (!input_validation.valid) {
+      let list_of_errors = input_validation.errors.map(error => error.stack);
+      return next(new ExpressError(list_of_errors, 403));
+    }
+
+    const { username, password } = req.body;
+    const usr_details = await User.get_with_hashed_password(username);
+
+    // verify username
+    if (!usr_details) return next(new ExpressError(`No username of ${username}`, 403))
+
+    // verify password
+    const correct_password = await bcrypt.compare(password, usr_details.password);
+
+    if (!correct_password) return next(new ExpressError('Wrong password', 403));
+
+    const token = jsonwebtoken.sign(usr_details, SECRET_KEY);
+    return res.status(200).json({ token: token });
+
+  } catch (error) {
+    return next(error);
+  }
+})
+
+
+
+module.exports = router;

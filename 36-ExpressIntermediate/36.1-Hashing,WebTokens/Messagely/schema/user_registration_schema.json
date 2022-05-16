@@ -1,0 +1,36 @@
+{
+  "title": "User object",
+  "description": "the description",
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "integer"
+    },
+    "join_at": {
+      "type": "date-time"
+    },
+    "last_login_at": {
+      "type": "date-time"
+    }
+  },
+  "required": [
+    "username",
+    "password",
+    "first_name",
+    "last_name",
+    "phone"
+  ],
+  "additionalProperties": false
+}

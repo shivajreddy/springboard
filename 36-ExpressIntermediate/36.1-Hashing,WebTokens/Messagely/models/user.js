@@ -1,7 +1,8 @@
 /** User class for message.ly */
-const db = require('../db');
 const ExpressError = require('../expressError');
+const db = require('../db');
 
+const Message = require('./message');
 
 /** User of the site. */
 
@@ -21,19 +22,15 @@ class User {
    *    {username, password, first_name, last_name, phone}
    */
 
-  static async register({ username: given_username, hashed_pw: given_password, first_name: given_first_name, last_name: given_last_name, phone: given_phone }) {
-    const temp_join_at = new Date();
-    const temp_last_login = new Date();
+  static async register(username, password, first_name, last_name, phone, join_at, last_login_at) {
     const result = await db.query(
       `INSERT INTO users (username, password, first_name, last_name, phone, join_at, last_login_at)
         VALUES ($1, $2, $3, $4, $5, $6, $7)
-        RETURNING * `,
-      // RETURNING username, password, first_name, last_name, phone`,
-      [given_username, given_password, given_first_name, given_last_name, given_phone, temp_join_at, temp_last_login]
+        RETURNING username, first_name, last_name, phone, join_at, last_login_at`,
+      [username, password, first_name, last_name, phone, join_at, last_login_at]
     );
-    const psql_result = result.rows[0];
-    const new_usr = new User(psql_result.username, psql_result.password, psql_result.first_name, psql_result.last_name, psql_result.phone, psql_result.join_at, psql_result.last_login_at);
-    return new_usr;
+    const created_user_details = result.rows[0];
+    return created_user_details;
   }
 
   /** Authenticate: is this username/password valid? Returns boolean. */
@@ -49,8 +46,9 @@ class User {
 
   static async all() {
     const result = await db.query(
-      `SELECT username, first_name, last_name, phone FROM users`
-    )
+      `SELECT username, first_name, last_name, phone
+      FROM users`
+    );
     return result.rows;
   }
 
@@ -65,15 +63,23 @@ class User {
 
   static async get(username) {
     const result = await db.query(
-      `SELECT username, first_name, last_name, phone, join_at, last_login_at FROM users
-      WHERE username=$1`
-      , [username]
+      `SELECT username, first_name, last_name, phone, join_at, last_login_at
+      FROM users
+      WHERE username=$1`,
+      [username]
     )
-    if (result.rowCount === 0) throw { result: `❗️No user of ${username}`, status: 404 };
-    const psql_row = result.rows[0];
-    const usr = new User(psql_row.username, psql_row.password, psql_row.first_name, psql_row.last_name, psql_row.phone, psql_row.join_at, psql_row.last_login_at);
-    return usr;
-  }
+    return result.rows[0];
+  };
+
+  static async get_with_hashed_password(username) {
+    const result = await db.query(
+      `SELECT username, password, first_name, last_name, phone, join_at, last_login_at
+      FROM users
+      WHERE username=$1`,
+      [username]
+    )
+    return result.rows[0];
+  };
 
   /** Return messages from this user.
    *
@@ -84,16 +90,18 @@ class User {
    */
 
   static async messagesFrom(username) {
-    // try {
     const result = await db.query(
-      `SELECT id, to_username, body, sent_at, read_at from messages
-        WHERE from_username=$1`,
-      [username]);
-    // if (result.rowCount === 0) throw { result: `No messages from ${username}` };
-    return result.rows;
-    // } catch (error) {
-    //   return next(error);
-    // }
+      `SELECT id FROM messages
+      WHERE from_username=$1`,
+      [username]
+    )
+    if (result.rowCount === 0) throw new ExpressError(`No Messages from ${username}`, 404);
+    console.log('these are from messages', result.rows);
+
+    // wait for all messages
+    const messages = Promise.all(result.rows.map(message => Message.get(message.id)));
+
+    return messages;
   }
 
   /** Return messages to this user.
@@ -104,17 +112,32 @@ class User {
    *   {username, first_name, last_name, phone}
    */
 
-  static async messagesTo(username) { }
+  // static async messagesTo(username) { }
+  static async messagesTo(username) {
+    const result = await db.query(
+      `SELECT id FROM messages
+      WHERE to_username=$1`,
+      [username]
+    )
+    if (result.rowCount === 0) throw new ExpressError(`No Messages from ${username}`, 404);
+    console.log('these are from messages', result.rows);
+
+    // wait for all messages
+    const messages = Promise.all(result.rows.map(message => Message.get(message.id)));
+
+    return messages;
+  }
+
 
   async save() {
     const result = await db.query(
       `UPDATE users
-      SET password=$2, first_name=$3, last_name=$4, phone=$5, join_at=$6, last_login_at=$7
+      SET first_name=$2, password=$3, last_name=$4, phone=$5, join_at=$6, last_login_at=$7
       WHERE username=$1
-      RETURNING * `,
-      [this.username, this.password, this.first_name, this.last_name, this.phone, this.join_at, this.last_login_at]);
-
-    return result.rows[0];
+      RETURNING *`,
+      [this.username, this.first_name, this.last_name, this.phone, this.join_at, this.last_login_at]
+    );
+    return { status: 201, user: result.rows[0] }
   }
 }
 

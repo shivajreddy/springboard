@@ -1,44 +1,40 @@
+const express = require('express');
+const ExpressError = require('../expressError');
+const users = express.Router();
+
+const User = require('../models/user');
+const Message = require('../models/message');
+
 /** GET / - get list of users.
  *
  * => {users: [{username, first_name, last_name, phone}, ...]}
  *
  **/
-const express = require('express');
-const userRoutes = express.Router();
-const User = require('../models/user');
-
-userRoutes.get('/', async (req, res, next) => {
-  const all_users = await User.all();
-  return res.status(200).json({ users: all_users });
-})
-
-// my tested protected route
-const { authenticateJWT, ensureLoggedIn, ensureCorrectUser } = require('../middleware/auth');
-userRoutes.get('/2', ensureLoggedIn, (req, res, next) => {
+users.get('/', async (req, res, next) => {
   try {
-
-    return res.status(200).json({ msg: "reached the secure page" })
+    const all_users = await User.all();
+    return res.status(200).json({ all_users: all_users });
   } catch (error) {
     return next(error);
   }
-})
+});
 
-userRoutes.get('/3', ensureLoggedIn, (req, res, next) => {
-  res.status(200).send(`Succesfull token found. SO WELCOME ${req.user.username}`)
-})
+
 
 /** GET /:username - get detail of users.
  *
  * => {user: {username, first_name, last_name, phone, join_at, last_login_at}}
  *
  **/
-
-userRoutes.get('/:username', async (req, res, next) => {
+users.get('/:username', async (req, res, next) => {
   try {
-    const usr_name = req.params.username;
-    if (!usr_name) return next();
-    const usr = await User.get(usr_name);
-    return res.status(302).json({ user: usr })
+    if (!req.params.username) return next();
+    const username = req.params.username;
+    const usr = await User.get(username);
+    if (!usr) return next({ status: 404, msg: `No user found with username ${username}` }, 404);
+
+    return res.status(200).json({ user: usr })
+
   } catch (error) {
     return next(error);
   }
@@ -53,16 +49,21 @@ userRoutes.get('/:username', async (req, res, next) => {
  *                 to_user: {username, first_name, last_name, phone}}, ...]}
  *
  **/
-
-userRoutes.get('/:username/from', async (req, res, next) => {
+users.get('/:username/from', async (req, res, next) => {
   try {
-    const usr_name = req.params.username;
-    if (!usr_name) return next();
-    User.messagesFrom(usr_name)
+    const username = req.params.username;
+    if (!username) return next(new ExpressError('username cant be empty', 403));
+
+    const messages = await User.messagesFrom(username);
+    // this will message object also has from_user, since Message.get() has that
+
+    return res.status(200).json({ messages: messages })
+
   } catch (error) {
     return next(error);
   }
 })
+
 
 /** GET /:username/to - get messages to user
  *
@@ -73,12 +74,20 @@ userRoutes.get('/:username/from', async (req, res, next) => {
  *                 from_user: {username, first_name, last_name, phone}}, ...]}
  *
  **/
-userRoutes.get('/:username/to', async (req, res, next) => {
+users.get('/:username/to', async (req, res, next) => {
   try {
+    const username = req.params.username;
+    if (!username) return next(new ExpressError('username cant be empty', 403));
+
+    const messages = await User.messagesTo(username);
+    // this will message object also has from_user, since Message.get() has that
+
+    return res.status(200).json({ messages: messages })
 
   } catch (error) {
     return next(error);
   }
 })
 
-module.exports = userRoutes;
+
+module.exports = users;
