@@ -63,8 +63,8 @@ books.post("/", async function (req, res, next) {
     const input_validation = jsonschema.validate(req.body, bookschema);
     if (!input_validation.valid) {
       const all_errors = input_validation.errors.map(error => error.stack);
-      console.log('detected errors')
-      console.log(input_validation)
+      // console.log('detected errors')
+      // console.log(input_validation)
       return next(new ExpressError(all_errors, 403));
     };
 
