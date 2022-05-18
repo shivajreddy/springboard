@@ -1,5 +1,4 @@
 # Springboard
-Projects &amp; Exercises created for completion of 9month Software Engineering Bootcamp
 
 <!-- ## Meme-Generator
 Scope - Create a meme, by giving image, text for the meme.  
