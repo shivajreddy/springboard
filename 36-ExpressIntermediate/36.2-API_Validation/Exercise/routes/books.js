@@ -9,7 +9,18 @@ const jsonschema = require('jsonschema');
 
 /** GET / => {books: [book, ...]}  */
 books.get('/test', (req, res, next) => {
-  return res.status(333).send('reached test');
+  const some_ob = {
+    "isbn": "0691161518",
+    "amazon_url": "http://a.co/eobPtX2",
+    "author": "Matthew Lane",
+    "language": "english",
+    "pages": 264,
+    "publisher": "Princeton University Press",
+    "title": "Power-Up: Unlocking the Hidden Mathematics in Video Games",
+    "year": 2017
+  };
+  // const values = Object.values(some_ob)
+  return res.status(200).send('reached test');
 });
 
 books.get("/", async function (req, res, next) {
@@ -53,6 +64,7 @@ books.post("/", async function (req, res, next) {
     if (!input_validation.valid) {
       const all_errors = input_validation.errors.map(error => error.stack);
       console.log('detected errors')
+      console.log(input_validation)
       return next(new ExpressError(all_errors, 403));
     };
 

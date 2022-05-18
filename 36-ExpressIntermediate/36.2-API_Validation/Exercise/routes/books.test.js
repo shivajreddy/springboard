@@ -25,15 +25,19 @@ const test_wrong_book = {
   "year": 2017
 }
 
-beforeEach(function () {
-  db.query(`
-  INSERT INTO books`)
+beforeEach(async function () {
+  await db.query(`
+  INSERT INTO books (isbn, amazon_url, author, language, pages, publisher, title, year)
+  VALUES( $1, $2, $3, $4, $5, $6, $7, $8)`,
+    [...Object.values(test_book)]
+  );
+
 })
 
-// can you spread the keys into the query dictionary
-
-afterEach(function () {
-
+afterEach(async function () {
+  // delete all rows in the books table
+  await db.query(`
+  DELETE FROM books`)
 })
 
 afterAll(async () => {
@@ -44,6 +48,6 @@ afterAll(async () => {
 describe('get route test', () => {
   test('get request for /books', async () => {
     const response = await request(app).get('/books/test');
-    expect(response.statusCode).toBe(333);
+    expect(response.statusCode).toBe(200);
   })
 })
