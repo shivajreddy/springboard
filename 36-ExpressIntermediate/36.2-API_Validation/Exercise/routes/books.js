@@ -1,4 +1,5 @@
 const express = require("express");
+const ExpressError = require('../expressError');
 const books = new express.Router();
 
 const Book = require("../models/book");
@@ -35,8 +36,28 @@ books.get("/:id", async function (req, res, next) {
 
 books.post("/", async function (req, res, next) {
   try {
+    /**
+    {
+      "isbn": "0691161518",
+      "amazon_url": "http://a.co/eobPtX2",
+      "author": "Matthew Lane",
+      "language": "english",
+      "pages": 264,
+      "publisher": "Princeton University Press",
+      "title": "Power-Up: Unlocking the Hidden Mathematics in Video Games",
+      "year": 2017
+    }
+    */
+    // validate data
+    const input_validation = jsonschema.validate(req.body, bookschema);
+    if (!input_validation.valid) {
+      const all_errors = input_validation.errors.map(error => error.stack);
+      console.log('detected errors')
+      return next(new ExpressError(all_errors, 403));
+    };
+
+    // data validated
     const book = await Book.create(req.body);
-    const result = jsonschema.validate({ book }, bookschema);
     return res.status(201).json({ book });
   } catch (err) {
     return next(err);

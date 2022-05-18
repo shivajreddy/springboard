@@ -15,6 +15,7 @@ app.use("/books", bookRoutes);
 
 app.use(function (req, res, next) {
   const err = new ExpressError("Not Found", 404);
+  res.send('404 page');
   return next(err);
 });
 
