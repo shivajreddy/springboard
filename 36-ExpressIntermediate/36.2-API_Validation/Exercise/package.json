@@ -16,8 +16,8 @@
     "pg": "^8.3.3",
     "supertest": "^3.3.0"
   },
-  "description": "",
   "devDependencies": {
     "jest": "^28.1.0"
-  }
+  },
+  "description": ""
 }
