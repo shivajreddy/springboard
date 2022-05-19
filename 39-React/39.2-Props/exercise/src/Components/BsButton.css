@@ -1,0 +1,14 @@
+.primary {
+  background-color: rgb(55, 55, 173);
+  color: white;
+}
+
+.secondary {
+  background-color: gray;
+  color: black;
+}
+
+.black {
+  background-color: black;
+  color: white;
+}

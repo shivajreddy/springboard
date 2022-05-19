@@ -1,0 +1,23 @@
+.bs-card {
+  background-color: rgb(48, 48, 48);
+  color: red;
+  width: 500px;
+  height: 300px;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: aqua;
+}
+
+.bs-card>* {
+  /* text-align: center; */
+}
+
+.bs-card>.title {
+  text-align: center;
+  background-color: cornflowerblue;
+}
+
+.bs-card>.body {
+  color: gray;
+  padding: 0px 20px;
+}
