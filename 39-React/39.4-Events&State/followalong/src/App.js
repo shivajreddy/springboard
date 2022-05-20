@@ -1,9 +1,13 @@
 // import './App.css';
+// import Clicker from "./Clicker";
+import Counter from "./Counter";
 
 function App() {
   return (
     <>
-      <h2>Test 2</h2>
+      {/* <h2 style={{ textAlign: "center" }}>Events</h2> */}
+      <h2 style={{ textAlign: "center" }}>State</h2>
+      <Counter />
     </>
   );
 }
