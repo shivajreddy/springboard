@@ -1,0 +1,18 @@
+.Ball {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.Ball-circle {
+  border-radius: 50%;
+  width: 140px;
+  height: 140px;
+  background-color: antiquewhite;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
