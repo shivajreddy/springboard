@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import msgs from './messages'
+// import msgs from './messages'
 import './EightBall.css'
 
 const color_count = {
@@ -9,8 +9,9 @@ const color_count = {
 }
 
 function EightBall(props) {
-  const default_msg = "Ask me anything human.🧞️"
+  const default_msg = "Ask me anything human🧞"
 
+  const msgs = props.answers;
   const [curr_msg, setMsg] = useState(default_msg);
   const [curr_color, setColor] = useState();
 
