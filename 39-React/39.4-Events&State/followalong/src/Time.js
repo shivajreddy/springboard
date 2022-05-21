@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import './Time.css'
 
 function Time() {
 
   const current_time = new Date().toLocaleTimeString();
   const [current_state, setState] = useState(current_time);
+
 
   setInterval(() => {
     setState(new Date().toLocaleTimeString())
