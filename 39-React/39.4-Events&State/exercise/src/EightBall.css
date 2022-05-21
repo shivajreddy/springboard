@@ -1,0 +1,28 @@
+.EightBall-game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.EightBall-ball {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background-color: black;
+  text-align: center;
+  color: white;
+
+  filter: drop-shadow(10px 8px 10px #39393a);
+
+  width: 180px;
+  height: 180px;
+}
+
+.EightBall-btn {
+  margin: 10px;
+}
