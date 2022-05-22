@@ -7,6 +7,7 @@ import dark from './images/dark.png';
 import messages from './messages';
 import EightBall from './EightBall';
 
+import ColorBoxes from './ColorBoxes';
 
 function App() {
   const [current_theme, setTheme] = useState('light');
@@ -16,12 +17,12 @@ function App() {
         {(current_theme === 'light' ? <img src={dark} alt='dark-logo' /> : <img src={light} alt='light-logo' />)}
       </button>
 
-      <h1 style={{ textAlign: "center" }}>Eight Ball</h1>
 
       {/* <Ball /> */}
-      <EightBall
-        answers={messages}
-      />
+
+      {/* <EightBall answers={messages} /> */}
+
+      <ColorBoxes />
 
     </div>
   );

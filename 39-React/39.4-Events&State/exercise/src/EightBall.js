@@ -17,11 +17,14 @@ function EightBall(props) {
 
   function ask_ball() {
     const random_obj = msgs[(Math.floor(Math.random() * (msgs.length)))];
-    setMsg(random_obj.msg)
-    setColor(random_obj.color)
+
+    // when the same color repeats, the count updates in the array,
+    // but the component doesnt reload. all the count should have a state, for reload when changed
     if (random_obj.color === 'red') color_count.red += 1;
     if (random_obj.color === 'green') color_count.green += 1;
     if (random_obj.color === 'goldenrod') color_count.goldenrod += 1;
+    setMsg(random_obj.msg)
+    setColor(random_obj.color)
   }
 
   function reset_game() {
@@ -31,6 +34,7 @@ function EightBall(props) {
 
   return (
     <div className='EightBall-game'>
+      <h1 style={{ textAlign: "center" }}>Eight Ball</h1>
       <div className='EightBall-ball' style={{ backgroundColor: curr_color }}>
         <h3 style={{ padding: "10px" }}>{curr_msg}</h3>
         {/* <h3>{curr_color}</h3> */}
