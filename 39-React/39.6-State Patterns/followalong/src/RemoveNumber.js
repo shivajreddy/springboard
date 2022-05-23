@@ -15,12 +15,14 @@ function RemoveNumber(props) {
 
     )
   })
+
   
 
   return (
     <>
       <ul>
         {all_buttons}
+
       </ul>
     </>
   )
