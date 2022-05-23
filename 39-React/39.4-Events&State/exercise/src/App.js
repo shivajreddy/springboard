@@ -7,7 +7,31 @@ import dark from './images/dark.png';
 import messages from './messages';
 import EightBall from './EightBall';
 
-import ColorBoxes from './ColorBoxes';
+// Further study
+import ParentBox from './BoxComp/ParentBox';
+
+const allColors = [
+  "Aqua",
+  "Black",
+  "BlanchedAlmond",
+  "Blue",
+  "Chocolate",
+  "DodgerBlue",
+  "Lavender",
+  "LawnGreen",
+  "Peru",
+  "Plum",
+  "SpringGreen",
+  "SteelBlue",
+  "Tan",
+  "Teal",
+  "Thistle",
+  "Tomato",
+  "Turquoise",
+  "Violet",
+  "Yellow",
+  "YellowGreen"
+]
 
 function App() {
   const [current_theme, setTheme] = useState('light');
@@ -18,11 +42,13 @@ function App() {
       </button>
 
 
-      {/* <Ball /> */}
 
-      {/* <EightBall answers={messages} /> */}
+      <EightBall answers={messages} />
 
-      <ColorBoxes />
+      <ParentBox
+        number={16}
+        colors={allColors}
+      />
 
     </div>
   );
