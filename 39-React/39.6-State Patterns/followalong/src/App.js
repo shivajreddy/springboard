@@ -3,6 +3,8 @@ import Counter from './Counter';
 
 import RemoveNumber from './RemoveNumber';
 
+import ColorfulCircles from './ColorfulCircles';
+
 import NumberList from './NumberList';
 const nums = [1,2,3,4,5,6,7,8,9,10,11,12,13,14];
 
@@ -18,9 +20,12 @@ function App() {
         remove_number={10}
       /> */}
 
-      <RemoveNumber
+      {/* <RemoveNumber
         all_numbers = {nums}
-      /> 
+      />  */}
+
+        <ColorfulCircles/>
+
       
     </>
   );
