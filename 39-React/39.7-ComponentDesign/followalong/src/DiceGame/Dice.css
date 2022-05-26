@@ -1,0 +1,20 @@
+.Dice {
+  border: solid 2px;
+  padding: 1em 0 2em 0;
+  text-align: center;
+  margin: 1em auto auto;
+  border-radius: 5px;
+  width: 40em;
+}
+
+.Dice h2 {
+  text-align: center;
+}
+
+.Dice button {
+  background-color: darkgoldenrod;
+  color: white;
+  font-size: 140%;
+  border-radius: 2px;
+  margin-top: 1.5em;
+}
