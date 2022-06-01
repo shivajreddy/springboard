@@ -1,0 +1,10 @@
+.Grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0 50px;
+  background-color: aquamarine;
+  border-radius: 10px;
+}

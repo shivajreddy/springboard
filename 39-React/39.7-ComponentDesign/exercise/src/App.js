@@ -1,9 +1,10 @@
 import './App.css';
+import Game from './Game';
 
 function App() {
   return (
     <>
-      <h1>React App</h1>
+      <Game />
     </>
   );
 }
