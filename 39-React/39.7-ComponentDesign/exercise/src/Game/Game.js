@@ -6,9 +6,9 @@ import './Game.css'
 function Game({ width, height }) {
   return (
     <div className='Game'>
-      <h1> Lights Out 💡</h1>
+      <h1> 💡 Lights Out  {width} x {height}</h1>
 
-      <Grid width={width} height={height}/>
+      <Grid width={width} height={height} />
 
     </div>
   )

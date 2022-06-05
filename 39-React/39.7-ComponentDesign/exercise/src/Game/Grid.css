@@ -1,0 +1,8 @@
+.Grid {
+  display: flex;
+  justify-content: center;
+
+  padding: 20px;
+  background-color: aquamarine;
+  border-radius: 20px;
+}
