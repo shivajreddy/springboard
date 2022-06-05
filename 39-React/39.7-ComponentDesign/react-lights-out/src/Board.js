@@ -34,6 +34,12 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   function createBoard() {
     let initialBoard = [];
     // TODO: create array-of-arrays of true/false values
+    for (let r = 0; r < nrows; r++) {
+      const row = [];
+      for (let c = 0; c < ncols; c++) {
+        row.push(Math.random() < chanceLightStartsOn)
+      }
+    }
     return initialBoard;
   }
 
@@ -54,6 +60,7 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
       };
 
       // TODO: Make a (deep) copy of the oldBoard
+      const copy = [...oldBoard]
 
       // TODO: in the copy, flip this cell and the cells around it
 
