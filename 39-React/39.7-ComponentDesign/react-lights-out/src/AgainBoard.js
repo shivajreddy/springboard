@@ -28,18 +28,18 @@ import "./Board.css";
  **/
 
 function Board({ nrows, ncols, chanceLightStartsOn }) {
-
-  // Declare state of the board
   const [board, setBoard] = useState(createBoard());
 
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
+  // matrix of true or false
   function createBoard() {
     let initialBoard = [];
     // TODO: create array-of-arrays of true/false values
     for (let r = 0; r < nrows; r++) {
       const row = [];
       for (let c = 0; c < ncols; c++) {
-        row.push(Math.random() < chanceLightStartsOn)
+        const flag = (Math.random() < chanceLightStartsOn);
+        row.push(flag);
       }
       initialBoard.push(row);
     }
@@ -50,8 +50,6 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
     // TODO: check the board in state to determine whether the player has won.
   }
 
-  // The call back fn, that is going to be passed down
-  // fn changes the state of the board
   function flipCellsAround(coord) {
     setBoard(oldBoard => {
       const [y, x] = coord.split("-").map(Number);
@@ -65,12 +63,8 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
       };
 
       // TODO: Make a (deep) copy of the oldBoard
-      const copy = [...oldBoard]
 
       // TODO: in the copy, flip this cell and the cells around it
-      // copy.map(row => {
-      //   map.
-      // })
 
       // TODO: return the copy
     });
@@ -83,41 +77,31 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   // make table board
 
   // TODO
-  // board is the trueFalseMatrix
-  const trueFalseMatrix = board;
-  const resultDivGrid = [];
+  // 1. get the initial state. Which is set to a trueFalse Matrix
 
-  // Iterater over trueFlaseMatrix and make a divMatrix
-  for (let r = 0; r < trueFalseMatrix.length; r++) {
-    // array to collect all table rows
+  const gameBoard = [];
+
+  for (let r = 0; r < nrows; r++) {
     const row = [];
-
-    for (let c = 0; c < trueFalseMatrix[0].length; c++) {
-      const coord = `${r}-${c}`;
-      // console.log('now actual', r, c, trueFalseMatrix[r][c]);
+    for (let c = 0; c < ncols; c++) {
+      // console.log(board[r][c]);
+      const coord = `${r}-${c}`
       row.push(
         <Cell
           key={coord}
-          isLit={trueFalseMatrix[r][c]}
           flipCellsAroundMe={() => 21}
-        />
-      )
+          isLit={board[r][c]}
+        />)
     }
-    // make a table row and push it to row array
-    resultDivGrid.push(<tr key={r} >{row}</tr>);
-  };
+    gameBoard.push(<tr key={r}>{row}</tr>);
+  }
 
   return (
-    <table className="Board">
-      <tbody>{resultDivGrid}</tbody>
+    <table>
+      <tbody>{gameBoard}</tbody>
     </table>
   )
+
 }
 
 export default Board;
-
-Board.defaultProps = {
-  nrows: 5,
-  ncols: 5,
-  chanceLightStartsOn: 0.5
-}
