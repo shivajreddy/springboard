@@ -33,7 +33,7 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
   function createBoard() {
     let initialBoard = [];
-    // TODO: create array-of-arrays of true/false values
+    // create array-of-arrays of true/false values
     for (let r = 0; r < nrows; r++) {
       const rowOfTrueFalses = []
       for (let c = 0; c < ncols; c++) {
@@ -46,7 +46,7 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   }
 
   function hasWon() {
-    // TODO: check the board in state to determine whether the player has won.
+    // check the board in state to determine whether the player has won.
   }
 
   function flipCellsAround(coord) {
@@ -61,23 +61,26 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
         }
       };
 
-      // TODO: Make a (deep) copy of the oldBoard
+      // Make a (deep) copy of the oldBoard
       const deepCopy = [...oldBoard];
 
-      // TODO: in the copy, flip this cell and the cells around it
+      // in the copy, flip this cell and the cells around it
       flipCell(r, c, deepCopy);
       flipCell(r + 1, c, deepCopy);
       flipCell(r - 1, c, deepCopy);
       flipCell(r, c + 1, deepCopy);
       flipCell(r, c - 1, deepCopy);
 
-      // TODO: return the copy
+      // return the copy
       return deepCopy;
     });
     return coord;
   }
 
   // TODO if the game is won, just show a winning msg & render nothing else
+  if (hasWon) {
+    return <h2>You won</h2>
+  }
 
 
   // TODO make table board
