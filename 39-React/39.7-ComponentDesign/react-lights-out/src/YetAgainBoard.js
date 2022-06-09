@@ -48,6 +48,10 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   function hasWon() {
     // check the board in state to determine whether the player has won.
 
+    // this solution is much efficient
+    // return board.every(row => row.every(cell => !cell));
+
+
     // check all the boxes in "board"
     let totalItems = nrows * ncols;
     for (let rowcount = 0; rowcount < nrows; rowcount++) {
