@@ -47,6 +47,20 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
 
   function hasWon() {
     // check the board in state to determine whether the player has won.
+
+    // check all the boxes in "board"
+    let totalItems = nrows * ncols;
+    for (let rowcount = 0; rowcount < nrows; rowcount++) {
+      for (let colcount = 0; colcount < ncols; colcount++) {
+        if (board[rowcount][colcount] === false) {
+          totalItems--;
+        }
+      }
+      if (totalItems === 0) {
+        return true
+      }
+    }
+    return false;
   }
 
   function flipCellsAround(coord) {
@@ -78,8 +92,8 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   }
 
   // TODO if the game is won, just show a winning msg & render nothing else
-  if (hasWon) {
-    return <h2>You won</h2>
+  if (hasWon()) {
+    return <h2>You Won!</h2>
   }
 
 

@@ -13,7 +13,7 @@ function App() {
         nrows={6}
         ncols={6}
         chanceLightStartsOn={0.25}
-      // chanceLightStartsOn={-1}
+      // chanceLightStartsOn={1}
       />
     </div>
   );
