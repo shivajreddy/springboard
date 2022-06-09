@@ -31,17 +31,16 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   const [board, setBoard] = useState(createBoard());
 
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
-  // matrix of true or false
   function createBoard() {
     let initialBoard = [];
     // TODO: create array-of-arrays of true/false values
     for (let r = 0; r < nrows; r++) {
-      const row = [];
+      const rowOfTrueFalses = []
       for (let c = 0; c < ncols; c++) {
-        const flag = (Math.random() < chanceLightStartsOn);
-        row.push(flag);
+        const flag = Math.random() < chanceLightStartsOn;
+        rowOfTrueFalses.push(flag);
       }
-      initialBoard.push(row);
+      initialBoard.push(rowOfTrueFalses);
     }
     return initialBoard;
   }
@@ -52,56 +51,63 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
 
   function flipCellsAround(coord) {
     setBoard(oldBoard => {
-      const [y, x] = coord.split("-").map(Number);
+      const [r, c] = coord.split("-").map(Number);
 
-      const flipCell = (y, x, boardCopy) => {
+      const flipCell = (r, c, boardCopy) => {
         // if this coord is actually on board, flip it
 
-        if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
-          boardCopy[y][x] = !boardCopy[y][x];
+        if (c >= 0 && c < ncols && r >= 0 && r < nrows) {
+          boardCopy[r][c] = !boardCopy[r][c];
         }
       };
 
       // TODO: Make a (deep) copy of the oldBoard
+      const deepCopy = [...oldBoard];
 
       // TODO: in the copy, flip this cell and the cells around it
+      flipCell(r, c, deepCopy);
+      flipCell(r + 1, c, deepCopy);
+      flipCell(r - 1, c, deepCopy);
+      flipCell(r, c + 1, deepCopy);
+      flipCell(r, c - 1, deepCopy);
 
       // TODO: return the copy
+      return deepCopy;
     });
+    return coord;
   }
 
-  // if the game is won, just show a winning msg & render nothing else
+  // TODO if the game is won, just show a winning msg & render nothing else
 
-  // TODO
 
-  // make table board
+  // TODO make table board
 
-  // TODO
-  // 1. get the initial state. Which is set to a trueFalse Matrix
-
-  const gameBoard = [];
-
-  for (let r = 0; r < nrows; r++) {
-    const row = [];
-    for (let c = 0; c < ncols; c++) {
-      // console.log(board[r][c]);
+  const resultGameDiv = [];
+  for (let r = 0; r < board.length; r++) {
+    const rowElements = [];
+    for (let c = 0; c < board[0].length; c++) {
+      const item = board[r][c];
       const coord = `${r}-${c}`
-      row.push(
+      rowElements.push(
         <Cell
+          flipCellsAroundMe={() => flipCellsAround(coord)}    //Fix me
+          isLit={item}
           key={coord}
-          flipCellsAroundMe={() => coord}
-          isLit={board[r][c]}
-        />)
+        />
+      )
     }
-    gameBoard.push(<tr key={r}>{row}</tr>);
+    resultGameDiv.push(
+      <tr key={r}>{rowElements}</tr>
+    )
   }
 
   return (
     <table>
-      <tbody>{gameBoard}</tbody>
+      <tbody>
+        {resultGameDiv}
+      </tbody>
     </table>
   )
-
 }
 
 export default Board;
