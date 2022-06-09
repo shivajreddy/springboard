@@ -22,7 +22,6 @@ function Tasks({ tasks }) {
 
       {allTasks}
 
-
     </div>
   )
 }

@@ -1,12 +1,5 @@
 import React, { useState } from 'react'
 
-/*
-Controlled Components
-input -> has own state
-React has state also.
-So -> we will make React the incharge of the input state.
-*/
-
 // 1. start a state, usually an empty string
 //    in.other.words-> you set the value of a label, with a state.
 // 2. So the input's value is going to be the state. So initially an empty string.
@@ -15,52 +8,71 @@ So -> we will make React the incharge of the input state.
 //    events value, i.e.,
 
 
+/*  COMPUTED PROPERTY NAMES
+ES2015 -> New Feature
+let instructorCode = "elie";
+let instructorDate = {
+  [instructorCode] : "Elie Schooppik"
+};
+*/
+
+
+/*
+instead of multiple functions to evaluate stuff,
+you can have same function to evaluate
+*/
+
 
 function MyForm(props) {
-
 
   const [task, setTask] = useState("");
 
   const updateTheText = (e) => {
-    // console.log(e.target.value);
     const userText = e.target.value;
+    setTask(userText);
+  }
 
-    setTask((prevState) => {
-      // console.log(prevState);
-      return e.target.value;
-    })
+  const [email, setEmail] = useState("");
 
-    // check if ther is any number.
-    // if (/\d/.test(userText)) {
-    //   setTask("")
-    // }
-
+  const validateEmail = (e) => {
+    const userText = e.target.value;
+    setEmail(userText)
   }
 
   const handleSumbit = (e) => {
-
     e.preventDefault();
-
-    props.addTask(task);
-    setTask("");
-
+    if (task === "" || email === "") {
+      return false;
+    }
+    else {
+      props.addTask(task);
+      setTask("");
+    }
   }
-
-
-  const func21 = () => { console.log("hi") };
-  const func22 = () => { console.clear() };
 
   return (
     <div>
       <form>
-        <label className='MyForm-label'> Task</label>
+        <label htmlFor='tsk'>
+          Task
+        </label>
         <input
+          id='tsk'
           value={task}
           onChange={updateTheText}
-        // onKeyDown={func21}
-        // onKeyUp={func22}
         />
+
+        <label htmlFor='em'>
+          Email
+        </label>
+        <input
+          id='em'
+          value={email}
+          onChange={validateEmail}
+        />
+
         <button onClick={handleSumbit}>Add to List !</button>
+
       </form>
     </div>
   )
