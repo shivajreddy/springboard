@@ -1,0 +1,12 @@
+.Task {
+  color: black;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.Task .Finished {
+  color: gray;
+  text-decoration: line-through;
+}
