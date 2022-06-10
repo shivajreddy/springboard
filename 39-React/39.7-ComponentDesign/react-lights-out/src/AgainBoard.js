@@ -52,7 +52,7 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
 
   function flipCellsAround(coord) {
     setBoard(oldBoard => {
-      const [y, x] = coord.split("-").map(Number);
+      const [r, c] = coord.split("-").map(Number);
 
       const flipCell = (y, x, boardCopy) => {
         // if this coord is actually on board, flip it
@@ -63,8 +63,11 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
       };
 
       // TODO: Make a (deep) copy of the oldBoard
+      const copy = [...oldBoard];
 
       // TODO: in the copy, flip this cell and the cells around it
+      flipCell(y, x, copy);
+      flipCell()
 
       // TODO: return the copy
     });
