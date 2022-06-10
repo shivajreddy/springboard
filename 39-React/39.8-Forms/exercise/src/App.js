@@ -7,7 +7,6 @@ function App() {
 
       <h1>CBM</h1>
 
-
       <BoxList />
 
     </div>
