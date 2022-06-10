@@ -92,7 +92,7 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
       row.push(
         <Cell
           key={coord}
-          flipCellsAroundMe={() => 21}
+          flipCellsAroundMe={() => coord}
           isLit={board[r][c]}
         />)
     }
