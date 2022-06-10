@@ -21,30 +21,30 @@ you can have same function to evaluate
 */
 
 
-function MyForm(props) {
+function MyForm({ addTask }) {
 
-  const [task, setTask] = useState("");
+  const INITIALSTATE = {
+    "task": "",
+    "email": ""
+  }
+  const [formData, setFormData] = useState(INITIALSTATE);
 
-  const updateTheText = (e) => {
-    const userText = e.target.value;
-    setTask(userText);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value,
+    }))
   }
 
-  const [email, setEmail] = useState("");
-
-  const validateEmail = (e) => {
-    const userText = e.target.value;
-    setEmail(userText)
-  }
-
-  const handleSumbit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (task === "" || email === "") {
-      return false;
-    }
-    else {
-      props.addTask(task);
-      setTask("");
+    if (formData.task === "" || formData.email === "") {
+      return false
+    } else {
+      // props.addTask(formData.task, formData.email);
+      addTask({ ...formData })
+      setFormData(INITIALSTATE);
     }
   }
 
@@ -56,8 +56,9 @@ function MyForm(props) {
         </label>
         <input
           id='tsk'
-          value={task}
-          onChange={updateTheText}
+          name="task"
+          value={formData.task}
+          onChange={handleChange}
         />
 
         <label htmlFor='em'>
@@ -65,11 +66,12 @@ function MyForm(props) {
         </label>
         <input
           id='em'
-          value={email}
-          onChange={validateEmail}
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
         />
 
-        <button onClick={handleSumbit}>Add to List !</button>
+        <button onClick={handleSubmit}>Add to List !</button>
 
       </form>
     </div>
