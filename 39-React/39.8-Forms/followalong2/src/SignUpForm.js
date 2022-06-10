@@ -1,4 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useFormik } from 'formik';
+
+
+const npmBear = (
+  <img width={100} alt="" role="presentation" src="https://static.npmjs.com/c9e19250d48d66f0e9c70c9b3991bbdb.png" >
+  </img>
+)
+
+
 
 function SignUpForm() {
 
@@ -7,6 +16,14 @@ function SignUpForm() {
     formName: "",
     formEmail: ""
   };
+
+  const formik = useFormik({
+    initialValues: {
+      formName: "",
+      formEmail: ""
+    }
+  }
+  );
 
   const [formData, setFormData] = useState(INITIALSTATE);
 
@@ -35,13 +52,16 @@ function SignUpForm() {
 
       <div>
 
+        {npmBear}
+
         <form>
 
           <label htmlFor='name' > Name </label>
           <input
             id="name"
             name="formName"
-            value={formData.formName}
+            // value={formData.formName}
+            value={formik.values.formName}
             onChange={handleChange}
           />
 
@@ -49,7 +69,8 @@ function SignUpForm() {
           <input
             id="email"
             name="formEmail"
-            value={formData.formEmail}
+            // value={formData.formEmail}
+            value={formik.values.formEmail}
             onChange={handleChange}
           />
 

@@ -1,10 +1,16 @@
 import './App.css';
+import BoxList from './BoxList';
 
 function App() {
   return (
-    <>
-      <h1>React App</h1>
-    </>
+    <div style={{ textAlign: "center" }}>
+
+      <h1>CBM</h1>
+
+
+      <BoxList />
+
+    </div>
   );
 }
 
