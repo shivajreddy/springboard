@@ -7,7 +7,6 @@ import React, { useState } from 'react'
 // 4. This function will take the event as input. And event.target.value will give the
 //    events value, i.e.,
 
-
 /*  COMPUTED PROPERTY NAMES
 ES2015 -> New Feature
 let instructorCode = "elie";
@@ -15,7 +14,6 @@ let instructorDate = {
   [instructorCode] : "Elie Schooppik"
 };
 */
-
 
 /*
 instead of multiple functions to evaluate stuff,
