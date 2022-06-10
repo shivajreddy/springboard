@@ -1,8 +1,12 @@
 import React from 'react'
 
-function Task({ value }) {
+function Task({ value, email }) {
   return (
-    <h1>{value}</h1>
+    <div>
+      <h3>{value}</h3>
+      <h3> {email} </h3>
+    </div>
+
 
   )
 }
