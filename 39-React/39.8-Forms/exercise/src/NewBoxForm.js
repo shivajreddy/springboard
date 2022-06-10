@@ -17,7 +17,7 @@ When each Box component is displayed, add a button with the text of of “X” n
 
 */
 
-function NewBoxForm() {
+function NewBoxForm({ addBox }) {
 
   const INITIAL_STATE = {
     "color": "",
@@ -29,6 +29,9 @@ function NewBoxForm() {
 
   function handleChange(e) {
     const { name, value } = e.target;
+
+    // Validation of input. Allow only text in color.
+    // only numbers in width, height
 
     // set the state
     setFormData(prevData => {
@@ -46,6 +49,7 @@ function NewBoxForm() {
       return false;
     } else {
       // Call the function to add new box component
+      addBox(formData.color, formData.width, formData.height);
       setFormData(INITIAL_STATE);
     }
   }

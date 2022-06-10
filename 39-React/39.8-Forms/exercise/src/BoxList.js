@@ -7,26 +7,26 @@ import { v4 as uuid } from 'uuid'
 function BoxList() {
 
   // Generate boxes
-  const box1 = {
-    color: "pink",
-    width: "100px",
-    height: "100px"
-  }
+  // const box1 = {
+  //   color: "pink",
+  //   width: "100",
+  //   height: "100"
+  // }
 
-  const box2 = {
-    color: "pink",
-    width: "100px",
-    height: "100px"
-  }
+  // const box2 = {
+  //   color: "pink",
+  //   width: "100",
+  //   height: "100"
+  // }
 
   // state for managing all boxes
-  const [boxes, setBoxes] = useState([box1, box2]);
+  const [boxes, setBoxes] = useState([]);
 
   // Create Box component and add it to state, set it.
   const addBox = (c, w, h) => {
     const newBoxObject = {
       color: c,
-      widht: w,
+      width: w,
       height: h
     };
 
@@ -51,12 +51,15 @@ function BoxList() {
     boxesDiv.push(boxComponent);
   })
 
+
   return (
     <div style={{ textAlign: "center" }}>
 
-      <NewBoxForm />
+
+      <NewBoxForm addBox={addBox} />
 
       {boxesDiv}
+
 
     </div>
   )
