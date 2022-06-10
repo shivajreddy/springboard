@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function ToDoForm() {
+function ToDoForm({ addTask }) {
 
   const INITIAL_STATE = {
     task: ""
@@ -20,8 +20,8 @@ function ToDoForm() {
   function handleSubmit(e) {
     e.preventDefault();
     if (formData.task !== "") {
-      // add the task
-      console.log(formData.task);
+      // call the function that adds this task to the parent state
+      addTask(formData.task)
 
       setFormData(INITIAL_STATE);
     }

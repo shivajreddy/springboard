@@ -12,31 +12,57 @@ function ToDoList() {
     status: false
   }
 
-  const [toDoList, setToDoList] = useState([sampleTask]); // starting state is empty array.
+  const [toDoList, setToDoList] = useState([]); // starting state is empty array.
 
   function addTask(taskText) {
     const newTasks = [...toDoList];
-    newTasks.push(taskText);
+    const id = uuid();
+    const newTaskObject = {
+      id: id,
+      taskText: taskText,
+      status: false
+    }
+    newTasks.push(newTaskObject);
     setToDoList(newTasks);
   }
 
+  function deleteTask(id) {
 
+    setToDoList(prevTasks => {
+
+      const newTasks = [...prevTasks];
+
+      // get the idx of the task that is to be deleted
+      let task_idx;
+      newTasks.map((task, idx) => {
+        if (task.id === id) {
+          task_idx = idx
+        }
+      })
+      newTasks.splice(task_idx, 1); // delete the task
+      return newTasks;
+    })
+
+  }
+
+
+  // Create array of Task Components based off state objects
   const todoListDiv = [];
   toDoList.map(taskObject => {
-    const id = uuid();
     todoListDiv.push(
       <Task
-        key={id}
-        id={id}
+        key={taskObject.id}
+        id={taskObject.id}
         taskText={taskObject.taskText}
         status={taskObject.status}
+        deleteTask={deleteTask}
       />
     )
   })
 
   return (
     <div>
-      <ToDoForm />
+      <ToDoForm addTask={addTask} />
       {todoListDiv}
     </div>
   )

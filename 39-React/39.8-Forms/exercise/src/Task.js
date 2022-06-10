@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Task.css'
 
-function Task({ id, taskText }) {
+function Task({ id, taskText, deleteTask }) {
 
   const [status, setStatus] = useState(false);
 
@@ -19,7 +19,7 @@ function Task({ id, taskText }) {
         onChange={handleChange}
       />
       <h4 className={classes} >{taskText}</h4>
-      <button>X</button>
+      <button onClick={() => deleteTask(id)}>X</button>
 
     </div>
   )
