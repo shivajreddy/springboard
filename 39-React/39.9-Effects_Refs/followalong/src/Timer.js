@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
-function Timer() {
-  const [timer, setTimer] = useState(0);
+function Timer({ start = 0, color = "cyan" }) {
+  const [timer, setTimer] = useState(start);
 
   function ChangeTimer() {
     setInterval(() => {
@@ -10,7 +10,7 @@ function Timer() {
   }
 
   // DOM changes after 2 seconds, not after 1 second
-  // useEffect(ChangeTimer, []);
+  useEffect(ChangeTimer, [start]);
 
   // DOM changes after 2 seconds, not after 1 second
   // useEffect(() => {
@@ -22,7 +22,7 @@ function Timer() {
 
   return (
     <>
-      <h2> Time: {timer} </h2>
+      <h2 style={{ backgroundColor: color }}> Time: {timer} </h2>
     </>
   )
 }
