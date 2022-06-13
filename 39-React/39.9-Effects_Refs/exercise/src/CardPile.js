@@ -14,7 +14,7 @@ function CardPile() {
   const [cards, setCards] = useState([]);
 
   const [autoDraw, setAutoDraw] = useState(false);
-  const [intervalId, setIntervalId] = useState(null);
+  // const [intervalId, setIntervalId] = useState(null);
 
   async function newDeck() {
     const res = await axios.get(baseUrl);
@@ -47,24 +47,32 @@ function CardPile() {
   // Auto Draw
   // Should only run once.
   function runAutoDraw() {
+    setAutoDraw(!autoDraw);
+    let newId;
     if (autoDraw) {
       console.log("will clear if interval exists, else start interval");
-      let newId;
-      if (!intervalId) {
-        newId = setInterval(() => {
-          console.log("running interval", newId);
-        }, 1000);
-        setIntervalId(newId);
-      } else {
-        console.log("clearingL", intervalId);
-        clearInterval(newId);
-        // setIntervalId(null);
-      }
-      setAutoDraw(!autoDraw);
+      newId = setInterval(() => {
+        console.log("running interval", newId);
+      }, 1000);
     }
+    else {
+      console.log("clearingL", newId);
+      // clearInterval(newId);
+      // setIntervalId(null);
+      return () => {
+        clearInterval(newId);
+      }
+    }
+    // setAutoDraw(!autoDraw);
   }
 
-  useEffect(runAutoDraw, [autoDraw])
+  // clean up fn
+  function cleanIntervaFn() {
+    console.log("clean wtf")
+
+  }
+
+  useEffect(cleanIntervaFn, [autoDraw])
 
   const handleSubmit = () => newDeck();
 
@@ -75,8 +83,9 @@ function CardPile() {
         {cardsDiv}
       </div>
       <div>
-        {deckId && <button onClick={drawCard}>Draw a single Card</button>}
-        {deckId && <button onClick={() => setAutoDraw(!autoDraw)}>Auto Draw</button>}
+        {deckId && <button onClick={drawCard}>Draw Card</button>}
+        {deckId && <button onClick={runAutoDraw}>Auto Draw</button>}
+        {/* {deckId && <button onClick={() => setAutoDraw(!autoDraw)}>Auto Draw</button>} */}
       </div>
 
       {!deckId && <button onClick={handleSubmit}>Open a Deck</button>}
