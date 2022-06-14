@@ -68,11 +68,18 @@ function CardPile() {
 
   // clean up fn
   function cleanIntervaFn() {
-    console.log("clean wtf")
-
+    // console.log('hi')
+    // return console.log("clean")
   }
 
-  useEffect(cleanIntervaFn, [autoDraw])
+
+  // useEffect(cleanIntervaFn, [autoDraw])
+  useEffect(() => {
+    /*
+    Query logic
+    */
+    console.log('i fire once');
+  }, []);
 
   const handleSubmit = () => newDeck();
 
