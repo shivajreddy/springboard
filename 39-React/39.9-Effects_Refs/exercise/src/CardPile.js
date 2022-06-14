@@ -13,7 +13,7 @@ function CardPile() {
 
   const [cards, setCards] = useState([]);
 
-  const [autoDraw, setAutoDraw] = useState(false);
+  const [autoDrawId, setAutoDrawId] = useState(null);
   // const [intervalId, setIntervalId] = useState(null);
 
   async function newDeck() {
@@ -27,7 +27,7 @@ function CardPile() {
   // Add Card components to cardsDiv only if cards is not null
   if (cards) {
     cards.map(cardObject => {
-      const cardComponent = <Card key={cardObject.code} code={cardObject.code} imageUrl={cardObject.img} />
+      const cardComponent = <Card key={cardObject.code} code={cardObject.code} imageUrl={cardObject.img} />;
       cardsDiv.push(cardComponent);
     })
   }
@@ -47,34 +47,38 @@ function CardPile() {
   // Auto Draw
   // Should only run once.
   function runAutoDraw() {
-    setAutoDraw(!autoDraw);
-    let newId;
-    if (autoDraw) {
-      console.log("will clear if interval exists, else start interval");
-      newId = setInterval(() => {
-        console.log("running interval", newId);
-      }, 1000);
+    // set a new interval, assign that id to the state
+    if (!autoDrawId) {
+      const id = setInterval(() => {
+        drawCard();
+      }, 500);
+      setAutoDrawId(id);
+    } else {
+      console.log("going to shutdown", autoDrawId);
+      clearInterval(autoDrawId);
+      setAutoDrawId(null);
     }
-    else {
-      console.log("clearingL", newId);
-      // clearInterval(newId);
-      // setIntervalId(null);
-      return () => {
-        clearInterval(newId);
-      }
-    }
-    // setAutoDraw(!autoDraw);
+    // toggle the autodraw status
   }
 
-  // clean up fn
-  function cleanIntervaFn() {
-    console.log("clean wtf")
-
+  // Cleaning function -> after every rendering check if 52 cards are drawn or not
+  function cleanFunction() {
+    console.log("length now is", cards.length);
+    if (cards.length === 52) {
+      console.log("oh no stop");
+      // setCards([]);
+      clearInterval(autoDrawId);
+      setAutoDrawId(null);
+      // setDeckId(null);
+    }
   }
 
-  useEffect(cleanIntervaFn, [autoDraw])
+  useEffect(cleanFunction, [cards, autoDrawId])
 
-  const handleSubmit = () => newDeck();
+  // ref to the button "Open a Deck" and change the name to "Open new deck"
+
+
+  // const handleSubmit = () => newDeck();
 
   return (
     <div className='CardPile'>
@@ -82,13 +86,12 @@ function CardPile() {
       <div className='CardPile-Deck'>
         {cardsDiv}
       </div>
-      <div>
+      <div className='CardPile-Controls'>
         {deckId && <button onClick={drawCard}>Draw Card</button>}
         {deckId && <button onClick={runAutoDraw}>Auto Draw</button>}
-        {/* {deckId && <button onClick={() => setAutoDraw(!autoDraw)}>Auto Draw</button>} */}
+        {!deckId && <button onClick={newDeck}>Open a Deck</button>}
       </div>
 
-      {!deckId && <button onClick={handleSubmit}>Open a Deck</button>}
 
     </div>
   )
