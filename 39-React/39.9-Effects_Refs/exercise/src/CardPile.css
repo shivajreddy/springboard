@@ -12,3 +12,7 @@
   justify-content: center;
   align-items: center;
 }
+
+.CardPile-Controls {
+  margin-top: 80px;
+}
