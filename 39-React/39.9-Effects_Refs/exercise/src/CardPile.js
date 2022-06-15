@@ -61,22 +61,6 @@ function CardPile() {
     // toggle the autodraw status
   }
 
-<<<<<<< HEAD
-  // clean up fn
-  function cleanIntervaFn() {
-    // console.log('hi')
-    // return console.log("clean")
-  }
-
-
-  // useEffect(cleanIntervaFn, [autoDraw])
-  useEffect(() => {
-    /*
-    Query logic
-    */
-    console.log('i fire once');
-  }, []);
-=======
   // Cleaning function -> after every rendering check if 52 cards are drawn or not
   function cleanFunction() {
     console.log("length now is", cards.length);
@@ -90,7 +74,6 @@ function CardPile() {
   }
 
   useEffect(cleanFunction, [cards, autoDrawId])
->>>>>>> refs/remotes/origin/main
 
   // ref to the button "Open a Deck" and change the name to "Open new deck"
 
