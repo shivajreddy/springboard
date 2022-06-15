@@ -4,13 +4,13 @@ import './Card.css';
 function Card({ code, imageUrl }) {
 
   // api image size "226 x 314"
-  const sampleData = {
-    code: 'QC',
-    image: 'https://deckofcardsapi.com/static/img/QC.png',
-    // images: {… },
-    value: 'QUEEN',
-    suit: 'CLUBS'
-  }
+  // const sampleData = {
+  //   code: 'QC',
+  //   image: 'https://deckofcardsapi.com/static/img/QC.png',
+  //   // images: {… },
+  //   value: 'QUEEN',
+  //   suit: 'CLUBS'
+  // }
 
 
   const angle = Math.random() * 90 - 45;
