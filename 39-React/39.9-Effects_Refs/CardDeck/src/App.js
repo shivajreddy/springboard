@@ -1,16 +1,12 @@
 import './App.css';
-// import CardPile from './CardPile';
-import Table from './Table';
+import Deck from './Deck'
 
 function App() {
   return (
-    <>
-      {/* <h1 style={{ textAlign: 'center' }}>Card Game</h1> */}
-      <h1 style={{ textAlign: 'center' }}>.</h1>
-
-      <Table />
-
-    </>
+    <div>
+      <h1>Card Deck</h1>
+      <Deck />
+    </div>
   );
 }
 
