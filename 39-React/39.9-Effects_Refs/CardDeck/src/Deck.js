@@ -2,13 +2,13 @@ import React, { useState, useEffect, useRef } from 'react'
 import Card from './Card'
 import axios from 'axios'
 
-function Deck({maxCards}) {
+function Deck({ maxCards }) {
 
   const [deckId, setDeckId] = useState(null);
   const [cards, setCards] = useState([]);
   const [autoDraw, setAutoDraw] = useState(false);
   useEffect(startAutoDraw, [autoDraw]);
-  useEffect(checkTotalCards, [cards]);
+  useEffect(checkTotalCards, [cards, maxCards]);
   const intervalId = useRef();
 
   const baseUrl = 'http://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1'
