@@ -9,8 +9,8 @@ function Card({ image, idx, transform }) {
     position: "absolute",
     "zIndex": idx,
     transform: transform,
-    marginTop: "80px",
-    marginLeft : "100px"
+    marginTop: "180px",
+    marginLeft: "100px"
   }
   return (
     <div className="Card" style={{ ...styles }}>
