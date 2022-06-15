@@ -29,6 +29,7 @@ function CardPile() {
     cards.map(cardObject => {
       const cardComponent = <Card key={cardObject.code} code={cardObject.code} imageUrl={cardObject.img} />;
       cardsDiv.push(cardComponent);
+      return null;
     })
   }
 
