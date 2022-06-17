@@ -1,0 +1,20 @@
+.Nav {
+  display: flex;
+}
+
+.Nav-Link {
+  background-color: darkslateblue;
+  padding: 20px;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  text-decoration: none;
+}
+
+.Nav a.active {
+  font-weight: bold;
+  text-decoration-line: underline;
+}
