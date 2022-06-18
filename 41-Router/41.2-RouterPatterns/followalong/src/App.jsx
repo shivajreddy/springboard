@@ -21,6 +21,7 @@ function App() {
           <Route path="product">
             <Route path="1" element={<Shoe id={id} />} />
             <Route path="2" element={<Sickle />} />
+            <Route path="2" element={<Sickle />} />
           </Route>
           <Route path="*" element={<Error404 />} />
         </Routes>
