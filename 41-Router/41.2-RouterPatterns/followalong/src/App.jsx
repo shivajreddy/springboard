@@ -6,6 +6,7 @@ import Products from "./pages/Products";
 import Shoe from "./pages/Shoe";
 import Sickle from "./pages/Sickle";
 import Error404 from "./pages/Error404";
+import Gif from "./pages/Gif";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path="2" element={<Sickle />} />
           </Route>
           <Route path="*" element={<Error404 />} />
+          <Route path="/gif/:searchTerm" element={<Gif />} />
         </Routes>
 
       </BrowserRouter>
