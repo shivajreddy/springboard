@@ -9,6 +9,7 @@ function Gif() {
   let navigate = useNavigate();
   const { searchTerm } = useParams();
   const [src, setSrc] = useState(null);
+  const [term, setTerm] = useState(null);
 
   useEffect(() => {
     async function getGif(searchTerm) {
@@ -16,14 +17,16 @@ function Gif() {
       const random = Math.floor(Math.random() * response.data.data.length)
       setSrc(response.data.data[random].images.original.url);
     };
-    getGif(searchTerm);
-  }, [searchTerm]);
+    getGif(term);
+  }, [term]);
 
   const img = src ? <img src={src} alt={searchTerm} /> : null;
 
   const searchGif = (e) => {
+    console.log('running searchGif function')
     e.preventDefault();
     const searchTerm = e.target[0].value;
+    setTerm(searchTerm);
     navigate(`/gif/${searchTerm}`)
   }
 

@@ -27,7 +27,6 @@ function App() {
           <Route path="*" element={<Error404 />} />
           <Route path="/gif/:searchTerm" element={<Gif />} />
         </Routes>
-
       </BrowserRouter>
     </div>
   );
