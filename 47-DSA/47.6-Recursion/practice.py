@@ -1,19 +1,9 @@
-#1. Product of nums
-# Write a function that finds the product of an array of numbers:
-def product(arr):
+# practise 1
 
-  # base condition
-  if arr == []:
-    return 1
-  
-  last = arr.pop()
+# stack frame
+# call stack
 
-  return product(arr)*last
 
-# product([2, 3, 4])   // 24
-# print(product([2,3,4,5])) // 120
-
-#2. Longest Word
 def longest(arr):
 
   # base condition
@@ -24,7 +14,7 @@ def longest(arr):
 
   return max(size, longest(arr))
 
-print(longest(["hello", "hi", "hola"]))
+# print(longest(["hello", "hi", "hola"]))   // 5
 
 # call stack
 #* longest([]) -> 0
@@ -46,6 +36,5 @@ def everyOther(str, n, newStr):
   # recursive call
   return everyOther(str, n+2, newStr)
 
-# print(everyOther("hello", 0, ""))  // "hlo"
-
+print(everyOther("hello", 0, ""))
 
