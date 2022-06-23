@@ -2,7 +2,7 @@
 # Write a function that finds the product of an array of numbers:
 # product([2, 3, 4])   // 24
 
-def product(arr):
+def product2(arr):
   # base condition
   if arr == []:
     return 1
@@ -16,4 +16,15 @@ def product(arr):
   return result
 
 
-product([2,3,4,5])
+def product(arr):
+
+  # base condition
+  if arr == []:
+    return 1
+  
+  last = arr.pop()
+
+  return product(arr)*last
+
+
+print(product([2,3,4,5]))
