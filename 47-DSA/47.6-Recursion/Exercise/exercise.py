@@ -24,7 +24,7 @@ def longest(arr):
 
   return max(size, longest(arr))
 
-print(longest(["hello", "hi", "hola"]))
+# print(longest(["hello", "hi", "hola"]))
 
 # call stack
 #* longest([]) -> 0
@@ -33,7 +33,7 @@ print(longest(["hello", "hi", "hola"]))
 #* longest(["hello", "hi", "hola"]) -> max(5, 4) -> 5
 
 
-# Every other character
+#3. Every other character
 
 def everyOther(str, n, newStr):
 
@@ -49,3 +49,11 @@ def everyOther(str, n, newStr):
 # print(everyOther("hello", 0, ""))  // "hlo"
 
 
+def alternate(str, idx=0, result=""):
+  if idx >= len(str):
+    return result
+  result += str[idx]
+  return alternate(str, idx+2, result)
+
+print(alternate("shiva", 0, ""))
+print(alternate("shivaq", 0, ""))

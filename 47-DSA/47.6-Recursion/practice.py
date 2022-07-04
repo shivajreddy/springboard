@@ -31,10 +31,70 @@ def everyOther(str, n, newStr):
   if n >= len(str):
     return newStr
   
-  newStr += str[n]
+  n += 1
+  if n % 2 == 0:
+    newStr += str[n]
+
+# recursive call
+  return everyOther(str, n, newStr)
+
+# print(everyOther("hello", -1, ""))
+
+
+
+# palindrome
+
+def palindrome(str, start, end):
+
+  if start >= end:
+    return True
+
+  # check for false
+  # print("checking ", str[start], "vs", str[end])
+  if str[start] != str[end]:
+    return False
+  
+  start += 1
+  end -= 1
 
   # recursive call
-  return everyOther(str, n+2, newStr)
+  palindrome(str, start, end)
 
-print(everyOther("hello", 0, ""))
+  return True
+
+
+# print(palindrome("tacocat", 0, 6))
+# print(palindrome("tacodog", 0, 6))
+# print(palindrome("appappa", 0, 6))
+
+
+def isPalindrome(str, idx = 0):
+
+  start = idx
+  end = len(str) - idx -1
+
+  if start >= end:
+    return True
+  
+  if str[start] != str[end]:
+    return False
+  
+  isPalindrome(str, idx+1)
+  return True 
+
+print(isPalindrome("tacocat"))
+print(isPalindrome("tacodog"))
+print(isPalindrome("appappa"))
+
+def palindrome(str, idx=0):
+  s = idx
+  e = len(str) - 1
+
+  if s >= e:
+    return True
+
+  if str[s] != str[e]:
+    return False
+  
+  return palindrome(str, idx+1)
 
