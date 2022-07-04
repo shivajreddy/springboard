@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import uuid from "uuid";
+import { v4 as uuid } from "uuid";
 import axios from "axios";
 import PlayingCard from "./PlayingCard";
 import "./PlayingCardList.css";
@@ -12,7 +12,7 @@ function CardTable() {
     const response = await axios.get(
       "https://deckofcardsapi.com/api/deck/new/draw/"
     );
-    setCards(cards => [...cards, { ...response.data, id: uuid() }]);
+    setCards((cards) => [...cards, { ...response.data, id: uuid() }]);
   };
   return (
     <div className="PlayingCardList">
@@ -21,7 +21,7 @@ function CardTable() {
         <button onClick={addCard}>Add a playing card!</button>
       </div>
       <div className="PlayingCardList-card-area">
-        {cards.map(cardData => (
+        {cards.map((cardData) => (
           <PlayingCard key={cardData.id} front={cardData.cards[0].image} />
         ))}
       </div>
