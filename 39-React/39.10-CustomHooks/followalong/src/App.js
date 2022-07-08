@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -81,23 +79,17 @@ function RandomAge() {
   );
 }
 
->>>>>>> 76dcadf9bd0bcc2646449f2751708710c867b95c
 function App() {
   const [state, toggleState] = useToggleState();
   const [isDarkMode, setIsDarkMode] = useToggleState(true);
   return (
     <div>
-<<<<<<< HEAD
-      <h1>follow</h1>
-      <h1>follow</h1>
-=======
       <h2>{state ? "true" : "false"}</h2>
       <h2>{isDarkMode ? "DarkMode" : "LightMode"}</h2>
       <button onClick={toggleState}>change</button>
       <button onClick={setIsDarkMode}>Toggle Theme</button>
       <Form />
       <RandomAge />
->>>>>>> 76dcadf9bd0bcc2646449f2751708710c867b95c
     </div>
   );
 }
