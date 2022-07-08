@@ -36,8 +36,8 @@ function useLocalStorage(key, defaultValue = "") {
     return typeof defaultValue === "function" ? defaultValue() : defaultValue;
   });
   useEffect(() => {
-    localStorage.setItem(key);
-  }, [key]);
+    localStorage.setItem(key, state);
+  }, [key, state]);
   return [state, setState];
 }
 
