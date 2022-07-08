@@ -1,9 +1,9 @@
+import React from "react";
+import CardTable from "./CardTable";
 
 function App() {
   return (
-    <div>
-      <h1>React</h1>
-    </div>
+    <CardTable />
   );
 }
 
