@@ -1,7 +1,8 @@
 import React from "react";
+import MadLibs from "./MadLibs";
 
 function App() {
-  return <h1>MadLibs</h1>;
+  return <MadLibs />;
 }
 
 export default App;
