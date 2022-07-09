@@ -12,8 +12,9 @@ function useFlip(defaultFlipState = true) {
 }
 
 // Custom useAxios Hook
-function useAxios(url) {
-  const [state, setState] = React.useState([]);
+function useAxios(keyForLs, url) {
+  // const [state, setState] = React.useState([]);
+  const [state, setState] = useLocalStorage(keyForLs);
 
   async function addState(pokemonName) {
     if (pokemonName) {
@@ -31,6 +32,23 @@ function useAxios(url) {
   }
 
   return [state, addState, resetState];
+}
+
+// Custom useLocalStorage Hook
+function useLocalStorage(key, defaultValue = []) {
+  const [state, setState] = React.useState(() => {
+    const localValue = localStorage.getItem(key);
+    if (localValue) {
+      return JSON.parse(localValue);
+    }
+    return defaultValue;
+  });
+
+  React.useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(state));
+  }, [key, state]);
+
+  return [state, setState];
 }
 
 export { useFlip, useAxios };

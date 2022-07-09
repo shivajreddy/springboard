@@ -8,6 +8,7 @@ import { useAxios } from "./hooks";
  * or from a dropdown of available pokemon. */
 function PokeDex() {
   const [pokemon, addPokemon, clearPokemon] = useAxios(
+    "pokedex-ls",
     `https://pokeapi.co/api/v2/pokemon/`
   );
   return (

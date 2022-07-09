@@ -7,7 +7,7 @@ import { useAxios } from "./hooks";
  * Can also add a new card at random. */
 function CardTable() {
   const baseUrl = "https://deckofcardsapi.com/api/deck/new/draw/";
-  const [cards, addCard, resetCards] = useAxios(baseUrl);
+  const [cards, addCard, resetCards] = useAxios("playing-cards-ls", baseUrl);
   return (
     <div className="PlayingCardList">
       <h3>Pick a card, any card!</h3>
