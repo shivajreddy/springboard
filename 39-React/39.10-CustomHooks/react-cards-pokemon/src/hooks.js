@@ -15,9 +15,15 @@ function useFlip(defaultFlipState = true) {
 function useAxios(url) {
   const [state, setState] = React.useState([]);
 
-  async function addState() {
-    const response = await axios.get(url);
-    setState((prevState) => [...prevState, { ...response.data, id: uuid() }]);
+  async function addState(pokemonName) {
+    if (pokemonName) {
+      const response = await axios.get(`${url}${pokemonName}`);
+      setState((prevState) => [...prevState, { ...response.data, id: uuid() }]);
+    } else {
+      const response = await axios.get(url);
+      console.log("this is the response from useAxios hook", response);
+      setState((prevState) => [...prevState, { ...response.data, id: uuid() }]);
+    }
   }
 
   function resetState() {

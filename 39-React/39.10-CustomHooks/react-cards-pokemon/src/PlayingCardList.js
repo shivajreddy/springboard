@@ -12,9 +12,7 @@ function CardTable() {
     <div className="PlayingCardList">
       <h3>Pick a card, any card!</h3>
       <div>
-        <button onClick={() => addCard({ type: "cards-api" })}>
-          Add a playing card!
-        </button>
+        <button onClick={() => addCard()}>Add a playing card!</button>
         <button onClick={resetCards}>Reset Cards</button>
       </div>
       <div className="PlayingCardList-card-area">
