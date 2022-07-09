@@ -5,7 +5,7 @@ import { useFlipCard } from "./hooks";
 
 /* Renders a single playing card. */
 function PlayingCard({ front, back = backOfCard }) {
-  const [isFacingUp, flipCard] = useFlipCard(false);
+  const [isFacingUp, flipCard] = useFlipCard(true);
 
   const res = useFlipCard();
   return (

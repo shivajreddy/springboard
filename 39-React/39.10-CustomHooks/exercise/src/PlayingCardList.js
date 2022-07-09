@@ -7,9 +7,10 @@ import { useAxios } from "./hooks";
 
 /* Renders a list of playing cards.
  * Can also add a new card at random. */
-function CardTable() {
+function CardTable_MYOLD() {
   // const [cards, setCards] = useState([]);
-  const [addCard, cards] = useAxios(
+  const [cards, addCard, clearCard] = useAxios(
+    "cards",
     "https://deckofcardsapi.com/api/deck/new/draw/"
   );
   // const addCard = async () => {
@@ -25,8 +26,33 @@ function CardTable() {
         <button onClick={addCard}>Add a playing card!</button>
       </div>
       <div className="PlayingCardList-card-area">
-        {cards.map((cardData) => (
+        {/* {cards.map((cardData) => (
           <PlayingCard key={cardData.id} front={cardData.cards[0].image} />
+        ))} */}
+      </div>
+    </div>
+  );
+}
+
+function formatCard(data) {
+  return {
+    image: data.cards[0].image,
+    id: uuid(),
+  };
+}
+
+function CardTable() {
+  const [cards, addCard, clearCards] = useAxios();
+  return (
+    <div className="PlayingCardList">
+      <h3>Pick a card, any card!</h3>
+      <div>
+        <button onClick={addCard}>Add a playing card!</button>
+        <button onClick={clearCards}>Clear the table</button>
+      </div>
+      <div className="PlayingCardList-card-area">
+        {cards.map((card) => (
+          <PlayingCard key={card.id} front={card.image} />
         ))}
       </div>
     </div>

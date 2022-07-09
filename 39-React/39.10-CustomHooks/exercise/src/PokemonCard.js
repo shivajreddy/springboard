@@ -4,7 +4,7 @@ import { useFlipCard } from "./hooks";
 
 /* Renders a single pokemon card. */
 function PokemonCard({ front, back, name, stats }) {
-  const [isFacingUp, flipCard] = useFlipCard(false);
+  const [isFacingUp, flipCard] = useFlipCard(true);
   return (
     <div onClick={flipCard} className="PokemonCard Card">
       {isFacingUp ? (
@@ -15,7 +15,7 @@ function PokemonCard({ front, back, name, stats }) {
             <ul className="PokemonCard-stats">
               {stats.map((stat) => (
                 <li key={stat.name}>
-                  <em>{stat.name}</em>: {stat.value}
+                  <i>{stat.name}</i>: {stat.value}
                 </li>
               ))}
             </ul>

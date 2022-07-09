@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import { v4 as uuid } from "uuid";
 
@@ -6,25 +6,6 @@ function useFlipCard(defaultState = false) {
   const [status, setStatus] = useState(defaultState);
   const flipCard = () => setStatus((status) => !status);
   return [status, flipCard];
-}
-
-function useAxios(key, url) {
-  const [pokemon, setPokemon] = useState([]);
-  const addPokemon = async (name) => {
-    const response = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/${name}/`
-    );
-    setPokemon((pokemon) => [...pokemon, { ...response.data, id: uuid() }]);
-  };
-
-  const [val, setVal] = useLocalStorage(key);
-
-  const [data, setData] = useState([]);
-  const addCard = async () => {
-    const response = await axios.get(url);
-    setData((cards) => [...cards, { ...response.data, id: uuid() }]);
-  };
-  return [addCard, data];
 }
 
 function useLocalStorage(key, defaultValue = "") {
@@ -41,20 +22,70 @@ function useLocalStorage(key, defaultValue = "") {
   return [state, setState];
 }
 
-export { useFlipCard, useAxios };
+function reducer(state, action) {
+  switch (action.type) {
+    case "card-api":
+      // const [responses, setResponses] = useState([]);
+      async function addCard() {
+        const response = await axios.get(
+          "https://deckofcardsapi.com/api/deck/new/draw/"
+        );
+        const newCardObject = {
+          id: response.data.deck_id,
+          image: response.data.cards[0].image,
+        };
+        return () => [...state, newCardObject];
+      }
+      return addCard();
 
-function useSPRINGBOARDAxios(keyInLS, baseUrl) {
-  const [responses, setResponses] = useLocalStorage(keyInLS);
+    case "pokemon-api":
+      console.log("reached pokemon reducer");
+      // const [pokemon, setPokemon] = useState([]);
+      const url = `https://pokeapi.co/api/v2/pokemon/${action.pokemon_name}/`;
+      const addPokemon = async () => {
+        const response = await axios.get(url);
+        // setPokemon((pokemon) => [...pokemon, { ...response.data, id: uuid() }]);
+        return [...state, { ...response.data }];
+      };
+      return addPokemon();
 
-  const addResponseData = async (
-    formatter = (data) => data,
-    restOfUrl = ""
-  ) => {
-    const response = await axios.get(`${baseUrl}${restOfUrl}`);
-    setResponses((data) => [...data, formatter(response.data)]);
-  };
-
-  const clearResponses = () => setResponses([]);
-
-  return [responses, addResponseData, clearResponses];
+    default:
+      throw new Error(`Cant find action type ${action.type}`);
+  }
 }
+
+function useAxios(keyInLS, baseUrl) {
+  const [responses, dispatch] = useReducer(reducer, []);
+  const addResponses = ({ type }) => dispatch({ type });
+
+  // const [responses, setResponses] = useState([]);
+  // async function addCard() {
+  //   const response = await axios.get(
+  //     "https://deckofcardsapi.com/api/deck/new/draw/"
+  //   );
+  //   const deck_id = response.data.deck_id;
+  //   const image_url = response.data.cards[0].image;
+  //   const newCardObject = { id: response.data.deck_id, image: image_url };
+  //   setResponses((oldCards) => [...oldCards, newCardObject]);
+  // }
+  // const [responses, setResponses] = useLocalStorage(keyInLS);
+
+  // const makeAxiosCall = async () => {
+  //   const response = await axios.get(baseUrl);
+  //   console.log("this is the response", response);
+  //   const deck_id = response.data.deck_id;
+  //   const image_url = response.data.cards[0].image;
+  //   setResponses((old_data) => {
+  //     const new_data = [old_data];
+  //     new_data.push({ id: deck_id, image: image_url });
+  //     console.log("the data is", new_data);
+  //     return new_data;
+  //   });
+  // };
+
+  // const clearResponses = () => setResponses([]);
+
+  return [responses, addResponses];
+}
+
+export { useFlipCard, useLocalStorage, useAxios };

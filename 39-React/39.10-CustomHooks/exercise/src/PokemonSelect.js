@@ -5,7 +5,7 @@ import { choice } from "./helpers";
 /* Select element to choose from common pokemon. */
 function PokemonSelect({ add, pokemon = pokemonList }) {
   const [pokeIdx, setPokeIdx] = useState(0);
-  const handleChange = evt => {
+  const handleChange = (evt) => {
     setPokeIdx(evt.target.value);
   };
 
@@ -18,7 +18,13 @@ function PokemonSelect({ add, pokemon = pokemonList }) {
           </option>
         ))}
       </select>
-      <button onClick={() => add(pokemon[pokeIdx])}>Catch one!</button>
+      <button
+        onClick={() =>
+          add({ type: "pokemon-api", pokemon_name: pokemon[pokeIdx] })
+        }
+      >
+        Catch one!
+      </button>
       <button onClick={() => add(choice(pokemon))}>I'm feeling lucky</button>
     </div>
   );
