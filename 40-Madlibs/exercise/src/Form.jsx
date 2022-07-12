@@ -2,22 +2,41 @@ import React from "react";
 import LabelInput from "./LabelInput";
 import "./Form.css";
 
+// Promps object
+const prompts = {
+  noun: "",
+  noun2: "",
+  adjective: "",
+  color: "",
+};
+
+function generateInputs() {
+  const result = [];
+  for (let k of Object.keys(prompts)) {
+    result.push(
+      <LabelInput id={k} key={k} type="text" labelText={k}></LabelInput>
+    );
+  }
+  return result;
+}
+
 function Form() {
   const [story, setStory] = React.useState();
   function handleSubmission(event) {
     event.preventDefault();
-    const submissions = [];
+
+    // return if any of the field is empty
+    // 5th element in the HTML collection is the buttton
+    for (let idx = 0; idx < 4; idx++) {
+      const input = event.target.elements[idx];
+      if (!input.value) return;
+    }
+
     const noun = event.target.elements.noun.value;
     const noun2 = event.target.elements.noun2.value;
     const adjective = event.target.elements.adjective.value;
     const color = event.target.elements.color.value;
-    console.log([noun.value, noun2.value, adjective.value, color.value]);
-    if (!noun || !noun2 || !adjective || !color) return;
 
-    submissions.push(noun);
-    submissions.push(noun2);
-    submissions.push(adjective);
-    submissions.push(color);
     setStory(`There was a ${color} ${noun} who loved a ${adjective} ${noun2}`);
   }
   return (
@@ -30,10 +49,7 @@ function Form() {
       )}
       {!story && (
         <form onSubmit={handleSubmission} className="Form">
-          <LabelInput id="noun" type="Text" labelText="Noun" />
-          <LabelInput id="noun2" type="Text" labelText="Noun2" />
-          <LabelInput id="adjective" type="Text" labelText="Adjective" />
-          <LabelInput id="color" type="Text" labelText="color" />
+          {generateInputs()}
           <button>Get Story</button>
         </form>
       )}
