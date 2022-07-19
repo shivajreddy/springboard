@@ -1,34 +1,21 @@
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
-import Nav from "./Nav";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Products from "./pages/Products";
-import Shoe from "./pages/Shoe";
-import Sickle from "./pages/Sickle";
-import Error404 from "./pages/Error404";
-import Gif from "./pages/Gif";
-
+import * as React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Nav from "components/Nav";
+import HomePage from "pages/HomePage";
+import Page1 from "pages/Page1";
+import Page2 from "pages/Page2";
 
 function App() {
-  let { id } = useParams();
   return (
-    <div>
-      <BrowserRouter>
-        <Nav />
-        <Routes>
-          <Route path="/" element={<Home />} ></Route>
-          <Route path="/about" element={<About />} ></Route>
-          <Route path="/products" element={<Products />} ></Route>
-          <Route path="product">
-            <Route path="1" element={<Shoe id={id} />} />
-            <Route path="2" element={<Sickle />} />
-            <Route path="2" element={<Sickle />} />
-          </Route>
-          <Route path="*" element={<Error404 />} />
-          <Route path="/gif/:searchTerm" element={<Gif />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<HomePage />}></Route>
+        <Route path="/homepage" element={<HomePage />}></Route>
+        <Route path="/page1" element={<Page1 />} />
+        <Route path="/page2" element={<Page2 />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,0 +1,13 @@
+.Nav {
+  text-decoration: none;
+  border-bottom: solid 1px;
+  color: red;
+  font-size: large;
+}
+.Nav a:link { text-decoration: none; }
+
+.Nav a:visited { text-decoration: none; }
+
+.Nav a:hover { text-decoration: none; }
+
+.Nav a:active { text-decoration: none; }
