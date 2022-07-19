@@ -1,13 +1,20 @@
 .Nav {
   text-decoration: none;
-  border-bottom: solid 1px;
-  color: red;
-  font-size: large;
+  background-color: darkslateblue;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 15px;
 }
-.Nav a:link { text-decoration: none; }
 
-.Nav a:visited { text-decoration: none; }
+.Nav a {
+  color: white;
+  text-decoration: none;
+}
 
-.Nav a:hover { text-decoration: none; }
+.Nav a:hover{
+  color: palevioletred;
+}
 
-.Nav a:active { text-decoration: none; }
+.Nav a.active {
+  color: deeppink;
+}
