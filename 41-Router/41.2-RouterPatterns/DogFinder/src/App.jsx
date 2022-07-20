@@ -16,9 +16,9 @@ function App() {
         <Route path="/page1" element={<Page1 />} />
         <Route path="/page2" element={<Page2 />} />
         <Route path="product">
-          <Route path="1" element={<HomePage />} />} />
-          <Route path="2" element={<Page1 />} />
-          <Route path="2" element={<Page2 />} />
+          <Route exact path="1" element={<HomePage />} />} />
+          <Route exact path="2" element={<Page1 />} />
+          <Route path="3" element={<Page2 />} />
         </Route>
         <Route path="*" element={<Error404 />} />
       </Routes>
