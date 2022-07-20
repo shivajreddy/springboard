@@ -6,13 +6,7 @@ function Nav() {
   return (
     // List of nav items
     <div className="Nav">
-      <NavLink to="/homepage">HomePage</NavLink>
-      <NavLink to="/page1">Page1</NavLink>
-      <NavLink to="/page2">Page2</NavLink>
-      <NavLink to="/product">Product</NavLink>
-      <NavLink to="/product/1">Product-1</NavLink>
-      <NavLink to="/product/2">Product-2</NavLink>
-      <NavLink to="/product/3">Product-3</NavLink>
+      <NavLink to="/dogs">Home</NavLink>
     </div>
   );
 }
