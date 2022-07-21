@@ -102,7 +102,7 @@ The goal of this exercise will be to use React Router to build an app that lets 
 5.  As a user, if I try to navigate to a color page that does not exist (eg, /colors/blargh), I am redirected to the colors index page.
 6.  As a user, if I try to navigate to an invalid url (eg, /this-is-not-valid), I am redirected to the colors index page.
 
-Here’s an idea of what your app could look like: ![something](./color-factory.gif)
+Here’s an idea of what your app could look like: ![something](./ColorFactory/color-factory.gif)
 
 ### Further Study
 
