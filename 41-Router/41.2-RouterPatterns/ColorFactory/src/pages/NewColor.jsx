@@ -1,12 +1,12 @@
 import React from "react";
 import "styles/NewColor.css";
 import colorsArray from "colorsArray.";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function NewColor() {
   const [name, setName] = React.useState("");
   const [colorHex, setColorHex] = React.useState("#ffffff");
-  // const []
+  const navigate = useNavigate();
 
   function handleChange(event) {
     const name = event.target.value;
@@ -18,8 +18,8 @@ function NewColor() {
     event.preventDefault();
     if (name === "") return;
 
-    // TODO add a new color
-    colorsArray.push({
+    // add a new color
+    colorsArray.splice(0, 0, {
       name: name,
       hex: colorHex,
       dateTime: Date.now(),
@@ -28,7 +28,8 @@ function NewColor() {
     // reset the states after validated submission
     setName("");
     setColorHex("#ffffff");
-    // console.log("colors array = ", colorsArray);
+    // navigate to home page
+    navigate("/colors");
   }
 
   return (

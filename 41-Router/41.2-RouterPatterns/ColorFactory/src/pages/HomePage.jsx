@@ -16,21 +16,24 @@ function HomePage() {
   return (
     <div className="HomePage">
       <header className="HomePage-Header">
-        <h1 style={{ textAlign: "center" }}>CF</h1>
+        <h1 style={{ textAlign: "center" }}>Color Factory</h1>
         <br />
         <NavLink to="/colors/new">Add a new Color</NavLink>
       </header>
       <section>
         {colors.length > 0 && <p>Please select a Color</p>}
-        {colors.map((color) => {
-          return (
-            <li key={`${color.name}${color.hex}`}>
-              <NavLink to={`/colors/${color.name}`}>{color.name}</NavLink>
-            </li>
-            // <ColorPage hex={color.hex} name={color.name} key={color.name} />
-          );
-        })}
+        <div className="HomePage-List">
+          {colors.map((color) => {
+            return (
+              <li key={`${color.name}${color.hex}`}>
+                <NavLink to={`/colors/${color.name}`}>{color.name}</NavLink>
+              </li>
+              // <ColorPage hex={color.hex} name={color.name} key={color.name} />
+            );
+          })}
+        </div>
       </section>
+      <NavLink to="/colors/somethinghere">wrong color name</NavLink>
     </div>
   );
 }
