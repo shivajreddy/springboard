@@ -2,24 +2,33 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "styles/HomePage.css";
-import Color from "components/Color";
+import ColorPage from "pages/ColorPage";
+import colorsArray from "colorsArray.";
 
 function HomePage() {
-  // map to dog components
-  // const allDogs = dogs.map((dog) => <Dog />);
-  const [colors, setColors] = React.useState([]);
+  const [colors, setColors] = React.useState(colorsArray);
+  /* color object
+  {"name" : "somename",
+    "hex" : "ffffff"},
+    "dateTime" : "xxx"
+  */
 
   return (
     <div className="HomePage">
       <header className="HomePage-Header">
-        <h1 style={{ textAlign: "center" }}>Color Factory</h1>
+        <h1 style={{ textAlign: "center" }}>CF</h1>
         <br />
         <NavLink to="/colors/new">Add a new Color</NavLink>
       </header>
       <section>
-        <p>Please select a Color</p>
+        {colors.length > 0 && <p>Please select a Color</p>}
         {colors.map((color) => {
-          return <Color />;
+          return (
+            <li key={`${color.name}${color.hex}`}>
+              <NavLink to={`/colors/${color.name}`}>{color.name}</NavLink>
+            </li>
+            // <ColorPage hex={color.hex} name={color.name} key={color.name} />
+          );
         })}
       </section>
     </div>

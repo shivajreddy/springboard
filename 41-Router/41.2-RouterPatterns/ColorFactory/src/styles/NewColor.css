@@ -1,0 +1,16 @@
+.NewColor {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.NewColor .form-row {
+  text-align: start;
+  padding: 10px;
+}
+
+.NewColor .form-row label{
+  padding-right: 10px;
+}
