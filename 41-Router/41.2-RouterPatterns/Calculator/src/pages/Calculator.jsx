@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useLocation, useParams, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 function Calculator() {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ function Calculator() {
   }
 
   return (
-    <>
+    <div className="">
       {a && b && (
         <div>
           <h2>Calc Function: {action}</h2>
@@ -45,7 +45,7 @@ function Calculator() {
           <NavLink to="/">Go Home</NavLink>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
