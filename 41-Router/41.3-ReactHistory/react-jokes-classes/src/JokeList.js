@@ -57,6 +57,7 @@ function JokeList({ numJokesToGet = 10 }) {
 
   if (jokes.length) {
     let sortedJokes = [...jokes].sort((a, b) => b.votes - a.votes);
+    console.log("sorted jokes = ", sortedJokes);
 
     return (
       <div className="JokeList">

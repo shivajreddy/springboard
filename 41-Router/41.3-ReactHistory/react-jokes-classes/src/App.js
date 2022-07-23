@@ -1,5 +1,5 @@
 import React from "react";
-import JokeList from "./JokeList";
+import JokeList from "Components/JokeList";
 
 function App() {
   return (
