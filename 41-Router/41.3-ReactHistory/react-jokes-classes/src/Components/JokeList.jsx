@@ -18,6 +18,7 @@ class JokeList extends React.Component {
 
   state = {
     jokes: [],
+    loadingStatus: true,
   };
 
   async getJokes() {
@@ -47,6 +48,7 @@ class JokeList extends React.Component {
 
   componentDidMount() {
     if (this.state.jokes.length < this.props.numJokesToGet) {
+      this.setState({ loadingStatus: false });
       return this.getJokes();
     }
   }
@@ -60,7 +62,7 @@ class JokeList extends React.Component {
   // methods
   /* empty joke list and then call getJokes */
   generateNewJokes = () => {
-    this.setState({ jokes: [] });
+    this.setState({ jokes: [], loadingStatus: true });
   };
 
   /* change vote for this id by delta (+1 or -1) */
@@ -72,6 +74,12 @@ class JokeList extends React.Component {
     this.setState({ jokes: newJokes });
   };
 
+  resetVotes = () => {
+    this.setState((st) => ({
+      jokes: st.jokes.map((joke) => ({ ...joke, votes: 0 })),
+    }));
+  };
+
   // Render Method
   render() {
     if (this.state.jokes.length) {
@@ -81,6 +89,8 @@ class JokeList extends React.Component {
           <button className="JokeList-getmore" onClick={this.generateNewJokes}>
             Get New Jokes
           </button>
+
+          <button onClick={this.resetVotes}>Reset Votes</button>
 
           {sortedJokes.map((j) => (
             <Joke
@@ -94,7 +104,7 @@ class JokeList extends React.Component {
         </div>
       );
     }
-    return null;
+    return <div>{this.state.loadingStatus && <h2>Loading...</h2>}</div>;
   }
 }
 
