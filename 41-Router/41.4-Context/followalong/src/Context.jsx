@@ -1,5 +1,6 @@
 import React from "react";
 
 const AppContext = React.createContext();
+const ThemeContext = React.createContext();
 
-export default AppContext;
+export { AppContext, ThemeContext };

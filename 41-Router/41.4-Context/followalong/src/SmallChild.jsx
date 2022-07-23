@@ -1,9 +1,9 @@
 import React from "react";
-import AppContext from "Context";
+import { AppContext, ThemeContext } from "Context";
 
 // style={{ border: "4px solid #00774D9", margin: "1rem", widhth: "100px" }}
 function SmallChild() {
-  const { theme, toggleTheme } = React.useContext(AppContext);
+  const { theme, toggleTheme } = React.useContext(ThemeContext);
   return (
     <div>
       <p>small child</p>
