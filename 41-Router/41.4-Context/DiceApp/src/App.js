@@ -23,7 +23,7 @@ function App() {
             Rendering just Casino is the intended thing to do.
         */}
 
-      {/*<Die val={3} />*/}
+      <Die val={3} />
       {/*<DiceSet vals={[1, 2, 3]} />*/}
       {/*<RollEm />*/}
       {/*<PsychicDice addWin={() => "ignored"} addLoss={() => "ignored"} />*/}

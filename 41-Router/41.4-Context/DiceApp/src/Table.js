@@ -21,12 +21,12 @@ import "./Table.css";
 function Table(props) {
   const [gameStates, setGameStates] = useState([]);
   function addWin() {
-    setGameStates(states => [...states, "won"]);
+    setGameStates((states) => [...states, "won"]);
   }
   function addLoss() {
-    setGameStates(states => [...states, "lost"]);
+    setGameStates((states) => [...states, "lost"]);
   }
-  const wins = gameStates.filter(st => st === "won").length;
+  const wins = gameStates.filter((st) => st === "won").length;
   const losses = gameStates.length - wins;
 
   /** render "sets" of the game, along with win/loss summary */
