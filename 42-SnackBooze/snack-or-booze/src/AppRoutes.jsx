@@ -2,12 +2,13 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "Home";
 import FoodMenu from "FoodMenu";
-import Snack from "FoodItem";
+import Item from "Item";
 import SnackOrBoozeApi from "Api";
 
 function AppRoutes() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [snacks, setSnacks] = React.useState([]);
+  const [drinks, setDrinks] = React.useState([]);
 
   React.useEffect(() => {
     async function getSnacks() {
@@ -16,30 +17,49 @@ function AppRoutes() {
       setIsLoading(false);
     }
     getSnacks();
+    async function getDrinks() {
+      let drinks = await SnackOrBoozeApi.getDrinks();
+      setDrinks(drinks);
+      setIsLoading(false);
+    }
+    getDrinks();
   }, []);
 
   if (isLoading) {
     return <p>Loading &hellip;</p>;
   }
   return (
-    // <BrowserRouter>
     <main>
       <Routes>
-        <Route path="/" element={<Home snacks={snacks} />}></Route>
+        <Route
+          path="/"
+          element={<Home snacks={snacks} drinks={drinks} />}
+        ></Route>
+
         <Route
           path="/snacks"
           element={<FoodMenu snacks={snacks} title="Snacks" />}
         ></Route>
         <Route
           path="/snacks/:id"
-          element={<Snack items={snacks} cantFind="/snacks" />}
+          element={<Item type="food" items={snacks} cantFind="/snacks" />}
+        ></Route>
+
+        <Route
+          path="/drinks"
+          element={<FoodMenu drinks={drinks} title="Drinks" />}
         ></Route>
         <Route
-          element={<p>Hmmm. I can't seem to find what you want.</p>}
+          path="/drinks/:id"
+          element={<Item type="drink" items={drinks} cantFind="/drinks" />}
+        ></Route>
+
+        <Route
+          path="*"
+          element={<Home snacks={snacks} drinks={drinks} />}
         ></Route>
       </Routes>
     </main>
-    // </BrowserRouter>
   );
 }
 
