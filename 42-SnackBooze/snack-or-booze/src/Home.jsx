@@ -7,6 +7,13 @@ function Home() {
       <Card>
         <CardBody className="text-center">
           <CardTitle>
+            <p>Total Items</p>
+          </CardTitle>
+        </CardBody>
+      </Card>
+      <Card>
+        <CardBody className="text-center">
+          <CardTitle>
             <p className="font-weight-bold">
               Welcome to Silicon Valley's premier dive cafe!
             </p>

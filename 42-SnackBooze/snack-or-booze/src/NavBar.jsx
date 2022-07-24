@@ -7,7 +7,7 @@ function NavBar() {
   return (
     <div>
       <Navbar expand="md">
-        <NavLink exact to="/" className="navbar-brand">
+        <NavLink to="/" className="navbar-brand" style={{ color: "white" }}>
           Snack or Booze
         </NavLink>
 
