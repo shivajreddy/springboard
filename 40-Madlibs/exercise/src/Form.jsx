@@ -1,7 +1,6 @@
 import React from "react";
 import LabelInput from "LabelInput";
 import "Form.css";
-import Prompt from "Prompt";
 
 // Promps object
 const prompts = {
@@ -26,19 +25,16 @@ function Form() {
   function handleSubmission(event) {
     event.preventDefault();
 
-    // return if any of the field is empty
-    // 5th element in the HTML collection is the buttton
-    for (let idx = 0; idx < 4; idx++) {
-      const input = event.target.elements[idx];
-      if (!input.value) return;
+    // Set the values of prompts object to the input value of the form
+    for (let idx = 0; idx < Object.keys(prompts).length; idx++) {
+      const key = Object.keys(prompts)[idx];
+      if (!event.target.elements[key].value) return;
+      prompts[key] = event.target.elements[key].value;
     }
 
-    const noun = event.target.elements.noun.value;
-    const noun2 = event.target.elements.noun2.value;
-    const adjective = event.target.elements.adjective.value;
-    const color = event.target.elements.color.value;
-
-    setStory(`There was a ${color} ${noun} who loved a ${adjective} ${noun2}`);
+    setStory(
+      `There was a ${prompts.color} ${prompts.noun} who loved a ${prompts.adjective} ${prompts.noun2}`
+    );
   }
   return (
     <div>
