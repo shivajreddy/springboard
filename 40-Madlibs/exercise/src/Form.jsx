@@ -1,6 +1,7 @@
 import React from "react";
-import LabelInput from "./LabelInput";
-import "./Form.css";
+import LabelInput from "LabelInput";
+import "Form.css";
+import Prompt from "Prompt";
 
 // Promps object
 const prompts = {
