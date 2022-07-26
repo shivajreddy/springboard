@@ -50,6 +50,20 @@
       "description": "Tart and delicious.",
       "recipe": "Mix arugula, toasted walnuts, and thinly-sliced Parmesan cheese. Dress with lemon and olive oil.",
       "serve": "Place on tiny, precious little plates."
+    },
+    {
+      "id": "Snack1",
+      "name": "Snackname",
+      "description": "desc",
+      "recipe": "rec",
+      "serve": "serve"
+    },
+    {
+      "id": "s1",
+      "name": "s1",
+      "description": "descval",
+      "recipe": "recipeval",
+      "serve": "serveval"
     }
   ]
 }

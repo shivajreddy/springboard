@@ -1,9 +1,10 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "Home";
-import FoodMenu from "FoodMenu";
 import Item from "Item";
+import Items from "Items";
 import SnackOrBoozeApi from "Api";
+import NewItem from "NewItem";
 
 function AppRoutes() {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -38,20 +39,31 @@ function AppRoutes() {
 
         <Route
           path="/snacks"
-          element={<FoodMenu snacks={snacks} title="Snacks" />}
+          // element={<ItemMenu snacks={snacks} title="Snacks" />}
+          element={<Items type="snacks" />}
         ></Route>
         <Route
           path="/snacks/:id"
-          element={<Item type="food" items={snacks} cantFind="/snacks" />}
+          element={<Item type="snacks" cantFind="/snacks" />}
         ></Route>
 
         <Route
           path="/drinks"
-          element={<FoodMenu drinks={drinks} title="Drinks" />}
+          // element={<ItemMenu drinks={drinks} title="Drinks" />}
+          element={<Items type="drinks" />}
         ></Route>
         <Route
           path="/drinks/:id"
-          element={<Item type="drink" items={drinks} cantFind="/drinks" />}
+          element={<Item type="drinks" cantFind="/drinks" />}
+        ></Route>
+
+        <Route
+          path="/add-snack-item"
+          element={<NewItem type="snack" />}
+        ></Route>
+        <Route
+          path="/add-drink-item"
+          element={<NewItem type="drink" />}
         ></Route>
 
         <Route
