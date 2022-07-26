@@ -2,7 +2,7 @@ import React from "react";
 import LabelInput from "LabelInput";
 import "Form.css";
 
-// Promps object
+// Prompts object
 const prompts = {
   noun: "",
   noun2: "",
