@@ -15,6 +15,11 @@ app.get("/url/:color", (req, res) => {
 // Headers
 app.get("/headers", (req, res) => {});
 
+// Router
+const dogsRouter = require("./Auth");
+app.use("/dogs", dogsRouter);
+
+//! Last Line
 app.listen(PORT, () => {
   console.log("App started listening at ", PORT);
 });
