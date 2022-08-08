@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const config = require("./config");
 
+const ExpressError = require("./ExpressError");
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

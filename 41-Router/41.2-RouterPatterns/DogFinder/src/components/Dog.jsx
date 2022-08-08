@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 function Dog() {
   const params = useParams();
-  const [dog, setDog] = React.useState(() =>
+  const [dog] = React.useState(() =>
     dogs.find((dogObject) => dogObject.name === params.dogname)
   );
   console.log("these are the params", params, dog);
