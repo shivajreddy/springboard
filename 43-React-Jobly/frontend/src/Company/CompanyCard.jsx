@@ -1,5 +1,6 @@
 import React from "react";
 import "styles/CompanyCard.css";
+import { Button } from "@mui/material/Button";
 
 function CompanyCard(props) {
   const { name, description, numEmployees, logoUrl } = props.details;
@@ -10,6 +11,9 @@ function CompanyCard(props) {
       <p>Description:{description}</p>
       <p>#Employees:{numEmployees}</p>
       <p>Logo:{logoUrl}</p>
+      <button>hi</button>
+      {/* <Button></Button> */}
+      <Button variant="contained">Hello World</Button>
     </div>
   );
 }
