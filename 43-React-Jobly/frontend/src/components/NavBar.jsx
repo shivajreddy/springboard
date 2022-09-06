@@ -18,7 +18,7 @@ function NavBarMain() {
         <Container>
           <Navbar.Brand>
             <Link to="/" style={linkStyle}>
-              Page1
+              Home
             </Link>
           </Navbar.Brand>
           <Nav className="me-auto">
