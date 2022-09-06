@@ -4,7 +4,7 @@ import AppRoutes from "AppRoutes";
 function App() {
   return (
     <div className="App">
-      <h1>Jobly</h1>
+      <h1>App</h1>
       <AppRoutes />
     </div>
   );
