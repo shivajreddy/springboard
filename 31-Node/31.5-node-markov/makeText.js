@@ -9,14 +9,12 @@ const MarkovMachine = require("./markov");
 const sourceType = process.argv[2];
 const path = process.argv[3];
 
-console.log("these are argv", process.argv);
-
 function generateText(text) {
   let markov = new MarkovMachine(text);
   console.log(markov.makeText());
 }
 
-function cat(path) {
+function plainText(path) {
   // Read the file
   fs.readFile(path, "utf8", function (err, data) {
     if (err) {
@@ -28,10 +26,24 @@ function cat(path) {
   });
 }
 
+async function web(path) {
+  // Axios GET call to url
+  let response;
+  try {
+    response = await axios.get(path);
+  } catch (error) {
+    console.error("Error reaching the site", err);
+    process.exit(1);
+  }
+  return generateText(response.data);
+}
+
 /** Based on the type of the source, run the functions */
 if (sourceType === "file") {
-  cat(path);
+  console.log("Generated text from file");
+  plainText(path);
 }
 if (sourceType === "url") {
-  webCat(path);
+  console.log("Generated text from URL");
+  web(path);
 }

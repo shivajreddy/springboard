@@ -7,8 +7,7 @@ class MarkovMachine {
     let words = text.split(/[ \r\n]+/);
     this.words = words.filter((c) => c !== "");
     this.makeChains();
-    // var hashmap = {};
-    this.hashmap = {};
+    // console.log("the chains are", this.hashmap);
   }
 
   /** set markov chains:
@@ -17,16 +16,16 @@ class MarkovMachine {
    *  {"the": ["cat", "hat"], "cat": ["in"], "in": ["the"], "hat": [null]} */
 
   makeChains() {
+    let hashmap = new Map();
     for (let idx = 0; idx < this.words.length; idx++) {
       const word = this.words[idx];
-      // const otherWords = words.slice(idx + 1);
       const nextWord = this.words[idx + 1] || null;
-      console.log("this is the hashmap", this.hashmap);
-      if (this.hashmap && !this.hashmap[word]) {
-        this.hashmap[word] = nextWord;
+      if (!hashmap.has(word)) {
+        hashmap.set(word, []);
       }
+      hashmap.get(word).push(nextWord);
     }
-    return this.hashmap;
+    this.hashmap = hashmap;
   }
 
   /** Pick a random number */
@@ -37,18 +36,20 @@ class MarkovMachine {
   /** return random text from chains */
 
   makeText(numWords = 100) {
-    const keys = Object.keys(this.hashmap);
-    let randomWord = MarkovMachine.randomPick(keys);
     const result = [];
+    const keys = Array.from(this.hashmap.keys());
+    let randomWord = MarkovMachine.randomPick(keys);
 
-    while (result.length < numWords && randomWord !== null) {
+    while (randomWord && result.length < numWords) {
       result.push(randomWord);
-      randomWord = MarkovMachine.randomPick(this.hashmap[randomWord]);
+
+      // choose a new random word
+      randomWord = MarkovMachine.randomPick(this.hashmap.get(randomWord));
     }
 
+    // console.log("this is the result", result.join(" "));
     return result.join(" ");
   }
 }
 
-// export default MarkovMachine;
 module.exports = MarkovMachine;
