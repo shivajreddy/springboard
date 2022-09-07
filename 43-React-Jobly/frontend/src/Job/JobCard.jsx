@@ -4,8 +4,10 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
-export default function CompanyCard(props) {
-  const { name, description, numEmployees, logoUrl } = props.details;
+export default function JobCard(props) {
+  const { id, title, salary, equity, companyHandle, companyName } =
+    props.details;
+
   return (
     <Card
       sx={{
@@ -18,16 +20,20 @@ export default function CompanyCard(props) {
       }}
     >
       <CardContent>
-        <Typography gutterBottom variant="h4" component="div" color="white">
-          {name}
+        <p>{id}</p>
+        <Typography gutterBottom variant="h5" component="div" color="white">
+          {companyName}
+        </Typography>
+        <Typography gutterBottom variant="h5" component="div" color="white">
+          {title}
         </Typography>
         <Typography variant="body2" color="white">
-          Description:{description}
+          Salary:${salary}
         </Typography>
         <Typography variant="body3" color="white">
-          #Employees: {numEmployees}
+          Equity: {equity}
         </Typography>
-        <p>{logoUrl}</p>
+        <p>{companyHandle}</p>
       </CardContent>
     </Card>
   );

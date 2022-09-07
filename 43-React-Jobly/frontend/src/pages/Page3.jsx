@@ -1,9 +1,10 @@
 import React from "react";
+import JobList from "Job/JobList";
 
 function Page3() {
   return (
     <>
-      <h2>Page3</h2>
+      <JobList />
     </>
   );
 }

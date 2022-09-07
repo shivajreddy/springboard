@@ -1,7 +1,19 @@
-import React from "react";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
 
-function Loading() {
-  return <div>Loading...</div>;
+export default function Loading() {
+  return (
+    <div
+      style={{
+        display: "flex",
+        placeContent: "center",
+        margin: "20px",
+      }}
+    >
+      <Box sx={{ width: "50%" }}>
+        <LinearProgress />
+      </Box>
+    </div>
+  );
 }
-
-export default Loading;
