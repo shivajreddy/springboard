@@ -1,21 +1,35 @@
-import React from "react";
+import * as React from "react";
 import "styles/CompanyCard.css";
-import { Button } from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 
-function CompanyCard(props) {
+export default function CompanyCard(props) {
   const { name, description, numEmployees, logoUrl } = props.details;
   return (
-    <div className="CompanyCard">
-      <h5>Comp card</h5>
-      <p>Name:{name}</p>
-      <p>Description:{description}</p>
-      <p>#Employees:{numEmployees}</p>
-      <p>Logo:{logoUrl}</p>
-      <button>hi</button>
-      {/* <Button></Button> */}
-      <Button variant="contained">Hello World</Button>
-    </div>
+    <Card
+      sx={{
+        maxWidth: 345,
+        height: 250,
+        backgroundColor: "dimgrey",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}
+    >
+      {/* <p>{logoUrl}</p> */}
+      <CardContent>
+        <Typography gutterBottom variant="h4" component="div" color="white">
+          {name}
+        </Typography>
+        <Typography variant="body2" color="white">
+          Description:{description}
+        </Typography>
+        <Typography variant="body3" color="white">
+          #Employees: {numEmployees}
+        </Typography>
+        <p>{logoUrl}</p>
+      </CardContent>
+    </Card>
   );
 }
-
-export default CompanyCard;

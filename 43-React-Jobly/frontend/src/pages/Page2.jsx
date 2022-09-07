@@ -1,9 +1,11 @@
 import React from "react";
+import CompanyList from "Company/CompanyList";
 
 function Page2() {
   return (
     <>
-      <h2>Page2</h2>
+      <h2>All Companies:</h2>
+      <CompanyList />
     </>
   );
 }
