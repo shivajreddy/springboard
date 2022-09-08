@@ -5,7 +5,6 @@ import User from "./pages/User";
 import TestPage from "./pages/TestPage";
 import NavBar from "./components/Navbar";
 import { ThemeProvider } from "@mui/system";
-// import customTheme from "./theme/customTheme";
 import { joblyLightTheme, joblyDarkTheme } from "./theme/customTheme";
 import ThemeContext from "./theme/themeContext";
 import { useState } from "react";

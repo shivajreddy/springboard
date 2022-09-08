@@ -1,29 +1,39 @@
-import { Typography, Button } from "@mui/material";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 
-function Company() {
+const card = (
+  <CardContent>
+    <Typography sx={{ fontSize: 14 }} color="primary" gutterBottom>
+      Word of the Day
+    </Typography>
+    <Typography variant="h5" component="div"></Typography>
+    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+      adjective
+    </Typography>
+    <Typography variant="body2">
+      well meaning and kindly.
+      <br />
+      {'"a benevolent smile"'}
+    </Typography>
+  </CardContent>
+);
+
+export default function Company() {
   return (
-    <>
-      <h3>Title:</h3>
-      <p>hi</p>
-      <Typography variant="body1" color="textSecondary">
-        Typography test body 1
-      </Typography>
-      <Typography variant="body2" color="textSecondary">
-        Typography test body 2
-      </Typography>
-      <Typography
-        variant="h5"
-        color="primary"
+    <Box>
+      <Card
         sx={{
-          fontFamily: "Source Sans Pro",
-          fontWeight: "600",
+          backgroundColor: "#2d2d2d",
+          borderRadius: 2,
+          height: 200,
+          maxWidth: "320px",
         }}
       >
-        Typography test h1
-      </Typography>
-      <Button color="primary">hi</Button>
-    </>
+        {card}
+      </Card>
+    </Box>
   );
 }
-
-export default Company;

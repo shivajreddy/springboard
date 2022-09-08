@@ -2,23 +2,40 @@
  * This theme config will over write MUI theme object
  */
 
-import { purple, red } from "@mui/material/colors";
+import { ThemeOptions } from "@mui/material";
 
 //TODO Final theme object
-const joblyLightTheme = {
+const joblyLightTheme: ThemeOptions = {
   palette: {
-    primary: red,
-    secondary: purple,
+    mode: "light",
+  },
+  // typography: {
+  //   fontFamily: "Source Sans Pro",
+  // },
+  components: {
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
   },
 };
 
-const joblyDarkTheme = {
+const joblyDarkTheme: ThemeOptions = {
   palette: {
-    primary: purple,
-    secondary: red,
+    mode: "dark",
+    // primary: purple,
+    // secondary: red,
   },
   typography: {
     fontFamily: "Source Sans Pro",
+  },
+  components: {
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
   },
 };
 

@@ -8,6 +8,7 @@
     "@headlessui/react": "^1.7.0",
     "@heroicons/react": "^2.0.10",
     "@mui/icons-material": "^5.10.3",
+    "@mui/joy": "^5.0.0-alpha.44",
     "@mui/material": "^5.10.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
