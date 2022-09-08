@@ -1,7 +1,9 @@
 import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
+import { useContext } from "react";
+import ThemeContext from "../theme/themeContext";
 
-const MaterialUISwitch = styled(Switch)(({ theme }) => ({
+const ThemeSwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
   padding: 7,
@@ -48,4 +50,14 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export default MaterialUISwitch;
+export default function MaterialUISwitch() {
+  const context = useContext(ThemeContext);
+
+  const toggleTheme = () => {
+    context?.currTheme === "dark"
+      ? context.setCurrTheme("light")
+      : context?.setCurrTheme("dark");
+  };
+
+  return <ThemeSwitch onChange={toggleTheme} />;
+}
