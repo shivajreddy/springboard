@@ -1,12 +1,22 @@
 import React from "react";
 // testing company card
-import Company from "../components/cards/Company";
+import { Company } from "../components/cards/Company";
+
+const sampleData = {
+  handle: "test-handle",
+  name: "test-name",
+  num_employees: null,
+  description: "test-desription",
+  logo_url: null,
+};
 
 function Companies() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <Company />
+      <Company compDetails={sampleData} />
+      <Company compDetails={sampleData} />
+      <Company compDetails={sampleData} />
+      <Company compDetails={sampleData} />
     </>
   );
 }

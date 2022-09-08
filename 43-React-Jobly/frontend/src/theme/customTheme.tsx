@@ -7,11 +7,11 @@ import { ThemeOptions } from "@mui/material";
 //TODO Final theme object
 const joblyLightTheme: ThemeOptions = {
   palette: {
-    mode: "light",
+    // mode: "light",
+    primary: {
+      main: "#49D8CD",
+    },
   },
-  // typography: {
-  //   fontFamily: "Source Sans Pro",
-  // },
   components: {
     MuiButtonBase: {
       defaultProps: {
@@ -23,14 +23,18 @@ const joblyLightTheme: ThemeOptions = {
 
 const joblyDarkTheme: ThemeOptions = {
   palette: {
-    mode: "dark",
-    // primary: purple,
-    // secondary: red,
-  },
-  typography: {
-    fontFamily: "Source Sans Pro",
+    // mode: "dark",
+    primary: {
+      main: "#241C2D",
+    },
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: (themeParam) => `
+      p {
+        color : $(themeParam.palette.success.main)
+      }`,
+    },
     MuiButtonBase: {
       defaultProps: {
         disableRipple: true,

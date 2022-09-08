@@ -4,35 +4,47 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
-const card = (
-  <CardContent>
-    <Typography sx={{ fontSize: 14 }} color="primary" gutterBottom>
-      Word of the Day
-    </Typography>
-    <Typography variant="h5" component="div"></Typography>
-    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-      adjective
-    </Typography>
-    <Typography variant="body2">
-      well meaning and kindly.
-      <br />
-      {'"a benevolent smile"'}
-    </Typography>
-  </CardContent>
-);
+interface Details {
+  compDetails: {
+    handle: string;
+    name: string;
+    num_employees: string | null;
+    description: string;
+    logo_url: string | null;
+  };
+}
 
-export default function Company() {
+export function Company(props: Details) {
   return (
     <Box>
       <Card
         sx={{
-          backgroundColor: "#2d2d2d",
-          borderRadius: 2,
+          borderRadius: 4,
           height: 200,
           maxWidth: "320px",
+          margin: "10px",
+          transitionDuration: "0.1s",
+          ":hover": {
+            boxShadow: "2px 2px 2px 2px red",
+            zIndex: 999,
+          },
         }}
       >
-        {card}
+        <CardContent>
+          <p className="text-2xl font-bold">{props.compDetails.name}</p>
+          <Typography sx={{ fontSize: 14 }} color="primary" gutterBottom>
+            Word of the Day
+          </Typography>
+          <Typography variant="h5" component="div"></Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            adjective
+          </Typography>
+          <Typography variant="body2">
+            well meaning and kindly.
+            <br />
+            {'"a benevolent smile"'}
+          </Typography>
+        </CardContent>
       </Card>
     </Box>
   );
