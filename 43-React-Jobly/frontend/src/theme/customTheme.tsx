@@ -4,7 +4,7 @@ import { createTheme } from "@mui/material";
  * This theme config will over write MUI theme object
  */
 
-/** Light Mode -> Palette
+/** Light Mode Palette -> https://colorhunt.co/palette/645caaa084cabface0ebc7e8
  *
  * 645CAA
  * A084CA
@@ -13,7 +13,7 @@ import { createTheme } from "@mui/material";
  *
  */
 
-/** Dark Mode -> Palette
+/** Dark Mode Palette -> https://colorhunt.co/palette/472d2d553939704f4fa77979
  *
  * 472D2D
  * 553939
@@ -31,6 +31,15 @@ declare module "@mui/material/styles/createPalette" {
   }
 }
 
+declare module "@mui/material/styles" {
+  interface Theme {
+    demoImageOpacity: number;
+  }
+  interface ThemeOptions {
+    demoImageOpacity?: number;
+  }
+}
+
 const joblyLightTheme = createTheme({
   palette: {
     mode: "light",
@@ -39,6 +48,7 @@ const joblyLightTheme = createTheme({
     },
     custom1: "#BFACE0",
   },
+  demoImageOpacity: 0.4,
   components: {
     MuiButtonBase: {
       defaultProps: {
@@ -52,7 +62,7 @@ joblyLightTheme.shadows.push(
   "0px 11px 15px -7px rgba(235,199,232,0.2),0px 24px 38px 3px rgba(235,199,232,0.14),0px 9px 46px 8px rgba(235,199,232,0.12)"
 );
 joblyLightTheme.shadows.push(
-  "0px 11px 15px -7px rgba(235,199,232,0.2),0px 24px 38px 3px rgba(235,199,232,0.14),0px 9px 46px 8px rgba(235,199,232,0.12)"
+  "0px 11px 15px -7px rgba(167,121,121,1),0px 24px 38px 3px rgba(167,121,121,1),0px 9px 46px 8px rgba(167,121,121,1)"
 );
 
 const joblyDarkTheme = createTheme({
@@ -63,6 +73,7 @@ const joblyDarkTheme = createTheme({
     },
     custom1: "#553939",
   },
+  demoImageOpacity: 0.1,
   components: {
     MuiButtonBase: {
       defaultProps: {

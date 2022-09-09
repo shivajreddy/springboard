@@ -6,7 +6,7 @@ const sampleData = {
   handle: "test-handle",
   name: "test-name",
   num_employees: null,
-  description: "test-desription",
+  description: "test-description",
   logo_url: null,
 };
 
