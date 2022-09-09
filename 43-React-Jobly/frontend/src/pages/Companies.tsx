@@ -5,7 +5,7 @@ import { Company } from "../components/cards/Company";
 const sampleData = {
   handle: "test-handle",
   name: "test-name",
-  num_employees: null,
+  num_employees: "21",
   description: "test-description",
   logo_url: null,
 };

@@ -4,6 +4,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 
 interface Details {
   compDetails: {
@@ -22,8 +23,8 @@ export function Company(props: Details) {
       <Card
         sx={{
           borderRadius: 4,
-          height: 200,
-          maxWidth: "320px",
+          height: 318,
+          maxWidth: 279,
           margin: "10px",
           textAlign: "start",
           transitionDuration: "0.1s",
@@ -42,30 +43,36 @@ export function Company(props: Details) {
           sx={{
             opacity: theme.demoImageOpacity,
             filter: "alpha(opacity=40)",
+            width: "100%",
+            height: "60%",
+            objectFit: "cover",
           }}
         />
-
         <CardContent
           sx={{
             position: "absolute",
             overflow: "visible",
-            top: 10,
-            left: "10%",
+            top: "59%",
+            left: "11%",
             transform: "translateX(-50%)",
           }}
         >
-          <p className="text-2xl font-bold">{props.compDetails.name}</p>
-          <Typography sx={{ fontSize: 14 }} color="primary" gutterBottom>
-            Word of the Day
+          <Typography variant="h5" fontWeight={700} color="custom1">
+            {props.compDetails.name}
           </Typography>
-          <Typography variant="h5" component="div"></Typography>
+          {props.compDetails.num_employees && (
+            <Typography
+              sx={{ mb: 1.5 }}
+              color="text.primary"
+              display="flex"
+              alignContent="center"
+            >
+              <PeopleAltIcon fontSize="small" sx={{ paddingTop: "4px" }} />
+              <p className="pl-2">{props.compDetails.num_employees}</p>
+            </Typography>
+          )}
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            adjective
-          </Typography>
-          <Typography variant="body2">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
+            About: {props.compDetails.description}
           </Typography>
         </CardContent>
       </Card>

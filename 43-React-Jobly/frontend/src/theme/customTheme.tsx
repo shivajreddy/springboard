@@ -25,9 +25,15 @@ import { createTheme } from "@mui/material";
 declare module "@mui/material/styles/createPalette" {
   interface Pallette {
     custom1: React.CSSProperties["color"];
+    custom2: React.CSSProperties["color"];
+    custom3: React.CSSProperties["color"];
+    custom4: React.CSSProperties["color"];
   }
   interface PaletteOptions {
     custom1?: React.CSSProperties["color"];
+    custom2?: React.CSSProperties["color"];
+    custom3?: React.CSSProperties["color"];
+    custom4?: React.CSSProperties["color"];
   }
 }
 
@@ -44,9 +50,12 @@ const joblyLightTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#49D8CD",
+      main: "#472D2D",
     },
-    custom1: "#BFACE0",
+    custom1: "#472D2D",
+    custom2: "#553939",
+    custom3: "#704F4F",
+    custom4: "#A77979",
   },
   demoImageOpacity: 0.4,
   components: {
@@ -69,9 +78,12 @@ const joblyDarkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#241C2D",
+      main: "#645CAA",
     },
-    custom1: "#553939",
+    custom1: "#645CAA",
+    custom2: "#A084CA",
+    custom3: "#BFACE0",
+    custom4: "#EBC7E8",
   },
   demoImageOpacity: 0.1,
   components: {

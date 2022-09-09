@@ -32,7 +32,7 @@ const ResponsiveAppBar = () => {
   // const [logInStatus, setLogInStatus] = React.useState(false);
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: "custom1" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
