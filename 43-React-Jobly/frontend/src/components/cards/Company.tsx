@@ -24,9 +24,10 @@ export function Company(props: Details) {
           maxWidth: "320px",
           margin: "10px",
           transitionDuration: "0.1s",
+          color: "custom1",
+          // boxShadow: 25,
           ":hover": {
-            boxShadow: "2px 2px 2px 2px red",
-            zIndex: 999,
+            boxShadow: 26,
           },
         }}
       >
