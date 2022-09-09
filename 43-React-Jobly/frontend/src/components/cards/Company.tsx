@@ -31,6 +31,8 @@ export function Company(props: Details) {
           color: "custom1",
           // boxShadow: 25,
           ":hover": {
+            // border: "1px solid rgb(233,30,99)",
+            border: "custom2",
             boxShadow: 26,
           },
         }}
@@ -61,15 +63,17 @@ export function Company(props: Details) {
             {props.compDetails.name}
           </Typography>
           {props.compDetails.num_employees && (
-            <Typography
-              sx={{ mb: 1.5 }}
-              color="text.primary"
-              display="flex"
-              alignContent="center"
-            >
+            <div>
               <PeopleAltIcon fontSize="small" sx={{ paddingTop: "4px" }} />
-              <p className="pl-2">{props.compDetails.num_employees}</p>
-            </Typography>
+              <Typography
+                sx={{ mb: 1.5 }}
+                color="text.primary"
+                display="flex"
+                alignContent="center"
+              >
+                {props.compDetails.num_employees}
+              </Typography>
+            </div>
           )}
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             About: {props.compDetails.description}
