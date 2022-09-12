@@ -8,7 +8,6 @@ import { ThemeProvider } from "@mui/system";
 import { joblyLightTheme, joblyDarkTheme } from "./theme/customTheme";
 import ThemeContext from "./theme/themeContext";
 import { useState } from "react";
-import { createTheme } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
 function AppRoutes() {

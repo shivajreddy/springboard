@@ -1,11 +1,11 @@
 import React from "react";
-import { Company } from "../components/cards/Company";
+import { Company } from "../components/Company";
 import axios from "axios";
 import config from "../config.json";
 import { Box } from "@mui/system";
 import Loading from "../components/Loading";
 import { Typography } from "@mui/material";
-import { CompanyInterface } from "../components/cards/Company";
+import { CompanyInterface } from "../components/Company";
 
 function Companies() {
   const [companies, setCompanies] = React.useState<CompanyInterface[]>();
