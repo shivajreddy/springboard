@@ -6,30 +6,25 @@ import config from "../config.json";
 import { Box } from "@mui/system";
 import Loading from "../components/Loading";
 import { Typography } from "@mui/material";
+import { CompanyInterface } from "../components/cards/Company";
 
 const sampleData = {
   handle: "test-handle",
   name: "test-name",
-  num_employees: "21",
+  numEmployees: "21",
   description: "test-description",
   logo_url: null,
 };
 
-interface CompanyInterface {
-  name: string;
-  handle: string;
-  num_employees: string | null;
-  description: string;
-  logo_url: string;
-}
-
 function Companies() {
   const [companies, setCompanies] = React.useState<CompanyInterface[]>();
+  console.log("companies state is", companies);
 
   React.useEffect(() => {
     async function makeRequest() {
       const res = await axios.get(config.BASE_URL + "/companies");
       setCompanies(res.data.companies);
+      console.log(res.data.companies);
       return res.data.companies;
     }
     makeRequest();
@@ -38,7 +33,7 @@ function Companies() {
   return (
     <div>
       <Typography variant="h3" textAlign="start">
-        Companies
+        .
       </Typography>
       <Box
         sx={{
@@ -49,15 +44,9 @@ function Companies() {
           alignItems: "center",
         }}
       >
+        {/* <Company details={sampleData} /> */}
         {!companies && <Loading />}
-        {companies &&
-          companies.map((c: CompanyInterface) => (
-            <Company key={c.handle} compDetails={c} />
-          ))}
-        <Company compDetails={sampleData} />
-        <Company compDetails={sampleData} />
-        <Company compDetails={sampleData} />
-        <Company compDetails={sampleData} />
+        {companies && companies.map((c) => <Company key={c.handle} {...c} />)}
       </Box>
     </div>
   );
