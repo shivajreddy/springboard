@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Companies from "./pages/Companies";
 import Jobs from "./pages/Jobs";
-import User from "./pages/User";
+import RegistrationForm from "./pages/RegisterUserForm";
+import LoginForm from "./pages/LoginForm";
 import TestPage from "./pages/TestPage";
 import NavBar from "./components/Navbar";
 import { ThemeProvider } from "@mui/system";
@@ -27,8 +28,9 @@ function AppRoutes() {
           <Routes>
             <Route path="/companies" element={<Companies />}></Route>
             <Route path="/jobs" element={<Jobs />}></Route>
-            <Route path="/user" element={<User />}></Route>
             <Route path="/test" element={<TestPage />}></Route>
+            <Route path="/register" element={<RegistrationForm />}></Route>
+            <Route path="/login" element={<LoginForm />}></Route>
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
