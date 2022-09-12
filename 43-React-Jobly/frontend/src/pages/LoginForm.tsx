@@ -4,10 +4,10 @@ import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import PasswordIcon from "@mui/icons-material/Password";
 import { Button, Typography } from "@mui/material";
 import { useState } from "react";
+import axios from "axios";
+import config from "../config.json";
 
 export default function LoginForm() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   /** Login */
   function login(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -18,8 +18,14 @@ export default function LoginForm() {
       e.currentTarget.elements.namedItem("form-password") as HTMLInputElement
     ).value;
     console.log(username, password);
-    setUsername(username);
-    setPassword(password);
+    async function makeRequest() {
+      const res = await axios.post(config.BASE_URL + "/auth/token", {
+        username: username,
+        password: password,
+      });
+      console.log("this is the res", res);
+    }
+    makeRequest();
     return 21;
   }
 

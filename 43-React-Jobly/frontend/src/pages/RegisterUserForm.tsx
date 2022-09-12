@@ -5,27 +5,47 @@ import BadgeIcon from "@mui/icons-material/Badge";
 import PasswordIcon from "@mui/icons-material/Password";
 import EmailIcon from "@mui/icons-material/Email";
 import { Button, Typography } from "@mui/material";
+import axios from "axios";
+import config from "../config.json";
+import "../styles/RegisterForm.css";
 
 export default function RegisterForm() {
   /** Register a new user */
+  let username: string,
+    password: string,
+    firstname: string,
+    lastname: string,
+    email: string;
   function register(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const username = (
+    username = (
       e.currentTarget.elements.namedItem("form-username") as HTMLInputElement
     ).value;
-    const password = (
+    password = (
       e.currentTarget.elements.namedItem("form-password") as HTMLInputElement
     ).value;
-    const firstname = (
+    firstname = (
       e.currentTarget.elements.namedItem("form-first-name") as HTMLInputElement
     ).value;
-    const lastname = (
+    lastname = (
       e.currentTarget.elements.namedItem("form-last-name") as HTMLInputElement
     ).value;
-    const email = (
+    email = (
       e.currentTarget.elements.namedItem("form-email") as HTMLInputElement
     ).value;
     console.log(username, password, firstname, lastname, email);
+
+    async function makeRequest() {
+      const res = await axios.post(config.BASE_URL + "/auth/register", {
+        username,
+        password,
+        firstname,
+        lastname,
+        email,
+      });
+      console.log("this is the response", res);
+    }
+    makeRequest();
   }
 
   return (
@@ -47,7 +67,7 @@ export default function RegisterForm() {
         <AssignmentIndIcon sx={{ margin: "20px" }} />
         <TextField name="form-username" label="Username" variant="standard" />
       </div>
-      <div style={{ margin: "10px" }}>
+      <div style={{ margin: "10px" }} className="error">
         <PasswordIcon sx={{ margin: "20px" }} />
         <TextField
           name="form-password"
@@ -68,6 +88,7 @@ export default function RegisterForm() {
       <div style={{ margin: "10px" }}>
         <BadgeIcon sx={{ margin: "20px" }} />
         <TextField name="form-last-name" label="Last name" variant="standard" />
+        <p></p>
       </div>
       <div style={{ margin: "10px" }}>
         <EmailIcon sx={{ margin: "20px" }} />
