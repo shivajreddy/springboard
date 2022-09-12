@@ -1,5 +1,4 @@
-import React, { ReactElement } from "react";
-// testing company card
+import React from "react";
 import { Company } from "../components/cards/Company";
 import axios from "axios";
 import config from "../config.json";
