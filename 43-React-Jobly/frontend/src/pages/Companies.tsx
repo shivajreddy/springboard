@@ -8,14 +8,6 @@ import Loading from "../components/Loading";
 import { Typography } from "@mui/material";
 import { CompanyInterface } from "../components/cards/Company";
 
-const sampleData = {
-  handle: "test-handle",
-  name: "test-name",
-  numEmployees: "21",
-  description: "test-description",
-  logo_url: null,
-};
-
 function Companies() {
   const [companies, setCompanies] = React.useState<CompanyInterface[]>();
   console.log("companies state is", companies);
