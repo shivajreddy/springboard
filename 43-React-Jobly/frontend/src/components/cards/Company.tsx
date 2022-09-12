@@ -1,4 +1,4 @@
-import { Divider, Skeleton } from "@mui/material";
+import { Divider } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
@@ -11,13 +11,7 @@ export interface CompanyInterface {
   logo_url?: string | null;
 }
 
-export function Company({
-  name,
-  handle,
-  numEmployees,
-  description,
-  logo_url,
-}: CompanyInterface) {
+export function Company(props: CompanyInterface) {
   const theme = useTheme();
   const newBox = (
     <div
@@ -58,10 +52,10 @@ export function Company({
       >
         <div style={{ padding: "10px 30px 10px 20px" }}>
           <Typography variant="h5" fontWeight={600} padding="5px">
-            {name}
+            {props.name}
           </Typography>
           <Divider />
-          <Typography padding="5px">{description}</Typography>
+          <Typography padding="5px">{props.description}</Typography>
           <div
             style={{
               display: "flex",
@@ -70,7 +64,7 @@ export function Company({
             <PeopleAltIcon
               sx={{ verticalAlign: "middle", padding: "2px", marginTop: "4px" }}
             />
-            <Typography padding="5px">{numEmployees}</Typography>
+            <Typography padding="5px">{props.numEmployees}</Typography>
           </div>
         </div>
         <div
@@ -84,7 +78,7 @@ export function Company({
             width: "100%",
           }}
         >
-          {handle}
+          {props.handle}
         </div>
       </div>
     </div>

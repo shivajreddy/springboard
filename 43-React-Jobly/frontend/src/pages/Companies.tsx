@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 // testing company card
 import { Company } from "../components/cards/Company";
 import axios from "axios";
