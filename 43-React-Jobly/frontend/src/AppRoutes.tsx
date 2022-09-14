@@ -10,13 +10,10 @@ import { joblyLightTheme, joblyDarkTheme } from "./theme/customTheme";
 import ThemeContext from "./theme/themeContext";
 import { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
+import Company from "./pages/Company";
 
 function AppRoutes() {
   const [currTheme, setCurrTheme] = useState("dark");
-  // let currThemeObject =
-  //   currTheme === "dark"
-  //     ? createTheme(joblyLightTheme)
-  //     : createTheme(joblyDarkTheme);
   let currThemeObject = currTheme === "dark" ? joblyLightTheme : joblyDarkTheme;
 
   return (
@@ -27,9 +24,10 @@ function AppRoutes() {
           <NavBar />
           <Routes>
             <Route path="/companies" element={<Companies />}></Route>
+            <Route path="/company/:companyName" element={<Company />}></Route>
             <Route path="/jobs" element={<Jobs />}></Route>
             <Route path="/test" element={<TestPage />}></Route>
-            <Route path="/register" element={<RegistrationForm />}></Route>
+            <Route path="/signup" element={<RegistrationForm />}></Route>
             <Route path="/login" element={<LoginForm />}></Route>
           </Routes>
         </BrowserRouter>

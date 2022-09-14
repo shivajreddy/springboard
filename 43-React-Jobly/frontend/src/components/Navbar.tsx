@@ -12,7 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import MaterialUISwitch from "./MuiSwitch";
 
-const pages = ["companies", "jobs", "user"];
+const pages = ["companies", "jobs", "profile", "signup", "login"];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(

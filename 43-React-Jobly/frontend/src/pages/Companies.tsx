@@ -1,31 +1,49 @@
 import React from "react";
 import { Company } from "../components/Company";
-import axios from "axios";
-import config from "../config.json";
 import { Box } from "@mui/system";
 import Loading from "../components/Loading";
-import { Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import { CompanyInterface } from "../components/Company";
+import JoblyApi from "../utilities/joblyAPI";
 
 function Companies() {
   const [companies, setCompanies] = React.useState<CompanyInterface[]>();
-  console.log("companies state is", companies);
 
   React.useEffect(() => {
-    async function makeRequest() {
-      const res = await axios.get(config.BASE_URL + "/companies");
-      setCompanies(res.data.companies);
-      console.log(res.data.companies);
-      return res.data.companies;
-    }
+    const makeRequest = async () => {
+      const data = await JoblyApi.getCompanies();
+      setCompanies(data);
+    };
     makeRequest();
   }, []);
 
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const searchTerm = (
+      e.currentTarget.elements.namedItem("search-name") as HTMLInputElement
+    ).value;
+
+    const result = await JoblyApi.getCompany(searchTerm);
+    console.log(result);
+    setCompanies([result]);
+  }
+
   return (
     <div>
-      <Typography variant="h3" textAlign="start">
+      <br />
+      {/* <Typography variant="h3" textAlign="start">
         .
-      </Typography>
+      </Typography> */}
+      <div>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            name="search-name"
+            variant="outlined"
+            sx={{ margin: "0px", padding: "0px" }}
+          />
+          <Button type="submit">Submit</Button>
+        </form>
+      </div>
       <Box
         sx={{
           display: "flex",

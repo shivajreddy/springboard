@@ -9,7 +9,6 @@ import { Button, Typography } from "@mui/material";
 import axios from "axios";
 import config from "../config.json";
 import useLocalStorage from "../hooks/useLocalStorage";
-import FormInput from "../components/FormInput";
 
 const inputs = [
   {
@@ -140,21 +139,6 @@ export default function RegisterForm() {
       <Typography variant="h6" fontWeight={700}>
         Register
       </Typography>
-      <div>
-        {inputs.map((input) => (
-          <FormInput
-            key={input.id}
-            id={input.id}
-            name={input.name}
-            type={input.type}
-            placeholder={input.placeholder}
-            errorMessage={input.errorMessage}
-            label={input.label}
-            required={input.required}
-            icon={input.icon}
-          />
-        ))}
-      </div>
       <div style={{ margin: "10px" }}>
         <AssignmentIndIcon sx={{ margin: "20px" }} />
         <TextField name="form-username" label="Username" variant="standard" />

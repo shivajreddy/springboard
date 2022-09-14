@@ -2,6 +2,7 @@ import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import { useContext } from "react";
 import ThemeContext from "../theme/themeContext";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const ThemeSwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -53,10 +54,19 @@ const ThemeSwitch = styled(Switch)(({ theme }) => ({
 export default function MaterialUISwitch() {
   const context = useContext(ThemeContext);
 
+  // useLocalStorage("theme", "dark");
+  // const currTheme = useLocalStorage("theme", "dark");
+
   const toggleTheme = () => {
-    context?.currTheme === "dark"
-      ? context.setCurrTheme("light")
-      : context?.setCurrTheme("dark");
+    if (context?.currTheme === "dark") {
+      context.setCurrTheme("light");
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      useLocalStorage("theme", "light");
+    } else {
+      context?.setCurrTheme("dark");
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      useLocalStorage("theme", "dark");
+    }
   };
 
   return <ThemeSwitch onChange={toggleTheme} />;
