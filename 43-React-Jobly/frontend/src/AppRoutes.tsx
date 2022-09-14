@@ -11,6 +11,7 @@ import ThemeContext from "./theme/themeContext";
 import { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Company from "./pages/Company";
+import Profile from "./pages/Profile";
 
 function AppRoutes() {
   const [currTheme, setCurrTheme] = useState("dark");
@@ -29,6 +30,7 @@ function AppRoutes() {
             <Route path="/test" element={<TestPage />}></Route>
             <Route path="/signup" element={<RegistrationForm />}></Route>
             <Route path="/login" element={<LoginForm />}></Route>
+            <Route path="/profile" element={<Profile />}></Route>
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

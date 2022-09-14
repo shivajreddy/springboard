@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
@@ -5,8 +6,10 @@ import PasswordIcon from "@mui/icons-material/Password";
 import { Button, Typography } from "@mui/material";
 import axios from "axios";
 import config from "../config.json";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 export default function LoginForm() {
+  const [token, setToken] = useLocalStorage("token");
   /** Login */
   function login(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -23,6 +26,7 @@ export default function LoginForm() {
         password: password,
       });
       console.log("this is the res", res);
+      setToken(res.data.token);
     }
     makeRequest();
     return 21;
