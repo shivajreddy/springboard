@@ -1,5 +1,6 @@
 import axios from "axios";
 import config from "../config.json";
+import { IUser } from "../pages/Profile";
 
 // const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 const BASE_URL = config.BASE_URL;
@@ -44,7 +45,7 @@ class JoblyApi {
   }
 
   // TODO all axios routes here...
-  /** Get all companies */
+  // /** Get all companies */
   static async getCompanies() {
     try {
       let res = await this.request(`companies`);
@@ -57,15 +58,31 @@ class JoblyApi {
   }
 
   /** Get user details */
-  static async getUser(userId: number) {
+  static async getUser(userId: string) {
     let res = await this.request(`users/${userId}`);
-    return res.user;
+    return res.user as IUser;
   }
 
   /** Get Jobs */
   static async getJobs() {
     let res = await this.request(`jobs`);
     return res.jobs;
+  }
+
+  /** Login with username and passwrod */
+  static async login(data: Pick<IUser, "username" | "password">) {
+    console.log("making log in with this data", data);
+    let res = await this.request(`auth/token`, data, "post");
+    return res.token;
+  }
+
+  /** Update the user details */
+  static async updateUser(
+    username: string,
+    data: Pick<IUser, "password" | "firstName" | "lastName" | "email">
+  ) {
+    let res = await this.request(`users/${username}`, data, "patch");
+    return res.user;
   }
 }
 
