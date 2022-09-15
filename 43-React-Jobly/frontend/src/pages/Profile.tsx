@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import JoblyApi from "../utilities/joblyAPI";
@@ -15,7 +15,7 @@ export interface IUser {
 }
 
 function Profile() {
-  const [token] = useLocalStorage("token");
+  const [token, setToken] = useLocalStorage("token");
   const [userDetails, setUserDetails] = useState<IUser>();
 
   useEffect(() => {
@@ -29,7 +29,6 @@ function Profile() {
         }
       } catch (error) {
         console.error("Error Fetching user info", error);
-        // setUserDetails({});
       }
     }
     getCurrentUser();
@@ -45,7 +44,6 @@ function Profile() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log("this is the target", e.currentTarget);
 
     let newDetails;
     if (userDetails) {
@@ -62,12 +60,17 @@ function Profile() {
       setUserDetails(updatedUser);
     }
   }
-  console.log("this is the user object state", userDetails);
+
+  // TODO return to login page
+  if (typeof token !== "string") {
+    return <p>no user login</p>;
+  }
 
   return (
     <>
-      <p>{token}</p>
-      <h2>Profile page</h2>
+      <Typography variant="h5" sx={{ margin: "10px" }}>
+        Welcome back {userDetails?.firstName}!
+      </Typography>
       <div
         style={{
           display: "flex",
@@ -138,6 +141,13 @@ function Profile() {
           </Button>
         </form>
       </div>
+      <Button
+        onClick={() => setToken(null)}
+        sx={{ margin: "10px" }}
+        variant="contained"
+      >
+        Logout
+      </Button>
     </>
   );
 }

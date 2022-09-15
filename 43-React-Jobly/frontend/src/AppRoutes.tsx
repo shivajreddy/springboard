@@ -12,10 +12,11 @@ import { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Company from "./pages/Company";
 import Profile from "./pages/Profile";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 function AppRoutes() {
-  const [currTheme, setCurrTheme] = useState("dark");
-  let currThemeObject = currTheme === "dark" ? joblyLightTheme : joblyDarkTheme;
+  const [currTheme, setCurrTheme] = useLocalStorage("theme", "dark");
+  let currThemeObject = currTheme === "dark" ? joblyDarkTheme : joblyLightTheme;
 
   return (
     <ThemeContext.Provider value={{ currTheme, setCurrTheme }}>

@@ -54,20 +54,24 @@ const ThemeSwitch = styled(Switch)(({ theme }) => ({
 export default function MaterialUISwitch() {
   const context = useContext(ThemeContext);
 
+  const [localTheme, setLocalTheme] = useLocalStorage("theme", "dark");
+
   // useLocalStorage("theme", "dark");
   // const currTheme = useLocalStorage("theme", "dark");
 
   const toggleTheme = () => {
     if (context?.currTheme === "dark") {
       context.setCurrTheme("light");
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      useLocalStorage("theme", "light");
+      setLocalTheme("light");
     } else {
       context?.setCurrTheme("dark");
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      useLocalStorage("theme", "dark");
+      setLocalTheme("dark");
     }
   };
 
+  if (localTheme === "dark") {
+    return <ThemeSwitch onChange={toggleTheme} defaultChecked />;
+  }
   return <ThemeSwitch onChange={toggleTheme} />;
 }
