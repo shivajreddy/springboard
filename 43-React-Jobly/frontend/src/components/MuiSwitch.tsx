@@ -71,7 +71,8 @@ export default function MaterialUISwitch() {
   };
 
   if (localTheme === "dark") {
-    return <ThemeSwitch onChange={toggleTheme} defaultChecked />;
+    return <ThemeSwitch onChange={toggleTheme} checked={true} />;
+  } else {
+    return <ThemeSwitch onChange={toggleTheme} checked={false} />;
   }
-  return <ThemeSwitch onChange={toggleTheme} />;
 }

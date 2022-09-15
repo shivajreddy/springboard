@@ -21,7 +21,7 @@ function Profile() {
   useEffect(() => {
     async function getCurrentUser() {
       try {
-        if (token) {
+        if (token !== "null") {
           const { username } = decodeToken<any>(token);
           JoblyApi.token = token;
           const currentUser: IUser = await JoblyApi.getUser(username);
