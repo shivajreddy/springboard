@@ -7,8 +7,6 @@ import { JobInterface } from "../components/Job";
 function Jobs() {
   const [jobs, setJobs] = useState<JobInterface[]>();
 
-  console.log("jobs state", jobs);
-
   useEffect(() => {
     const makeRequest = async () => {
       const res = await JoblyApi.getJobs();

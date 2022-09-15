@@ -18,20 +18,17 @@ export default function LoginForm() {
     const password = (
       e.currentTarget.elements.namedItem("form-password") as HTMLInputElement
     ).value;
-    console.log(username, password);
     async function makeRequest() {
       const res = await axios.post(config.BASE_URL + "/auth/token", {
         username: username,
         password: password,
       });
-      console.log("this is the res", res);
       setToken(res.data.token);
     }
     makeRequest();
     return 21;
   }
 
-  console.log("this is the token", token);
   return (
     <Box
       component="form"
