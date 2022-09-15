@@ -62,94 +62,95 @@ function Profile() {
   }
 
   // TODO return to login page
-  if (typeof token !== "string") {
+  console.log("this is the token", token, typeof token);
+  if (token === "null" || token === null) {
     return <p>no user login</p>;
-  }
-
-  return (
-    <>
-      <Typography variant="h5" sx={{ margin: "10px" }}>
-        Welcome back {userDetails?.firstName}!
-      </Typography>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignContent: "center",
-        }}
-      >
-        <form
-          onSubmit={handleSubmit}
+  } else {
+    return (
+      <>
+        <Typography variant="h5" sx={{ margin: "10px" }}>
+          Welcome back {userDetails?.firstName}!
+        </Typography>
+        <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            width: "60vw",
+            justifyContent: "center",
+            alignContent: "center",
           }}
         >
-          <TextField
-            name="username"
-            sx={{ margin: "10px" }}
-            label="Username"
-            defaultValue="username"
-            value={userDetails?.username}
-            disabled
-            focused
-          />
-          <TextField
-            name="firstName"
-            sx={{ margin: "10px" }}
-            label="First Name"
-            value={userDetails?.firstName}
-            onChange={handleChange}
-            defaultValue="First name"
-          />
-          <TextField
-            name="lastName"
-            sx={{ margin: "10px" }}
-            label="Last Name"
-            value={userDetails?.lastName}
-            onChange={handleChange}
-            defaultValue="Last Name"
-          />
-          <TextField
-            name="email"
-            sx={{ margin: "10px" }}
-            label="Email"
-            value={userDetails?.email}
-            onChange={handleChange}
-            defaultValue="Email"
-          />
-          <TextField
-            name="isAdmin"
-            sx={{ margin: "10px" }}
-            label="Admin"
-            value={userDetails?.isAdmin}
-            disabled
-            defaultValue="Is Admin?"
-          />
-          <TextField
-            name="password"
-            type="password"
-            sx={{ margin: "10px" }}
-            label="Confirm Password"
-            value={userDetails?.password}
-            onChange={handleChange}
-            defaultValue="Password"
-          />
-          <Button type="submit" variant="contained">
-            Submit
-          </Button>
-        </form>
-      </div>
-      <Button
-        onClick={() => setToken(null)}
-        sx={{ margin: "10px" }}
-        variant="contained"
-      >
-        Logout
-      </Button>
-    </>
-  );
+          <form
+            onSubmit={handleSubmit}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "60vw",
+            }}
+          >
+            <TextField
+              name="username"
+              sx={{ margin: "10px" }}
+              label="Username"
+              defaultValue="username"
+              value={userDetails?.username}
+              disabled
+              focused
+            />
+            <TextField
+              name="firstName"
+              sx={{ margin: "10px" }}
+              label="First Name"
+              value={userDetails?.firstName}
+              onChange={handleChange}
+              defaultValue="First name"
+            />
+            <TextField
+              name="lastName"
+              sx={{ margin: "10px" }}
+              label="Last Name"
+              value={userDetails?.lastName}
+              onChange={handleChange}
+              defaultValue="Last Name"
+            />
+            <TextField
+              name="email"
+              sx={{ margin: "10px" }}
+              label="Email"
+              value={userDetails?.email}
+              onChange={handleChange}
+              defaultValue="Email"
+            />
+            <TextField
+              name="isAdmin"
+              sx={{ margin: "10px" }}
+              label="Admin"
+              value={userDetails?.isAdmin}
+              disabled
+              defaultValue="Is Admin?"
+            />
+            <TextField
+              name="password"
+              type="password"
+              sx={{ margin: "10px" }}
+              label="Confirm Password"
+              value={userDetails?.password}
+              onChange={handleChange}
+              defaultValue="Password"
+            />
+            <Button type="submit" variant="contained">
+              Submit
+            </Button>
+          </form>
+        </div>
+        <Button
+          onClick={() => setToken(null)}
+          sx={{ margin: "10px" }}
+          variant="contained"
+        >
+          Logout
+        </Button>
+      </>
+    );
+  }
 }
 
 export default Profile;

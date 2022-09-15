@@ -29,43 +29,49 @@ export default function LoginForm() {
     return 21;
   }
 
-  return (
-    <Box
-      component="form"
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        marginTop: "50px",
-        alignItems: "center",
-      }}
-      autoComplete="off"
-      onSubmit={login}
-    >
-      <Typography variant="h6" fontWeight={700}>
-        Login
-      </Typography>
-      <div style={{ margin: "10px" }}>
-        <AssignmentIndIcon sx={{ margin: "20px" }} />
-        <TextField name="form-username" label="Username" variant="standard" />
-      </div>
-      <div style={{ margin: "10px" }}>
-        <PasswordIcon sx={{ margin: "20px" }} />
-        <TextField
-          name="form-password"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-          variant="standard"
-        />
-      </div>
-      <Button
-        color="primary"
-        variant="contained"
-        sx={{ alignContent: "center" }}
-        type="submit"
+  // TODO redirect to user page if already logged in
+  console.log("token found in login form", token, typeof token);
+  if (token === "null" || token === null) {
+    return (
+      <Box
+        component="form"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          marginTop: "50px",
+          alignItems: "center",
+        }}
+        autoComplete="off"
+        onSubmit={login}
       >
-        Log in
-      </Button>
-    </Box>
-  );
+        <Typography variant="h6" fontWeight={700}>
+          Login
+        </Typography>
+        <div style={{ margin: "10px" }}>
+          <AssignmentIndIcon sx={{ margin: "20px" }} />
+          <TextField name="form-username" label="Username" variant="standard" />
+        </div>
+        <div style={{ margin: "10px" }}>
+          <PasswordIcon sx={{ margin: "20px" }} />
+          <TextField
+            name="form-password"
+            label="Password"
+            type="password"
+            autoComplete="current-password"
+            variant="standard"
+          />
+        </div>
+        <Button
+          color="primary"
+          variant="contained"
+          sx={{ alignContent: "center" }}
+          type="submit"
+        >
+          Log in
+        </Button>
+      </Box>
+    );
+  } else {
+    return <p>Already logged in</p>;
+  }
 }
