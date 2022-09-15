@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
@@ -32,6 +31,7 @@ export default function LoginForm() {
     return 21;
   }
 
+  console.log("this is the token", token);
   return (
     <Box
       component="form"

@@ -1,6 +1,5 @@
 import { Button, Divider } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
 import PaidIcon from "@mui/icons-material/Paid";
 import BalanceIcon from "@mui/icons-material/Balance";
 
@@ -13,7 +12,6 @@ export interface JobInterface {
 }
 
 export function Job(props: JobInterface) {
-  const theme = useTheme();
   const newBox = (
     <div
       style={{

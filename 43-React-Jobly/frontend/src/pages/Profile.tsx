@@ -15,7 +15,7 @@ export interface IUser {
 }
 
 function Profile() {
-  const [token, setToken] = useLocalStorage("token");
+  const [token] = useLocalStorage("token");
   const [userDetails, setUserDetails] = useState<IUser>();
 
   useEffect(() => {

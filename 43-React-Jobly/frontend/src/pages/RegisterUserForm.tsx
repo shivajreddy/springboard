@@ -10,64 +10,6 @@ import axios from "axios";
 import config from "../config.json";
 import useLocalStorage from "../hooks/useLocalStorage";
 
-const inputs = [
-  {
-    id: 1,
-    name: "username",
-    type: "text",
-    placeholder: "Username",
-    errorMessage:
-      "Username should be 3-16 characters and shouldn't include any special character!",
-    label: "Username",
-    pattern: "^[A-Za-z0-9]{3,16}$",
-    required: true,
-    icon: <AssignmentIndIcon sx={{ margin: "20px" }} />,
-  },
-  {
-    id: 2,
-    name: "password",
-    type: "password",
-    placeholder: "Password",
-    errorMessage: "Password must be 8-20 characters length",
-    label: "Password",
-    pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
-    required: true,
-    icon: <PasswordIcon sx={{ margin: "20px" }} />,
-  },
-  {
-    id: 3,
-    name: "firstname",
-    type: "text",
-    placeholder: "First Name",
-    errorMessage: "Must provide your First name",
-    label: "First Name",
-    pattern: "^[A-Za-z0-9]{3,16}$",
-    required: true,
-    icon: <BadgeIcon sx={{ margin: "20px" }} />,
-  },
-  {
-    id: 4,
-    name: "lastname",
-    type: "text",
-    placeholder: "Last Name",
-    errorMessage: "Must provide your Last name",
-    label: "Last Name",
-    pattern: "^[A-Za-z0-9]{3,16}$",
-    required: true,
-    icon: <BadgeIcon sx={{ margin: "20px" }} />,
-  },
-  {
-    id: 5,
-    name: "email",
-    type: "email",
-    placeholder: "Email",
-    errorMessage: "Must provide a valid Email",
-    label: "Email",
-    required: true,
-    icon: <EmailIcon sx={{ margin: "20px" }} />,
-  },
-];
-
 export default function RegisterForm() {
   /** Register a new user */
   let username: string,
@@ -79,6 +21,7 @@ export default function RegisterForm() {
 
   // local storage
   const [localStorageToken, setLocalStorageToken] = useLocalStorage("token");
+  console.log("this is the local storage token", localStorageToken);
 
   function register(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

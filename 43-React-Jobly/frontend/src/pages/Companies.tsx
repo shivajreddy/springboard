@@ -2,7 +2,7 @@ import React from "react";
 import { Company } from "../components/Company";
 import { Box } from "@mui/system";
 import Loading from "../components/Loading";
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { CompanyInterface } from "../components/Company";
 import JoblyApi from "../utilities/joblyAPI";
 
