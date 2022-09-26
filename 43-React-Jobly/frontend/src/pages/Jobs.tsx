@@ -21,7 +21,7 @@ function Jobs() {
     if (!token || token === "null") {
       navigate("/login");
     }
-  }, []);
+  }, [navigate, token]);
 
   return (
     <>
