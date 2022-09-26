@@ -29,7 +29,7 @@ export default function RegisterForm() {
     if (token && token !== "null") {
       navigate("/profile");
     }
-  }, [token]);
+  }, [navigate, token]);
 
   async function signUp(signUpData: UserType) {
     try {

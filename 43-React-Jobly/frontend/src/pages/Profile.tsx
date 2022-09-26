@@ -4,7 +4,6 @@ import JoblyApi from "../utilities/joblyAPI";
 import { decodeToken } from "react-jwt";
 import { TokenContext } from "../context/appContext";
 import { TokenType } from "../@types/token";
-import { UserType } from "../@types/user";
 import { useNavigate } from "react-router-dom";
 
 export interface IUser {
@@ -47,7 +46,7 @@ function Profile() {
     if (!token || token === "null") {
       navigate("/login");
     }
-  }, [token]);
+  }, [navigate, token]);
 
   function handleChange(e: any) {
     const { name, value } = e.currentTarget;
