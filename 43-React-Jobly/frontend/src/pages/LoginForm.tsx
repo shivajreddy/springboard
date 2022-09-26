@@ -39,21 +39,11 @@ export default function LoginForm() {
   /** Handle form submission */
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const username = (
-      e.currentTarget.elements.namedItem("username") as HTMLInputElement
-    ).value;
-    const password = (
-      e.currentTarget.elements.namedItem("password") as HTMLInputElement
-    ).value;
-    console.log(username, password);
-    // let result = await login()
     const result = await login(formData);
     if (!result.success) {
       setFormErrors(result.error);
     }
-    console.log("this is the result on line 43 in loginform component", result);
   }
-  // console.log("these are the errors", formErrors);
 
   /** Handle form change events */
   function handleChange(e: any) {
@@ -63,8 +53,6 @@ export default function LoginForm() {
     setFormData((l) => ({ ...l, [name]: value }));
   }
 
-  // TODO redirect to user page if already logged in
-  // console.log("token found in login form", token, typeof token);
   if (token === "null" || token === null) {
     return (
       <>

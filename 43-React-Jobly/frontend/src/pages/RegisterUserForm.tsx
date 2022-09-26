@@ -45,13 +45,13 @@ export default function RegisterForm() {
   function register(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    console.log(
-      "this is the formData",
-      formData,
-      Object.fromEntries(formData.entries())
-    );
+    // console.log(
+    //   "this is the formData",
+    //   formData,
+    //   Object.fromEntries(formData.entries())
+    // );
     newUser = Object.fromEntries(formData.entries()) as UserType;
-    console.log("this is the newUser", newUser);
+    // console.log("this is the newUser", newUser);
     signUp(newUser);
   }
   if (token === null || token === "null") {

@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Company } from "../components/Company";
 import { Box } from "@mui/system";
 import Loading from "../components/Loading";
 import { Button, TextField } from "@mui/material";
 import { CompanyInterface } from "../components/Company";
 import JoblyApi from "../utilities/joblyAPI";
+import { useNavigate } from "react-router-dom";
+import { TokenContext } from "../context/appContext";
+import { TokenType } from "../@types/token";
 
 function Companies() {
   const [companies, setCompanies] = React.useState<CompanyInterface[]>();
+  const { token } = useContext(TokenContext) as TokenType;
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const makeRequest = async () => {
@@ -15,7 +20,10 @@ function Companies() {
       setCompanies(data);
     };
     makeRequest();
-  }, []);
+    if (!token || token === "null") {
+      navigate("/login");
+    }
+  }, [navigate, token]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

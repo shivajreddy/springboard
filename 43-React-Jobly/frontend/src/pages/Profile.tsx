@@ -76,8 +76,6 @@ function Profile() {
     }
   }
 
-  // TODO return to login page
-  console.log("this is the token", token, typeof token);
   if (token === "null" || token === null) {
     return <p>no user login</p>;
   } else {

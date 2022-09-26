@@ -78,7 +78,6 @@ class JoblyApi {
 
   /** Login with username and password */
   static async login(data: Pick<IUser, "username" | "password">) {
-    console.log("making joblyAPI line74 log in with this data", data);
     let res = await this.request(`auth/token`, data, "post");
     return res.token;
   }

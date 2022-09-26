@@ -3,7 +3,8 @@ import Companies from "./pages/Companies";
 import Jobs from "./pages/Jobs";
 import RegistrationForm from "./pages/RegisterUserForm";
 import LoginForm from "./pages/LoginForm";
-import TestPage from "./pages/TestPage";
+import HomePage from "./pages/HomePage";
+// import TestPage from "./pages/TestPage";
 import NavBar from "./components/Navbar";
 import { ThemeProvider } from "@mui/system";
 import { joblyLightTheme, joblyDarkTheme } from "./theme/customTheme";
@@ -24,10 +25,11 @@ function AppRoutes() {
         <BrowserRouter>
           <NavBar />
           <Routes>
+            <Route path="/" element={<HomePage />}></Route>
             <Route path="/companies" element={<Companies />}></Route>
             <Route path="/company/:companyName" element={<Company />}></Route>
             <Route path="/jobs" element={<Jobs />}></Route>
-            <Route path="/test" element={<TestPage />}></Route>
+            {/* <Route path="/test" element={<TestPage />}></Route> */}
             <Route path="/signup" element={<RegistrationForm />}></Route>
             <Route path="/login" element={<LoginForm />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
