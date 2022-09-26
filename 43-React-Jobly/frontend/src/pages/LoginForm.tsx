@@ -20,7 +20,7 @@ export default function LoginForm() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (token) {
+    if (token && token !== "null") {
       navigate("/profile");
     }
   });

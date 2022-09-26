@@ -44,10 +44,10 @@ function Profile() {
       }
     }
     getCurrentUser();
-    if (!token) {
+    if (!token || token === "null") {
       navigate("/login");
     }
-  }, [navigate, token]);
+  }, [token]);
 
   function handleChange(e: any) {
     const { name, value } = e.currentTarget;
@@ -78,7 +78,7 @@ function Profile() {
   }
 
   // TODO return to login page
-  // console.log("this is the token", token, typeof token);
+  console.log("this is the token", token, typeof token);
   if (token === "null" || token === null) {
     return <p>no user login</p>;
   } else {

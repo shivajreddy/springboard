@@ -26,7 +26,7 @@ export default function RegisterForm() {
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (token) {
+    if (token && token !== "null") {
       navigate("/profile");
     }
   }, [token]);
