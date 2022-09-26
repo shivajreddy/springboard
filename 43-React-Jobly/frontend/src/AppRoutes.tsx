@@ -8,7 +8,6 @@ import NavBar from "./components/Navbar";
 import { ThemeProvider } from "@mui/system";
 import { joblyLightTheme, joblyDarkTheme } from "./theme/customTheme";
 import ThemeContext from "./theme/themeContext";
-import { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Company from "./pages/Company";
 import Profile from "./pages/Profile";

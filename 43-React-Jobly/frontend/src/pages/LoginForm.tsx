@@ -3,15 +3,14 @@ import TextField from "@mui/material/TextField";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import PasswordIcon from "@mui/icons-material/Password";
 import { Button, Typography } from "@mui/material";
-import config from "../config.json";
-import useLocalStorage from "../hooks/useLocalStorage";
 import JoblyApi from "../utilities/joblyAPI";
 import { IUser } from "./Profile";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { TokenType } from "../@types/token";
+import { TokenContext } from "../context/appContext";
 
 export default function LoginForm() {
-  const [token, setToken] = useLocalStorage("token");
-  const [statusMessage, setStatusMessage] = useState([]);
+  const { token, setToken } = useContext(TokenContext) as TokenType;
   const [formErrors, setFormErrors] = useState<any>([]);
   const [formData, setFormData] = useState({
     username: "",
@@ -47,7 +46,7 @@ export default function LoginForm() {
     }
     console.log("this is the result on line 43 in loginform component", result);
   }
-  console.log("these are the errors", formErrors);
+  // console.log("these are the errors", formErrors);
 
   /** Handle form change events */
   function handleChange(e: any) {

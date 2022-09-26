@@ -6,22 +6,35 @@ import BadgeIcon from "@mui/icons-material/Badge";
 import PasswordIcon from "@mui/icons-material/Password";
 import EmailIcon from "@mui/icons-material/Email";
 import { Button, Typography } from "@mui/material";
-import axios from "axios";
-import config from "../config.json";
-import useLocalStorage from "../hooks/useLocalStorage";
+import { useContext } from "react";
+import { TokenContext } from "../context/appContext";
+import { TokenType } from "../@types/token";
+import JoblyApi from "../utilities/joblyAPI";
+import { UserType } from "../@types/user";
 
 export default function RegisterForm() {
   /** Register a new user */
-  let username: string,
-    password: string,
-    firstName: string,
-    lastName: string,
-    email: string,
-    token: string | null;
+  let newUser: UserType = {
+    username: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+  };
 
-  // local storage
-  const [localStorageToken, setLocalStorageToken] = useLocalStorage("token");
-  console.log("this is the local storage token", localStorageToken);
+  const { token, setToken } = useContext(TokenContext) as TokenType;
+  console.log("this is the token", token);
+
+  async function signUp(signUpData: UserType) {
+    try {
+      let new_token = await JoblyApi.signUp(signUpData);
+      setToken(new_token);
+      return { success: true };
+    } catch (error) {
+      console.error("Sign-up Failed", error);
+      return { success: false, error };
+    }
+  }
 
   function register(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -31,40 +44,9 @@ export default function RegisterForm() {
       formData,
       Object.fromEntries(formData.entries())
     );
-    username = (
-      e.currentTarget.elements.namedItem("form-username") as HTMLInputElement
-    ).value;
-    password = (
-      e.currentTarget.elements.namedItem("form-password") as HTMLInputElement
-    ).value;
-    firstName = (
-      e.currentTarget.elements.namedItem("form-first-name") as HTMLInputElement
-    ).value;
-    lastName = (
-      e.currentTarget.elements.namedItem("form-last-name") as HTMLInputElement
-    ).value;
-    email = (
-      e.currentTarget.elements.namedItem("form-email") as HTMLInputElement
-    ).value;
-    console.log(username, password, firstName, lastName, email);
-
-    async function makeRequest() {
-      try {
-        const res = await axios.post(config.BASE_URL + "/auth/register", {
-          username,
-          password,
-          firstName,
-          lastName,
-          email,
-        });
-        console.log("this is the response", res);
-        token = res.data.token;
-        setLocalStorageToken(token);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    makeRequest();
+    newUser = Object.fromEntries(formData.entries()) as UserType;
+    console.log("this is the newUser", newUser);
+    signUp(newUser);
   }
 
   return (
@@ -84,7 +66,7 @@ export default function RegisterForm() {
       </Typography>
       <div style={{ margin: "10px" }}>
         <AssignmentIndIcon sx={{ margin: "20px" }} />
-        <TextField name="form-username" label="Username" variant="standard" />
+        <TextField name="username" label="Username" variant="standard" />
       </div>
       <div style={{ margin: "10px" }} className="error">
         <PasswordIcon sx={{ margin: "20px" }} />

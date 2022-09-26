@@ -1,4 +1,5 @@
 import axios from "axios";
+import { UserType } from "../@types/user";
 import config from "../config.json";
 import { IUser } from "../pages/Profile";
 
@@ -67,6 +68,12 @@ class JoblyApi {
   static async getJobs() {
     let res = await this.request(`jobs`);
     return res.jobs;
+  }
+
+  /** Register a new user*/
+  static async signUp(data: UserType) {
+    let res = await this.request(`auth/register`, data, "post");
+    return res.token;
   }
 
   /** Login with username and password */

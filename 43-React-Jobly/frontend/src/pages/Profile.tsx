@@ -1,8 +1,10 @@
 import { Button, TextField, Typography } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import JoblyApi from "../utilities/joblyAPI";
 import { decodeToken } from "react-jwt";
+import { TokenContext } from "../context/appContext";
+import { TokenType } from "../@types/token";
 
 export interface IUser {
   username: string;
@@ -15,7 +17,7 @@ export interface IUser {
 }
 
 function Profile() {
-  const [token, setToken] = useLocalStorage("token");
+  const { token, setToken } = useContext(TokenContext) as TokenType;
   const [userDetails, setUserDetails] = useState<IUser>();
 
   useEffect(() => {
