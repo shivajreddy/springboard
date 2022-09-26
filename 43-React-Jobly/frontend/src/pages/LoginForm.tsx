@@ -5,9 +5,10 @@ import PasswordIcon from "@mui/icons-material/Password";
 import { Button, Typography } from "@mui/material";
 import JoblyApi from "../utilities/joblyAPI";
 import { IUser } from "./Profile";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TokenType } from "../@types/token";
 import { TokenContext } from "../context/appContext";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
   const { token, setToken } = useContext(TokenContext) as TokenType;
@@ -15,6 +16,13 @@ export default function LoginForm() {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
+  });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+      navigate("/profile");
+    }
   });
 
   async function login(data: Pick<IUser, "username" | "password">) {
@@ -40,8 +48,7 @@ export default function LoginForm() {
     console.log(username, password);
     // let result = await login()
     const result = await login(formData);
-    if (result.success) {
-    } else {
+    if (!result.success) {
       setFormErrors(result.error);
     }
     console.log("this is the result on line 43 in loginform component", result);

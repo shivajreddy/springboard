@@ -1,10 +1,11 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
-import useLocalStorage from "../hooks/useLocalStorage";
 import JoblyApi from "../utilities/joblyAPI";
 import { decodeToken } from "react-jwt";
 import { TokenContext } from "../context/appContext";
 import { TokenType } from "../@types/token";
+import { UserType } from "../@types/user";
+import { useNavigate } from "react-router-dom";
 
 export interface IUser {
   username: string;
@@ -18,7 +19,16 @@ export interface IUser {
 
 function Profile() {
   const { token, setToken } = useContext(TokenContext) as TokenType;
-  const [userDetails, setUserDetails] = useState<IUser>();
+  const [userDetails, setUserDetails] = useState<IUser>({
+    username: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    isAdmin: false,
+    applications: [],
+  });
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getCurrentUser() {
@@ -34,7 +44,10 @@ function Profile() {
       }
     }
     getCurrentUser();
-  }, [token]);
+    if (!token) {
+      navigate("/login");
+    }
+  }, [navigate, token]);
 
   function handleChange(e: any) {
     const { name, value } = e.currentTarget;
@@ -42,6 +55,7 @@ function Profile() {
       IUser,
       keyof IUser
     >);
+    return e.currentTarget.value;
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -93,17 +107,17 @@ function Profile() {
               sx={{ margin: "10px" }}
               label="Username"
               defaultValue="username"
-              value={userDetails?.username}
+              value={userDetails.username}
+              onChange={(e) => e.target.value}
               disabled
-              focused
             />
             <TextField
               name="firstName"
               sx={{ margin: "10px" }}
               label="First Name"
-              value={userDetails?.firstName}
-              onChange={handleChange}
               defaultValue="First name"
+              value={userDetails.firstName}
+              onChange={handleChange}
             />
             <TextField
               name="lastName"
@@ -126,6 +140,7 @@ function Profile() {
               sx={{ margin: "10px" }}
               label="Admin"
               value={userDetails?.isAdmin}
+              onChange={handleChange}
               disabled
               defaultValue="Is Admin?"
             />

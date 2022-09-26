@@ -6,11 +6,12 @@ import BadgeIcon from "@mui/icons-material/Badge";
 import PasswordIcon from "@mui/icons-material/Password";
 import EmailIcon from "@mui/icons-material/Email";
 import { Button, Typography } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { TokenContext } from "../context/appContext";
 import { TokenType } from "../@types/token";
 import JoblyApi from "../utilities/joblyAPI";
 import { UserType } from "../@types/user";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm() {
   /** Register a new user */
@@ -21,9 +22,14 @@ export default function RegisterForm() {
     lastName: "",
     email: "",
   };
-
   const { token, setToken } = useContext(TokenContext) as TokenType;
-  console.log("this is the token", token);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (token) {
+      navigate("/profile");
+    }
+  }, [token]);
 
   async function signUp(signUpData: UserType) {
     try {
@@ -48,57 +54,60 @@ export default function RegisterForm() {
     console.log("this is the newUser", newUser);
     signUp(newUser);
   }
-
-  return (
-    <Box
-      component="form"
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        marginTop: "50px",
-        alignItems: "center",
-      }}
-      autoComplete="off"
-      onSubmit={register}
-    >
-      <Typography variant="h6" fontWeight={700}>
-        Register
-      </Typography>
-      <div style={{ margin: "10px" }}>
-        <AssignmentIndIcon sx={{ margin: "20px" }} />
-        <TextField name="username" label="Username" variant="standard" />
-      </div>
-      <div style={{ margin: "10px" }} className="error">
-        <PasswordIcon sx={{ margin: "20px" }} />
-        <TextField
-          name="password"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-          variant="standard"
-        />
-      </div>
-      <div style={{ margin: "10px" }}>
-        <BadgeIcon sx={{ margin: "20px" }} />
-        <TextField name="firstName" label="First name" variant="standard" />
-      </div>
-      <div style={{ margin: "10px" }}>
-        <BadgeIcon sx={{ margin: "20px" }} />
-        <TextField name="lastName" label="Last name" variant="standard" />
-        <p></p>
-      </div>
-      <div style={{ margin: "10px" }}>
-        <EmailIcon sx={{ margin: "20px" }} />
-        <TextField name="email" label="Email" variant="standard" />
-      </div>
-      <Button
-        color="primary"
-        variant="contained"
-        sx={{ width: "20vw", alignContent: "center" }}
-        type="submit"
+  if (token === null || token === "null") {
+    return (
+      <Box
+        component="form"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          marginTop: "50px",
+          alignItems: "center",
+        }}
+        autoComplete="off"
+        onSubmit={register}
       >
-        Log in
-      </Button>
-    </Box>
-  );
+        <Typography variant="h6" fontWeight={700}>
+          Register
+        </Typography>
+        <div style={{ margin: "10px" }}>
+          <AssignmentIndIcon sx={{ margin: "20px" }} />
+          <TextField name="username" label="Username" variant="standard" />
+        </div>
+        <div style={{ margin: "10px" }}>
+          <PasswordIcon sx={{ margin: "20px" }} />
+          <TextField
+            name="password"
+            label="Password"
+            type="password"
+            autoComplete="current-password"
+            variant="standard"
+          />
+        </div>
+        <div style={{ margin: "10px" }}>
+          <BadgeIcon sx={{ margin: "20px" }} />
+          <TextField name="firstName" label="First name" variant="standard" />
+        </div>
+        <div style={{ margin: "10px" }}>
+          <BadgeIcon sx={{ margin: "20px" }} />
+          <TextField name="lastName" label="Last name" variant="standard" />
+          <p></p>
+        </div>
+        <div style={{ margin: "10px" }}>
+          <EmailIcon sx={{ margin: "20px" }} />
+          <TextField name="email" label="Email" variant="standard" />
+        </div>
+        <Button
+          color="primary"
+          variant="contained"
+          sx={{ width: "20vw", alignContent: "center" }}
+          type="submit"
+        >
+          Log in
+        </Button>
+      </Box>
+    );
+  } else {
+    return <p> Already logged in</p>;
+  }
 }
